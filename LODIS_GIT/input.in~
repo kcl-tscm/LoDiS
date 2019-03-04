@@ -13,7 +13,7 @@
   metal_on_top  = .false.,           ! for the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Num atoms bound to their starting position by a spring (in './sticky.list')
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
-  cn_cal        = .false.,            ! Use Polynomial formalisation to calculate the coordination number, otherwise uses the Fermi
+  cn_cal        = .false.            ! Use Polynomial formalisation to calculate the coordination number, otherwise uses the Fermi
                                      ! distribution formalisation
   filepos      = '/home/k1811518/Documents/Structs/Ag_147.xyz', ! 'initial position file' ONLY .xyz format
   filepot      = '/home/k1811518/Documents/POT_FILE/Ag_Ag.pot',        ! 'potential file name' for RGL potential

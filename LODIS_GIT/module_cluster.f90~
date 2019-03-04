@@ -16,7 +16,7 @@ module cluster
     character(len = 59) :: filepot
     character(len = 21) :: type_process
     logical :: output_xyz
-    logical :: mgo_substrate, metal_on_top, writeheader, cn_cal
+    logical :: mgo_substrate, metal_on_top, writeheader
     character(len = 59) :: mgo_pot
     integer :: geometry_type
     logical :: impl_env
