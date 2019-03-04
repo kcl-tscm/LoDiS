@@ -4,7 +4,6 @@
 
 ## CONTENTS
 * [Background](#background)
-* [Documentation](#documentation)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Outputs](#outputs)
@@ -14,11 +13,14 @@
 ## Background
 The LoDiS package is a semi-empirical classical molecular dynamics software to investigate processes for finite-size systems
 between 10-1000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
-free energy and metadynamics with or without an MgO substrate. Supported nanosystems include:
+free energy and metadynamics with or without the presence of an MgO substrate. Supported nanosystems include:
 
 * Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential)
 * Noble gases (Lennard-Jones potential)
 * Carbon-based systems (Pacheco-Girifalco potential)
+
+LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion or 
+analytical and polynomial formalisation.
 
 ## Installation
 Clone the repository into a local directory:
