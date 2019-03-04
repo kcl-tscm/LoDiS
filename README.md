@@ -1,6 +1,6 @@
 # Low Dimensional System Molecular Dynamics (LoDiS)
 
-![Lodis Logo](../../LoDiS_MD/documentation/Mini_Version_2016/lodis_logo.png)
+![Lodis Logo](/home/k1811518/Documents/LoDiS_MD/documentation/Mini_Version_2016/lodis_logo.png)
 
 ## CONTENTS
 * [Background](#background)
@@ -16,9 +16,9 @@ The LoDiS package is a semi-empirical classical molecular dynamics software to i
 between 10-1000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
 free energy and metadynamics with or without an MgO substrate. Supported nanosystems include:
 
-* Mono- and bimetallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential)
+* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential)
 * Noble gases (Lennard-Jones potential)
-* Carbon-based sytems (Pacheco-Girifalco potential)
+* Carbon-based systems (Pacheco-Girifalco potential)
 
 ## Installation
 Clone the repository into a local directory:
