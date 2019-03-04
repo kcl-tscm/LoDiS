@@ -38,14 +38,13 @@ make -f Makefile
 ## Usage
 Copy the **input.in** file into a chosen output directory.
 Inputs for an MD simulation including which type of process to be simulated are determined by modifying the **input.in** file.
-Supporting annotations within the file provide information on each variable. Other input files required for simulation include:  
-* Initial nanocluster atom postions .xyz file
-* Potential parameters .pot file
-* MgO substrate parameters .pot file (only when MgO substrate is present)
-* coalescence cluster initial position .xyz file (only during coalescence/growth)
+Supporting annotations within the file provide information on each variable.  
 
-These input files must be listed in the **input.in** file with either the relative path from the latter to the former or ideally the absolute path 
-for the simulation to run.
+Requirements:
+* Initial nanocluster atom postions .xyz file (filepos)
+* Potential parameters .pot file (filepot)
+* MgO substrate parameters .pot file (mgo_pot, )
+* coalescence cluster initial position .xyz file (filepos2)  
 
 To run the simulation, use the following command line in terminal:
 ```
@@ -62,6 +61,10 @@ deltat/(npas*tstep)
 ```
 
 **Generally tstep shouldn't be changed unless required**
+
+**filepos must be in .xyz file format**
+
+**filepot, mgo_pot and filepos2 must be in .pot file format**
 
 NOTE: filepos2 is not used in this particular run
 
