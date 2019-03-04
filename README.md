@@ -39,10 +39,10 @@ make -f Makefile
 Copy the **input.in** file into a chosen output directory.
 Inputs for an MD simulation including which type of process to be simulated are determined by modifying the **input.in** file.
 Supporting annotations within the file provide information on each variable. Other input files required for simulation include:  
-* Initial nanocluster atom postions .xyz file
-* Potential parameters .pot file
-* MgO substrate parameters .pot file (only when MgO substrate is present)
-* coalescence cluster initial position .xyz file (only during coalescence/growth)
+* .xyz file with the initial nanocluster atom postions 
+* .pot file with the potential parameters
+* .pot file with the MgO substrate parameters (only when MgO substrate is present)
+* .xyz file with coalescence cluster postions(only during coalescence/growth)
 
 These input files must be listed in the **input.in** file with either the relative path from the latter to the former or ideally the absolute path 
 for the simulation to run.
