@@ -34,6 +34,7 @@ Supporting annotations within the file provide information on each variable. To 
 ./PATH/LODIS_all <input.in> output.out
 ```
 **NOTE: /PATH/ is the relative path from the input.in file directory (i.e current directory) to the LoDiS_GIT directory.**
+
 NOTE: Upon initializing the simulation, LoDiS will run in the background till completion.
 
 ## Example
@@ -44,8 +45,11 @@ deltat/(npas*tstep)
 ```
 
 **Generally tstep shouldn't be changed unless required**
+
 **filepos must be in an .xyz file format**
+
 **filepot, mgo_pot and filepos2 must be .pot file format**
+
 NOTE: filepos2 is not used in this particular run
 
 Running the simulation will output the following six files:
