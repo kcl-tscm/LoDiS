@@ -1,0 +1,51 @@
+&simul
+  irand  = 4001,                  ! odd 4 digits number lower than 4095
+  tstep  = 5.d-15,                ! time step smaller than phonon frequencies, usually 1-7 fs
+  npas   = 200000,            ! total number of steps (2000000000)
+  scrivo = 20000,                  ! after how many steps the program writes
+  npast  = 2000,                  ! thermalization time
+  tinit  = 400,                   ! initial temperature
+  vnu    = 5.d11,                 ! Andersen thermostat frequency (5.d11)
+  type_process = 'melting',       ! 'quenching' 'microcan' 'melting' 'freezing' 'growth' 'metadynamics', coalescence
+  output_xyz = .true.,             ! Output movie as xyz format (with hdf5 format)
+  mgo_substrate = .false.,           		! for calling the substrate force-field
+  geometry_type = 1
+  metal_on_top  = .false.,           ! for the MgO force-field with correction for the metal-on-top effect 
+  sticky_atoms  = 0,                 ! Num atoms bound to their starting position by a spring (in './sticky.list')
+  sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
+                                     !
+  filepos      = '/home/k1811518/Documents/Structs/Ag_147.xyz', ! 'initial position file' ONLY .xyz format
+  filepot      = '/home/k1811518/Documents/POT_FILE/Ag_Ag.pot',        ! 'potential file name' for RGL potential
+  mgo_pot      = '/home/k1811518/Documents/pot_file/MgO_3/Ag_Ag.MgO.pot',                  ! file of parameters for MgO substrate 
+  impl_env = .true.
+  pot_a = 1.5d0
+  pot_b = 1.5d0
+  eta_a = 0.02d0
+  eta_b = 0.02d0
+/
+
+&system
+  type_potential  = 'rgl',           ! potential type between LJ, RGL(for metallic systems), Girifalco
+  natom           = 147,             ! Initial number of atoms in the cluster
+  fattor          = 1.d0,            ! leave it, stupid units conversion
+  elem1           = 'Ag',            ! chemical species one
+  elem2           = 'Ag',            ! chemical species two
+  sys             = 'mon',           ! put bim if it is bimetallic otherwise mon
+/
+  ! &coal : procedure for coalescence
+
+&coal
+  filepos2 = 'Pt38TO_test.xyz'
+  natom2 = 38
+  somedist = 20.0d0
+/
+
+&quench
+  itremp          = 50,            ! after itremp steps the quench starts, itremp always < npas
+  tmin            = 1.d-5,           ! minimum temperature we want to reach, automatically stop
+/
+
+&melt
+  deltat          = 50.d0,            ! temperature step
+  tcaloric        = 1500.d0,          ! final temperature
+/
