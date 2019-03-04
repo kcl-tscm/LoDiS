@@ -16,7 +16,7 @@
   cn_cal        = .false.,            ! Use Polynomial formalisation to calculate the coordination number, otherwise uses the Fermi
                                      ! distribution formalisation
   filepos      = '/home/k1811518/Documents/Structs/Ag_147.xyz', ! 'initial position file' ONLY .xyz format
-  filepot      = '/home/k1811518/Documents/POT_FILE/Ag_Ag.pot',        ! 'potential file name' for RGL potential
+  filepot      = '/home/k1811518/Documents/POT_FILE/Ag_Ag.pot',        ! 'potential file name'
   mgo_pot      = '/home/k1811518/Documents/pot_file/MgO_3/Ag_Ag.MgO.pot',                  ! file of parameters for MgO substrate 
   impl_env = .true.
   pot_a = 1.5d0
@@ -26,7 +26,7 @@
 /
 
 &system
-  type_potential  = 'rgl',           ! potential type between LJ, RGL(for metallic systems), Girifalco
+  type_potential  = 'rgl',           ! potential type between 'lj' (for noble gases), 'rgl' (for metallic systems) and Girifalco (for carbon systems)
   natom           = 147,             ! Initial number of atoms in the cluster
   fattor          = 1.d0,            ! leave it, stupid units conversion
   elem1           = 'Ag',            ! chemical species one
