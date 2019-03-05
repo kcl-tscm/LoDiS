@@ -8,6 +8,7 @@
 * [Usage](#usage)
 * [Outputs](#outputs)
 * [Example](#example)
+* [License](#license)
 * [Contributors](#contributors)
 * [References](#references)
 
@@ -24,6 +25,8 @@ Supported nanosystems include:
 
 LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion [3] or 
 via analytical and polynomial formalisation [4].
+
+For further information and publications visit [baletto group page](https://balettogroup.weebly.com/lodis.html)
 
 ## Installation
 Clone the repository into a local directory:
@@ -58,10 +61,11 @@ To run the simulation, use the following command line in terminal:
 ./PATH/LODIS_all <input.in> output.out
 ```
 /PATH is the relative path from the **input.in** file directory (i.e the current directory) to the LoDiS_GIT directory.
-Upon initializing the simulation, LoDiS will run in the background till completion
+Upon initializing the simulation, LoDiS will run in the background till completion.
 
 ## Example
 A rapid 100K/ns melting simulation of an Ag 147 atom iscosahedron is readily available with the use of the provided files in the **example_input_files** directory.
+
 The chosen melting rate is determined by the variable relation:
 ```
 deltat/(npas*tstep)
@@ -69,7 +73,14 @@ deltat/(npas*tstep)
 
 **Generally tstep shouldn't be changed unless required**
 
-NOTE: filepos2 is not used in this particular run
+Edit the paths to the for Ag147.xyz and Ag_Ag.pot files before running the simulation:
+```
+filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
+  
+filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
+```
+
+NOTE: filepos2 nor Ag_Ag.MgO.pot are not used in this particular run.
 
 Running the simulation will output the following six files:
 * energy.out
@@ -81,9 +92,13 @@ Running the simulation will output the following six files:
 
 The caloric and trajectory data are written into the energy.out and movie.xyz files respectively.
 
+## License
+LoDiS is freely distributed under a BSD license.
+
 ## Contributors
 * Francesca Baletto (francesca.baletto@kcl.ac.uk)
 * Raphael Pinto-Miles (raphpmx@gmail.com)
+* Kevin Rossi (k1992@hotmail.it)
 
 ## References
 [1] V.Rosato, M.Guillope and B.Legrand, *Philosophical Magazine A* **59**, 321 (1989)

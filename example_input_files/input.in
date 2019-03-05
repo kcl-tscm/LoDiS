@@ -14,9 +14,9 @@
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
   cn_cal        = .false.,           ! Use Polynomial formalisation to calculate the coordination number? (Otherwise uses the Fermi distribution formalisation)
-  filepos      = 'LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
-  filepot      = 'LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
-  mgo_pot      = 'LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
+  filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
+  filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
+  mgo_pot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
   impl_env = .true.
   pot_a = 1.5d0
   pot_b = 1.5d0

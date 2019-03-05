@@ -51,7 +51,7 @@ Other files required for simulation include:
 * .xyz file with coalescence cluster postions(only during coalescence/growth)
 
 List the files to be read by the sofware in the **input.in** with either the relative path or ideally the absolute path.
-Example files for reference are provided in the **input_example_files** directory.
+Example files for reference are provided in the **example_input_files** directory.
 
 To run the simulation, use the following command line in terminal:
 ```
@@ -61,7 +61,8 @@ To run the simulation, use the following command line in terminal:
 Upon initializing the simulation, LoDiS will run in the background till completion
 
 ## Example
-A rapid 100K/ns melting simulation of an Ag 147 atom iscosahedron is readily available with the use of the provided files in the **input_example_files** directory.
+A rapid 100K/ns melting simulation of an Ag 147 atom iscosahedron is readily available with the use of the provided files in the **example_input_files** directory.
+
 The chosen melting rate is determined by the variable relation:
 ```
 deltat/(npas*tstep)
@@ -69,7 +70,14 @@ deltat/(npas*tstep)
 
 **Generally tstep shouldn't be changed unless required**
 
-NOTE: filepos2 is not used in this particular run
+Edit the paths to the for Ag147.xyz and Ag_Ag.pot files before running the simulation:
+```
+filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
+  
+filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
+```
+
+NOTE: filepos2 nor Ag_Ag.MgO.pot are not used in this particular run
 
 Running the simulation will output the following six files:
 * energy.out
