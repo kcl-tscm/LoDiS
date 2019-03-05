@@ -1,6 +1,6 @@
 # Low Dimensional System Molecular Dynamics (LoDiS)
 
-![Lodis Logo](/home/k1811518/Documents/lodislogo.png)
+![Lodis Logo](/images/lodislogo.png)
 
 ## CONTENTS
 * [Background](#background)
@@ -16,12 +16,12 @@ between 10-1000 atoms. Incorporated tools allow for investigations into growth/c
 free energy and metadynamics with or without the presence of an MgO substrate. 
 
 Supported nanosystems include:
-* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential)[1]
-* Noble gases (Lennard-Jones potential)[2]
-* Carbon-based systems (Pacheco-Girifalco potential)[3]
+* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential) [1]
+* Noble gases (Lennard-Jones potential) [2]
+* Carbon-based systems (Pacheco-Girifalco potential) [3]
 
-LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion[] or 
-via analytical and polynomial formalisation[].
+LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion [3] or 
+via analytical and polynomial formalisation [4].
 
 ## Installation
 Clone the repository into a local directory:
@@ -80,8 +80,12 @@ Running the simulation will output the following six files:
 The caloric and trajectory data are written into the energy.out and movie.xyz files respectively.
 
 ## References
-[1] V.Rosato, M.Guillope and B.Legrand, Philosophical Magazine A 59, 321 (1989)
-[2] J.E. Jones, Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences 106, 463 (1924)
-[3] L.A Girifalco, The Journal of Physical Chemistry 95, 5370 (1991)
-[4] K.Rossi, 2017 Journal of Physics: Condensed Matter. Matter 29, 145402 (2017)
-[5] K.Rossi and F.Baletto, Royal Society of Chemistry 19, 11057 (2017)
+[1] V.Rosato, M.Guillope and B.Legrand, *Philosophical Magazine A* **59**, 321 (1989)
+
+[2] J.E. Jones, *Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences* **106**, 463 (1924)
+
+[3] L.A Girifalco, *The Journal of Physical Chemistry* **95**, 5370 (1991)
+
+[4] K.Rossi, *Journal of Physics: Condensed Matter* **29**, 145402 (2017)
+
+[5] K.Rossi and F.Baletto, *Royal Society of Chemistry* **19**, 11057 (2017)
