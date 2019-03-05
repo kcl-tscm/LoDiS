@@ -1,0 +1,51 @@
+&simul
+  irand  = 4001,                     ! Odd 4 digits number lower than 4095
+  tstep  = 5.d-15,                   ! Time step smaller than phonon frequencies, usually 1-7 fs
+  npas   = 200000,                   ! Total number of steps (2000000000)
+  scrivo = 20000,                    ! After how many steps the program writes
+  npast  = 2000,                     ! Thermalization time
+  tinit  = 400,                      ! Initial temperature
+  vnu    = 5.d11,                    ! Andersen thermostat frequency (5.d11)
+  type_process = 'melting',          ! Process to simulate: 'quenching', 'microcan', 'melting', 'freezing', 'coalescence' or 'metadynamics'
+  output_xyz = .true.,               ! Output movie .xyz format (with hdf5 format)
+  mgo_substrate = .false.,           ! Run process with the substrate force-field?
+  geometry_type = 1
+  metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
+  sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
+  sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
+  cn_cal        = .false.,           ! Use Polynomial formalisation to calculate the coordination number? (Otherwise uses the Fermi distribution formalisation)
+  filepos      = 'LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
+  filepot      = 'LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
+  mgo_pot      = 'LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
+  impl_env = .true.
+  pot_a = 1.5d0
+  pot_b = 1.5d0
+  eta_a = 0.02d0
+  eta_b = 0.02d0
+/
+
+&system
+  type_potential  = 'rgl',           ! Potential type between 'lj' (for noble gases), 'rgl' (for metallic systems) and Girifalco (for carbon systems)
+  natom           = 147,             ! Initial number of atoms in the cluster
+  fattor          = 1.d0,            ! LEAVE IT, stupid units conversion
+  elem1           = 'Ag',            ! Chemical species one
+  elem2           = 'Ag',            ! Chemical species two
+  sys             = 'mon',           ! Monometallic cluster 'mon' or bimetallic cluster 'bim'?
+/
+  
+! &coal : procedure for coalescence
+&coal
+  filepos2 = 'Pt38TO_test.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
+  natom2 = 38                        ! Initial number of atoms in the coalescence cluster
+  somedist = 20.0d0                  ! 
+/
+
+&quench
+  itremp          = 50,              ! After itremp steps the quench starts, itremp always < npas
+  tmin            = 1.d-5,           ! Minimum temperature we want to reach, automatically stop
+/
+
+&melt
+  deltat          = 50.d0,            ! Temperature step
+  tcaloric        = 1500.d0,          ! Final temperature
+/

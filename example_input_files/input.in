@@ -14,9 +14,9 @@
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
   cn_cal        = .false.,           ! Use Polynomial formalisation to calculate the coordination number? (Otherwise uses the Fermi distribution formalisation)
-  filepos      = '.xyz',             ! Initial atom positions file, ONLY .xyz format
-  filepot      = '.pot',             ! Potential parameters file, ONLY .pot format
-  mgo_pot      = '.pot',             ! File of parameters for MgO substrate, ONLY .pot format
+  filepos      = 'LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
+  filepot      = 'LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
+  mgo_pot      = 'LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
   impl_env = .true.
   pot_a = 1.5d0
   pot_b = 1.5d0
@@ -35,7 +35,7 @@
   
 ! &coal : procedure for coalescence
 &coal
-  filepos2 = '.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
+  filepos2 = 'Pt38TO_test.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
   natom2 = 38                        ! Initial number of atoms in the coalescence cluster
   somedist = 20.0d0                  ! 
 /

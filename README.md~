@@ -1,6 +1,6 @@
 # Low Dimensional System Molecular Dynamics (LoDiS)
 
-![Lodis Logo](/home/k1811518/Documents/lodislogo.png)
+![Lodis Logo](/images/lodislogo.png)
 
 ## CONTENTS
 * [Background](#background)
@@ -8,11 +8,13 @@
 * [Usage](#usage)
 * [Outputs](#outputs)
 * [Example](#example)
+* [Contributors](#contributors)
 * [References](#references)
+
 
 ## Background
 The LoDiS package is a semi-empirical classical molecular dynamics software to investigate processes for finite-size systems
-between 10-1000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
+between 10-10000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
 free energy and metadynamics with or without the presence of an MgO substrate. 
 
 Supported nanosystems include:
@@ -78,6 +80,10 @@ Running the simulation will output the following six files:
 * output.out
 
 The caloric and trajectory data are written into the energy.out and movie.xyz files respectively.
+
+## Contributors
+* Francesca Baletto (francesca.baletto@kcl.ac.uk)
+* Raphael Pinto-Miles (raphpmx@gmail.com)
 
 ## References
 [1] V.Rosato, M.Guillope and B.Legrand, *Philosophical Magazine A* **59**, 321 (1989)

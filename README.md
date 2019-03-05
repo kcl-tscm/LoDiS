@@ -8,11 +8,13 @@
 * [Usage](#usage)
 * [Outputs](#outputs)
 * [Example](#example)
+* [Contributors](#contributors)
 * [References](#references)
+
 
 ## Background
 The LoDiS package is a semi-empirical classical molecular dynamics software to investigate processes for finite-size systems
-between 10-1000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
+between 10-10000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
 free energy and metadynamics with or without the presence of an MgO substrate. 
 
 Supported nanosystems include:
@@ -49,7 +51,7 @@ Other files required for simulation include:
 * .xyz file with coalescence cluster postions(only during coalescence/growth)
 
 List the files to be read by the sofware in the **input.in** with either the relative path or ideally the absolute path.
-Example files for reference are provided in the **input_example_files** directory.
+Example files for reference are provided in the **example_input_files** directory.
 
 To run the simulation, use the following command line in terminal:
 ```
@@ -59,7 +61,7 @@ To run the simulation, use the following command line in terminal:
 Upon initializing the simulation, LoDiS will run in the background till completion
 
 ## Example
-A rapid 100K/ns melting simulation of an Ag 147 atom iscosahedron is readily available with the use of the provided files in the **input_example_files** directory.
+A rapid 100K/ns melting simulation of an Ag 147 atom iscosahedron is readily available with the use of the provided files in the **example_input_files** directory.
 The chosen melting rate is determined by the variable relation:
 ```
 deltat/(npas*tstep)
@@ -78,6 +80,10 @@ Running the simulation will output the following six files:
 * output.out
 
 The caloric and trajectory data are written into the energy.out and movie.xyz files respectively.
+
+## Contributors
+* Francesca Baletto (francesca.baletto@kcl.ac.uk)
+* Raphael Pinto-Miles (raphpmx@gmail.com)
 
 ## References
 [1] V.Rosato, M.Guillope and B.Legrand, *Philosophical Magazine A* **59**, 321 (1989)
