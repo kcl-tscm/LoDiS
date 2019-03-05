@@ -26,7 +26,7 @@ Supported nanosystems include:
 LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion [3] or 
 via analytical and polynomial formalisation [4].
 
-For further information and publications visit [baletto group page](https://balettogroup.weebly.com/lodis.html)
+For further information and publications visit [Baletto group website](https://balettogroup.weebly.com/lodis.html)
 
 ## Installation
 Clone the repository into a local directory:
@@ -44,7 +44,7 @@ make -f Makefile
 
 ## Usage
 Copy the **input.in** file into a chosen output directory.
-Input variables for an MD simulation including which type of process to be simulated are determined by modifying the **input.in** file.
+The input variables for an MD simulation, including which type of process is to be simulated, are determined by modifying the **input.in** file.
 Supporting annotations within the file provide information on each variable. 
 
 Other files required for simulation include:  
@@ -71,7 +71,7 @@ The chosen melting rate is determined by the variable relation:
 deltat/(npas*tstep)
 ```
 
-**Generally tstep shouldn't be changed unless required**
+NOTE: Generally tstep shouldn't be changed unless required
 
 Edit the paths to the for Ag147.xyz and Ag_Ag.pot files before running the simulation:
 ```
@@ -80,7 +80,7 @@ filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! 
 filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
 ```
 
-NOTE: filepos2 nor Ag_Ag.MgO.pot are not used in this particular run.
+NOTE: PT38TO.xyz nor Ag_Ag.MgO.pot are not used in this particular run.
 
 Running the simulation will output the following six files:
 * energy.out
