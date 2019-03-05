@@ -1,6 +1,6 @@
 # Low Dimensional System Molecular Dynamics (LoDiS)
 
-![Lodis Logo](/home/k1811518/Documents/lodis_logo.png)
+![Lodis Logo](/home/k1811518/Documents/lodislogo.png)
 
 ## CONTENTS
 * [Background](#background)
@@ -13,14 +13,15 @@
 ## Background
 The LoDiS package is a semi-empirical classical molecular dynamics software to investigate processes for finite-size systems
 between 10-1000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
-free energy and metadynamics with or without the presence of an MgO substrate. Supported nanosystems include:
+free energy and metadynamics with or without the presence of an MgO substrate. 
 
-* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential)
-* Noble gases (Lennard-Jones potential)
-* Carbon-based systems (Pacheco-Girifalco potential)
+Supported nanosystems include:
+* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential)[1]
+* Noble gases (Lennard-Jones potential)[2]
+* Carbon-based systems (Pacheco-Girifalco potential)[3]
 
-LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion or 
-via analytical and polynomial formalisation.
+LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion[] or 
+via analytical and polynomial formalisation[].
 
 ## Installation
 Clone the repository into a local directory:
@@ -29,6 +30,7 @@ https://github.com/kcl-tscm/LoDiS.git
 ```
 
 Open the Makefile and select the correct version of fortran (listed under gfortran/ifort) and its libraries on your local computer by removing the necessary '#' symbols.
+
 Compile all the .f90 files by running the Makefile:
 ```
 cd LoDiS/LODIS_GIT
@@ -38,14 +40,16 @@ make -f Makefile
 ## Usage
 Copy the **input.in** file into a chosen output directory.
 Inputs for an MD simulation including which type of process to be simulated are determined by modifying the **input.in** file.
-Supporting annotations within the file provide information on each variable. Other input files required for simulation include:  
-* Initial nanocluster atom postions .xyz file
-* Potential parameters .pot file
-* MgO substrate parameters .pot file (only when MgO substrate is present)
-* coalescence cluster initial position .xyz file (only during coalescence/growth)
+Supporting annotations within the file provide information on each variable. 
+
+Other input files required for simulation include:  
+* .xyz file with the initial nanocluster atom postions 
+* .pot file with the potential parameters
+* .pot file with the MgO substrate parameters (only when MgO substrate is present)
+* .xyz file with coalescence cluster postions(only during coalescence/growth)
 
 These input files must be listed in the **input.in** file with either the relative path from the latter to the former or ideally the absolute path 
-for the simulation to run.
+for the simulation to run. Example files for reference are provided in the **input_example_files** directory.
 
 To run the simulation, use the following command line in terminal:
 ```
@@ -76,3 +80,8 @@ Running the simulation will output the following six files:
 The caloric and trajectory data are written into the energy.out and movie.xyz files respectively.
 
 ## References
+[1] V.Rosato, M.Guillope and B.Legrand, Philosophical Magazine A 59, 321 (1989)
+[2] J.E. Jones, Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences 106, 463 (1924)
+[3] L.A Girifalco, The Journal of Physical Chemistry 95, 5370 (1991)
+[4] K.Rossi, 2017 Journal of Physics: Condensed Matter. Matter 29, 145402 (2017)
+[5] K.Rossi and F.Baletto, Royal Society of Chemistry 19, 11057 (2017)
