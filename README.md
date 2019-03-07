@@ -1,14 +1,15 @@
 # Low Dimensional System Molecular Dynamics (LoDiS)
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 ![Lodis Logo](/images/lodislogo.png)
 
-## CONTENTS
+## Contents
 * [Background](#background)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Outputs](#outputs)
 * [Example](#example)
-* [License](#license)
 * [Contributors](#contributors)
 * [References](#references)
 
@@ -16,7 +17,7 @@
 ## Background
 The LoDiS package is a semi-empirical classical molecular dynamics software to investigate processes for finite-size systems
 between 10-10000 atoms. Incorporated tools allow for investigations into growth/coalescence, quenching, phase transition, 
-free energy and metadynamics with or without the presence of an MgO substrate. 
+canonical NVT and metadynamics with or without the presence of an MgO substrate. 
 
 Supported nanosystems include:
 * Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential) [1]
@@ -26,7 +27,7 @@ Supported nanosystems include:
 LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion [3] or 
 via analytical and polynomial formalisation [4].
 
-For further information and publications visit [Baletto group website](https://balettogroup.weebly.com/lodis.html)
+For more general information and publications visit [Baletto group website](https://balettogroup.weebly.com/lodis.html)
 
 ## Installation
 Clone the repository into a local directory:
@@ -45,7 +46,7 @@ make -f Makefile
 ## Usage
 Copy the **input.in** file into a chosen output directory.
 The input variables for an MD simulation, including which type of process is to be simulated, are determined by modifying the **input.in** file.
-Supporting annotations within the file provide information on each variable. 
+Supporting information about the input parameters can be found in the [LoDiS Documentation](https://github.com/kcl-tscm/LoDiS/wiki/LoDiS-Documentation).
 
 Other files required for simulation include:  
 * .xyz file with the initial nanocluster atom postions 
@@ -66,13 +67,6 @@ Upon initializing the simulation, LoDiS will run in the background till completi
 ## Example
 A rapid 100K/ns melting simulation of an Ag 147 atom iscosahedron is readily available with the use of the provided files in the **example_input_files** directory.
 
-The chosen melting rate is determined by the variable relation:
-```
-deltat/(npas*tstep)
-```
-
-NOTE: Generally tstep shouldn't be changed unless required
-
 Edit the paths to the for Ag147.xyz and Ag_Ag.pot files before running the simulation:
 ```
 filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
@@ -91,9 +85,6 @@ Running the simulation will output the following six files:
 * output.out
 
 The caloric and trajectory data are written into the energy.out and movie.xyz files respectively.
-
-## License
-LoDiS is freely distributed under a BSD license.
 
 ## Contributors
 * Francesca Baletto (francesca.baletto@kcl.ac.uk)

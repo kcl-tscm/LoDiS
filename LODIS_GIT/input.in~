@@ -49,3 +49,76 @@
   deltat          = 50.d0,            ! Temperature step
   tcaloric        = 1500.d0,          ! Final temperature
 /
+
+&microcanonical
+  vel_af = .true.
+/
+
+&metalist
+  collvar_wanted  = .false.,         ! to write CV values and average forces (total and MT)
+                                     ! at each time step during whatever procedure
+                                     !
+  metaframe       = 4000,            ! after how many steps a frame of movie.xyz is generated
+  gheight         = 0.75d0,          ! [eV] Gaussian height
+  metaperiod      = 4000,            ! after how many steps a new gaussian is added
+  num_cv          = 2,               ! number of CVs used (1 or 2)
+  collvar_name(1) = 'coord_number',  ! 'coord_number', 'C2N', 'SFN', 'CNN', 'none'
+  collvar_name(2) = 'CNN',           ! 'CN_bim', 'd_com'
+  !__________________________________________________________________________________________
+  ! coord_number (CN)          - Sigmoid Function
+  n_pwr           = 6,               ! n
+  m_pwr           = 12,              ! m
+  rzero           = 0.147d0,         ! r0 [latt bulk ref]
+  gwidth          = 2.d0,            ! Gaussian width
+  !__________________________________________________________________________________________
+  ! C2N (2nd Neighbour No.)    - Window Function 1            >>> d3.4N <<<
+  n2n_pwr         = 6,               ! n
+  m2n_pwr         = 12,              ! m
+  d2n             = 3.4d0,           ! d0 [latt bulk ref]
+  r2n             = 0.1d0,           ! r0 [latt bulk ref]
+  g2nwidth        = 50.d0,           ! Gaussian width
+  !__________________________________________________________________________________________
+  ! SFN (Stacking Fault No.)   - Window Function 2
+  nsf_pwr         = 6,               ! n
+  msf_pwr         = 12,              ! m
+  dsf             = 1.354d0,         ! d0 [latt bulk ref]
+  rsf             = 0.05d0,          ! r0 [latt bulk ref]
+  gsfwidth        = 25.d0,           ! Gaussian width
+  !__________________________________________________________________________________________
+  ! CNN (Common Neighbour No.) - Common Neighbour Function
+  cnf_in(1)       = 0.71d0,          ! d0 : 1st coord sphere [latt bulk ref]
+  cnf_in(2)       = 0.12d0,          ! r0 : 1st coord sphere [latt bulk ref] from d0
+  cnf_in(3)       = 0.24d0,          ! c0 : 1st coord sphere [latt bulk ref] from d0
+  cnf_in(4)       = 2,               ! m  : 1st coord sphere
+  cnf_in(5)       = 2,               ! n  : 1st coord sphere
+  !-----------------------------------
+  win_in(1)       = 4.9d0,           ! d0 : window function
+  win_in(2)       = 0.3d0,           ! r0 : window function from d0
+  win_in(3)       = 0.5d0,           ! c0 : window function from d0
+  win_in(4)       = 6,               ! m  : window function
+  win_in(5)       = 2,               ! n  : window function
+  !-----------------------------------
+  gcnnwidth       = 0.5d0,           ! Gaussian width
+  !==========================================================================================
+  ! CN_bim (CN bimetallic)     - Sigmoid Function bimetallic
+  cn_aa           = .false.,         ! pairs elem1-elem1
+  cn_bb           = .false.,         ! pairs elem2-elem2
+  cn_ab           = .true.,          ! mixed pairs
+  cn_n_pwr        = 6,               ! n
+  cn_m_pwr        = 12,              ! m
+  cn_rzero        = 0.147d0,         ! r0 [latt bulk ref]
+  cn_gwidth       = 2.d0,            ! Gaussian width
+  !__________________________________________________________________________________________
+  ! d_com (Squared distance of CoM) [latt bulk ref element A ^2]
+  d_com_gwidth    = 2.d0,            ! Gaussian width
+/
+
+&restart
+  restart_mode    = false,  ! If the program should restart from a file
+  restart_from_file = 'mid00.temp'   ! The file
+  save_progress   = false,   ! Save the state of system at the end  (file will be named label.temp)
+  periodic_save = .true.,   ! Periodically save the state of system
+  periodic_save_every = 20,   ! Save every n frames, if performance allows, put this equal to scrivo
+  periodic_save_last = 2,   ! Save the last n frames (files will be named <label>0.temp, ... , <label>(n-1).temp
+  progress_file_label = 'mid',   ! Label
+/
