@@ -24,7 +24,7 @@ Supported nanosystems include:
 * Noble gases (Lennard-Jones potential) [2]
 * Carbon-based systems (Pacheco-Girifalco potential) [3]
 
-LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion [3] or 
+LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalisation [3] or 
 via analytical and polynomial formalisation [4].
 
 For more general information and publications visit [Baletto group website](https://balettogroup.weebly.com/lodis.html)
@@ -49,12 +49,12 @@ The input variables for an MD simulation, including which type of process is to 
 Supporting information about the input parameters can be found in the [LoDiS Documentation](https://github.com/kcl-tscm/LoDiS/wiki/LoDiS-Documentation).
 
 Other files required for simulation include:  
-* .xyz file with the initial nanocluster atom postions 
+* .xyz file with the initial nanocluster atom positions 
 * .pot file with the potential parameters
 * .pot file with the MgO substrate parameters (only when MgO substrate is present)
-* .xyz file with coalescence cluster postions(only during coalescence/growth)
+* .xyz file with coalescence cluster positions (only during coalescence/growth)
 
-List the files to be read by the sofware in the **input.in** with either the relative path or ideally the absolute path.
+List the files to be read by the software in the **input.in** with either the relative path or ideally the absolute path.
 Example files for reference are provided in the **example_input_files** directory.
 
 To run the simulation, use the following command line in terminal:
@@ -65,7 +65,7 @@ To run the simulation, use the following command line in terminal:
 Upon initializing the simulation, LoDiS will run in the background till completion.
 
 ## Example
-A rapid 100K/ns melting simulation of an Ag 147 atom iscosahedron is readily available with the use of the provided files in the **example_input_files** directory.
+A rapid 100K/ns melting simulation of an Ag 147 atom icosahedron is readily available with the use of the provided files in the **example_input_files** directory.
 
 Edit the paths to the for Ag147.xyz and Ag_Ag.pot files before running the simulation:
 ```
@@ -74,7 +74,7 @@ filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! 
 filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
 ```
 
-NOTE: PT38TO.xyz nor Ag_Ag.MgO.pot are not used in this particular run.
+NOTE: neither PT38TO.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 
 Running the simulation will output the following six files:
 * energy.out
@@ -92,12 +92,12 @@ The caloric and trajectory data are written into the energy.out and movie.xyz fi
 * Kevin Rossi (k1992@hotmail.it)
 
 ## References
-[1] V.Rosato, M.Guillope and B.Legrand, *Philosophical Magazine A* **59**, 321 (1989)
+[1] V. Rosato, M. Guillope and B. Legrand, *Philosophical Magazine A* **59**, 321 (1989)
 
-[2] J.E. Jones, *Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences* **106**, 463 (1924)
+[2] J. E. Jones, *Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences* **106**, 463 (1924)
 
-[3] L.A Girifalco, *The Journal of Physical Chemistry* **95**, 5370 (1991)
+[3] L. A. Girifalco, *The Journal of Physical Chemistry* **95**, 5370 (1991)
 
-[4] K.Rossi, *Journal of Physics: Condensed Matter* **29**, 145402 (2017)
+[4] K. Rossi, *Journal of Physics: Condensed Matter* **29**, 145402 (2017)
 
-[5] K.Rossi and F.Baletto, *Royal Society of Chemistry* **19**, 11057 (2017)
+[5] K. Rossi and F. Baletto, *Physical Chemistry Chemical Physics* **19**, 11057 (2017)
