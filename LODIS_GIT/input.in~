@@ -6,22 +6,22 @@
   npast  = 2000,                     ! Thermalization time
   tinit  = 400,                      ! Initial temperature
   vnu    = 5.d11,                    ! Andersen thermostat frequency (5.d11)
-  type_process = 'melting',          ! Process to simulate: 'quenching', 'microcan', 'melting', 'freezing', 'coalescence' or 'metadynamics'
+  type_process = 'melting',          ! Process to simulate: 'quenching', 'canon', 'melting', 'freezing', 'coalescence' or 'metadynamics'
   output_xyz = .true.,               ! Output movie .xyz format (with hdf5 format)
   mgo_substrate = .false.,           ! Run process with the substrate force-field?
-  geometry_type = 1
+  geometry_type = 1                  ! Geometry of MgO substrate: 1 - double square, 2 - triangle
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
-  cn_cal        = .false.,           ! Use Polynomial formalisation to calculate the coordination number? (Otherwise uses the Fermi distribution formalisation)
+  cn_cal        = .false.,           ! Use HeCN/HoCN calculations (bi-metallic)? (Otherwise uses the Fermi distribution formalisation)
   filepos      = '.xyz',             ! Initial atom positions file, ONLY .xyz format
   filepot      = '.pot',             ! Potential parameters file, ONLY .pot format
   mgo_pot      = '.pot',             ! File of parameters for MgO substrate, ONLY .pot format
-  impl_env = .true.
-  pot_a = 1.5d0
-  pot_b = 1.5d0
-  eta_a = 0.02d0
-  eta_b = 0.02d0
+  impl_env = .true.                  ! Simulate with an implicit environment?
+  pot_a = 1.5d0                      ! Metal-environment interaction type. 1 - pairwise, <1 - covalent, >1 - strong interacting environment
+  pot_b = 1.5d0                      ! Same case as pot_a, but for chemical species 2 in bi-metallic cluster
+  eta_a = 0.02d0                     ! Strength of the interaction between species 1 and environment
+  eta_b = 0.02d0                     ! Strength of the interaction between species 2 and environment
 /
 
 &system
@@ -37,9 +37,17 @@
 &coal
   filepos2 = '.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
   natom2 = 38                        ! Initial number of atoms in the coalescence cluster
-  somedist = 20.0d0                  ! 
+  somedist = 20.0d0                  ! Distance between the two clusters
 /
-
+&growth
+  ndepmax  = 25                        !Number of deposited atoms
+  lcs  = 1                             !1-monometallic growth(A/A), 2-mixed shell growth((A+B)/A), 3-core shell growth(B/A)
+  at_tipo2  = 0                        !Number of deposited atoms of the species 2
+  elemd  = elem1                       !Chemical species of deposited atoms
+  prob  = 1.0d0                        !probability of deposition of chemical species 1
+  tsorg  = 1500.d0                     !temperature of the source
+  rad  = 6.d0                          !radius of the source  
+/
 &quench
   itremp          = 50,              ! After itremp steps the quench starts, itremp always < npas
   tmin            = 1.d-5,           ! Minimum temperature we want to reach, automatically stop
@@ -50,7 +58,7 @@
   tcaloric        = 1500.d0,          ! Final temperature
 /
 
-&microcanonical
+&canon
   vel_af = .true.
 /
 
@@ -91,7 +99,7 @@
   cnf_in(3)       = 0.24d0,          ! c0 : 1st coord sphere [latt bulk ref] from d0
   cnf_in(4)       = 2,               ! m  : 1st coord sphere
   cnf_in(5)       = 2,               ! n  : 1st coord sphere
-  !-----------------------------------
+  !------------------------------ Window Function
   win_in(1)       = 4.9d0,           ! d0 : window function
   win_in(2)       = 0.3d0,           ! r0 : window function from d0
   win_in(3)       = 0.5d0,           ! c0 : window function from d0
@@ -99,7 +107,7 @@
   win_in(5)       = 2,               ! n  : window function
   !-----------------------------------
   gcnnwidth       = 0.5d0,           ! Gaussian width
-  !==========================================================================================
+  !___________________________________________________________________________________________
   ! CN_bim (CN bimetallic)     - Sigmoid Function bimetallic
   cn_aa           = .false.,         ! pairs elem1-elem1
   cn_bb           = .false.,         ! pairs elem2-elem2

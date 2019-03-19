@@ -40,6 +40,16 @@
   somedist = 20.0d0                  ! 
 /
 
+&growth
+  ndepmax  = 25                        !Number of deposited atoms
+  lcs  = 1                             !1-monometallic growth(A+A), 2-mixed shell growth(A+B), 3-core shell growth(A/B + A/B)
+  at_tipo2  = 0                        !Number of deposited atoms of the species 2
+  elemd  = elem1                       !Chemical species of deposited atoms
+  prob  = 1.0d0                        !probability of deposition of chemical species 1
+  tsorg  = 1500.d0                     !temperature of the source
+  rad  = 6.d0                          !radius of the source  
+/
+
 &quench
   itremp          = 50,              ! After itremp steps the quench starts, itremp always < npas
   tmin            = 1.d-5,           ! Minimum temperature we want to reach, automatically stop

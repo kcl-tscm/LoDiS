@@ -25,6 +25,9 @@ Supported nanosystems include:
 * Noble gases (Lennard-Jones potential) [2]
 * Carbon-based systems (Pacheco-Girifalco potential) [3]
 
+Additionally, LoDiS allows for two choices of coordination number calculations; either by Fermi distribution formalistaion [3] or 
+via analytical and polynomial formalisation [4].
+
 For more general information and publications visit [Baletto group website](https://balettogroup.weebly.com/lodis.html)
 
 ## Installation

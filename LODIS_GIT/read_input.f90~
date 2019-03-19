@@ -41,7 +41,7 @@ NAMELIST/system/type_potential,natom,fattor,elem1,elem2,clusters,wires,&
                &surface,bulk,pbcz,pbcy,pbcx,sys,lcutoff,lsubstrate
 NAMELIST/support/sub_geom
 NAMELIST/sysbim/sologeom,NA_elem,fraz_ecoh,fraz_mass,fraz_radius
-NAMELIST/canon/vel_af
+NAMELIST/microcanonical/vel_af
 NAMELIST/growth/ndepmax,lcs,at_tipo2,prob,tsorg,rad,elemd
 NAMELIST/quench/itremp,tmin
 NAMELIST/melt/tcaloric,deltat
@@ -135,7 +135,7 @@ NA_elem = elem1
 fraz_radius = 1.d0
 fraz_mass = 1.d0
 fraz_ecoh = 1.d0
-!CANON
+!MICROCANONICAL
 vel_af = .false.
 !------------------
 ! METALIST
@@ -254,7 +254,7 @@ ELSE
    metadyn = 'no'
    coalescence = 'no'
    IF(type_process == 'quenching' )quenching = 'ya'
-   IF(type_process == 'canon' ) canonical = 'ya'
+   IF(type_process == 'microcan' ) canonical = 'ya'
    IF(type_process == 'melting' )  caloric = 'ya'
    IF(type_process == 'freezing' ) caloric = 'ya'
    IF(type_process == 'growth' )   deposizione = 'ya'
@@ -278,7 +278,7 @@ IF(caloric == 'ya') THEN
 END IF
 IF(canonical=='ya') THEN
    READ(UNIT=5, nml=quench, iostat = ios) !LP: does this make any sense? Why canonical >> quench?
-   READ(UNIT=5, nml=canon, iostat=ios)
+   READ(UNIT=5, nml=microcanonical, iostat=ios)
 END IF
 IF(deposizione =='ya') READ(UNIT=5, nml=growth, iostat = ios)
 IF (coalescence == 'ya') READ(UNIT = 5, nml = coal, iostat = ios)
