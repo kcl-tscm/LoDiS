@@ -74,7 +74,7 @@ filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! 
 filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
 ```
 
-NOTE: PT38TO.xyz and Ag_Ag.MgO.pot are both not used in this particular run.
+NOTE: neither PT38TO.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 
 Running the simulation will output the following six files:
 * energy.out
