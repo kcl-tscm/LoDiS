@@ -79,7 +79,7 @@ module cluster
     integer :: imet1         !!scelta del materiale
     integer :: imet2         !!scelta del materiale
     integer :: itype(nsiz)
-    integer :: natom         !!numero atomi
+    integer :: natom, initntipo2         !!number of atoms, initial number of atoms of species 2 (for growth lcs=2) 
 
     !periodicity
     logical :: clusters, wires, surface, bulk, substrate

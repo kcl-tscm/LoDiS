@@ -39,12 +39,12 @@ NAMELIST/simul/irand,tstep,npas,scrivo,npast,tinit,&
 !geometry_type, added variable for geometry
 NAMELIST/system/type_potential,natom,fattor,elem1,elem2,clusters,wires,&
                &surface,bulk,pbcz,pbcy,pbcx,sys,lcutoff,lsubstrate
-NAMELIST/support/sub_geom
+!NAMELIST/support/sub_geom
 NAMELIST/sysbim/sologeom,NA_elem,fraz_ecoh,fraz_mass,fraz_radius
 NAMELIST/canon/vel_af
 NAMELIST/growth/ndepmax,lcs,at_tipo2,prob,tsorg,rad,elemd
 NAMELIST/quench/itremp,tmin
-NAMELIST/melt/tcaloric,deltat
+NAMELIST/calor/tcaloric,deltat
 NAMELIST/coal/filepos2,natom2,somedist
 
 !----- beginning of new part (Metadynamics) -----------------------------------
@@ -105,7 +105,7 @@ lcutoff = .true.
 lsubstrate=.false.
 !
 !SUPPORT
-sub_geom = 0
+!sub_geom = 0
 !
 !COAL
 natom2 = 0
@@ -125,7 +125,7 @@ prob=0.5d0
 tsorg=1500.d0
 rad=6.d0
 !
-!MELT
+!CALOR
 tcaloric= tinit
 deltat=0.d0
 !
@@ -203,7 +203,7 @@ lb_at%tau(1:3,:)=0.d0
 !read namelist
   READ(UNIT=5, nml=simul, iostat=ios)
   READ(UNIT=5, nml=system, iostat=ios)
-  IF(mgo_substrate) READ(UNIT=5, nml=support, iostat=ios)
+!  IF(mgo_substrate) READ(UNIT=5, nml=support, iostat=ios)
 !=======================================
 !    control on system/ choice
 !=======================================
@@ -220,16 +220,6 @@ IF(scrivo>npas) THEN
  STOP
 ENDIF
 
-!#################################################################
-!#################################################################
-IF(geometry_type == 0) THEN
- WRITE(*,*) "read_input> Error: the geometry is not implemented"
- WRITE(uniterr,*) "Error: the geometry is incorrect"
- STOP
-ENDIF
-!#################################################################
-!#################################################################
-!
 IF(natom==0) THEN
  WRITE(*,*) 'read_input> NO ATOMS GIVEN',natom
  WRITE(*,*) 'read_input> ######################'
@@ -266,7 +256,7 @@ ENDIF
 !
 IF(quenching=='ya')    READ(UNIT=5, nml=quench, iostat = ios)
 IF(caloric == 'ya') THEN
-  READ(UNIT=5, nml=melt, iostat = ios)
+  READ(UNIT=5, nml=calor, iostat = ios) 
   IF (type_process == 'melting' .AND. tcaloric .LT. tinit) THEN
     WRITE(*,*) 'read_input> Error: Melting selected but final temperature is lower than initial temperature'
     STOP
@@ -284,20 +274,25 @@ IF(deposizione =='ya') READ(UNIT=5, nml=growth, iostat = ios)
 IF (coalescence == 'ya') READ(UNIT = 5, nml = coal, iostat = ios)
 
 !!!!!!!!!!!!!!! ====================================
-! Instruction for a substrate
+! Instruction for a substrate implemented in &system
 !!!!!!!!!!!!!!! ====================================
 IF (mgo_substrate) THEN
   IF (mgo_pot == 'no-mgo-name') THEN
    WRITE(*,*) 'read_input> Error: No path for substrate parameters'
    STOP
   ENDIF
-  IF (sub_geom == 0 ) THEN
-   WRITE(*,*) 'read_input> Error: no substrate geoemtry given'
+!  
+  IF(geometry_type == 0) THEN
+   WRITE(*,*) "read_input> Error: the geometry is not implemented"
+   WRITE(uniterr,*) "Error: the geometry is incorrect"
    STOP
   ENDIF
-  IF (metal_on_top)  WRITE(*,*) 'read_input> Warning: metal_on_top (MOT) NOT TESTED'
-ENDIF
+!   
+ IF (metal_on_top)  WRITE(*,*) 'read_input> Warning: metal_on_top (MOT) NOT TESTED'
 
+ENDIF
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
 !-------------------------------------------------------------------
 ! Metadynamics Begins
 !-------------------------------------------------------------------

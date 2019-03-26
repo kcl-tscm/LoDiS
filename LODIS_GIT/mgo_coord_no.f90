@@ -48,7 +48,7 @@ if(ipas==1) write(*,*) "mgo_coord:>alpha_sub and beta_sub",alpha_sub, beta_sub
    ! Elements on the diagonal
    DO i = 1, natom
       mgo_s(i,i) = 0.d0
-	  mgo_dS(i,j) = 0.d0
+	  mgo_dS(i,i) = 0.d0
    END DO
 !$OMP END DO
 

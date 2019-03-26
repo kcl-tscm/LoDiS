@@ -33,7 +33,7 @@ SUBROUTINE growth
  ! an atom of A or B type, with a given probability == prob
  ! element B is choosen when the random number is smaller than prob
  ! element A is choosen when the random number is bigger/= than prob 
- ! When all the max number of element B are deposited (ntipo2==at_tipo2)
+ ! When all the max number of element B are deposited (ntipo2 - initnatom==at_tipo2)
  ! the probability to deposit B atoms is set to zero
  
  IF (lcs==1) THEN
@@ -42,19 +42,19 @@ SUBROUTINE growth
     ntipo1=ntipo1+1
     WRITE(unitd,*) 'deposition of ',elem1
  ELSEIF(lcs==2) THEN
-    perc=ABS(2.d0*dlaran(ir)-1.d0) 
-    IF(perc>=prob) THEN
-        elem(nat3d)=elem1
-        itype(nat3d)=1
-        ntipo1=ntipo1+1
-        WRITE(unitd,*) 'deposition of ',elem1, perc
-    ELSEIF(perc<prob) THEN 
-       elem(nat3d)=elem2
-       itype(nat3d)=2
-       ntipo2=ntipo2+1
-       IF(ntipo2==at_tipo2) prob=0.d0
-       WRITE(unitd,*) 'deposition of ',elem2, perc
-       ENDIF
+    perc=ABS(2.d0*dlaran(ir)-1.d0)
+      IF(perc>=prob) THEN
+          elem(nat3d)=elem1
+          itype(nat3d)=1
+          ntipo1=ntipo1+1
+          WRITE(unitd,*) 'deposition of ',elem1, perc 
+      ELSEIF(perc<prob) THEN 
+         elem(nat3d)=elem2
+         itype(nat3d)=2
+         ntipo2=ntipo2+1
+         IF((ntipo2 -initntipo2)==at_tipo2) prob=0.d0
+         WRITE(unitd,*) 'deposition of ',elem2, perc, (ntipo2-initntipo2)
+      ENDIF
  ELSEIF (lcs==3) THEN
     elem(nat3d)=elem2
     itype(nat3d)=2

@@ -35,14 +35,14 @@
   
 ! &coal : procedure for coalescence
 &coal
-  filepos2 = 'Pt38TO_test.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
-  natom2 = 38                        ! Initial number of atoms in the coalescence cluster
-  somedist = 20.0d0                  ! 
+  filepos2 = '~/Documents/LoDiS/input_example_files/Ag_309.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
+  natom2 = 309                        ! Initial number of atoms in the coalescence cluster
+  somedist = 80.0d0                  ! 
 /
 
 &growth
   ndepmax  = 25                        !Number of deposited atoms
-  lcs  = 1                             !1 (A+A), 2 (A+B), 3 (A/B + A/B)
+  lcs  = 1                             !1-monometallic growth(A+A), 2-mixed shell growth(A+B), 3-core shell growth(A/B + A/B)
   at_tipo2  = 0                        !Number of deposited atoms of the species 2
   elemd  = elem1                       !Chemical species of deposited atoms
   prob  = 1.0d0                        !probability of deposition of chemical species 1

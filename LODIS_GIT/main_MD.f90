@@ -152,8 +152,12 @@ PROGRAM main
   END IF
   !
   !=========================================================================
-  nat=natom ! This has always to be natom (but in the case of deposizione)
-  IF(deposizione=='ya') nat = natom + ndepmax
+  ! This has always to be natom (but in the case of deposizione)
+  IF(deposizione=='ya') THEN
+  nat = natom + ndepmax
+  ELSE
+  nat=natom 
+  ENDIF
   ! nat is the max number of atoms, not natom, witch is the initial
   !=========================================================================
 
@@ -626,18 +630,20 @@ PROGRAM main
   IF((quenching=='ya').OR.(canonical=='ya').OR.(metadyn=='ya') .OR. (coalescence == 'ya') ) THEN
      ipas=0
      nd_proc=1
-     IF(ipas>itremp) tfin=0.d0
      OPEN(UNIT=unite,file='energy.out',status='unknown')
+     !
      IF (metadyn.eq.'ya') THEN
         OPEN(UNIT=110, file='metahistory.out', status='unknown')
      ELSE
         OPEN(UNIT=unite,file='energy.out',status='unknown')
      END IF
-
+     !
      !IF (restart_mode) THEN
      !  call read_state
      !ELSE
-       IF((quenching=='ya').and.(ipas>itremp)) tfin=0.d0
+       IF((quenching=='ya').and.(ipas>itremp)) THEN 
+       tfin=0.d0
+       ENDIF
      !END IF
 
      !call initialize_movie
@@ -706,6 +712,7 @@ PROGRAM main
   IF (deposizione=='ya') THEN
 
      OPEN(UNIT=unitd,file='depo.out',status='replace')
+     initntipo2 = ntipo2
      DO nd_proc=1,ndepmax
         !=========================================
         !Subroutine to create a new atoms which is

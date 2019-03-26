@@ -1,4 +1,4 @@
-SUBROUTINE mgo_coord
+SUBROUTINE mgo_coord_fb
  ! Luca
  ! Calculating the analytic coordination number for MgO
      
@@ -132,5 +132,5 @@ DO k = 1, natom
    !! Writing the cpu time for the subroutine                   !>>> CPU_TIME 
    !WRITE(500,'(1I10, 4X, 1F10.8)') ipas, t_end -t_start        !>>> CPU_TIME
    DEALLOCATE (dij, df_dx,df_dy,df_dz)
-END SUBROUTINE mgo_coord
+END SUBROUTINE mgo_coord_fb
 

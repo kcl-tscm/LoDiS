@@ -44,6 +44,7 @@ IF(np==0) THEN
     edelta=(etot+ntipo1*ecoh(1)+ntipo2*ecoh(2))/((natom)**(2.d0/3.d0))
   ENDIF
   tpar=tpar/scrivo
+
 !
    IF( surface .or. bulk ) THEN
       WRITE(unite,'(1f11.4,2x,4f15.8,1x,1f11.5,1x,1f9.4)')&
@@ -65,14 +66,14 @@ IF(np==0) THEN
 
 !! For the stress
 !  IF (interewr) THEN
-!  filename2=filename(nd_proc*nfile)
-!  write(filename2(1:1),'(A1)') 'i'
-!OPEN(unit=51,file=filename2) 
-!  call inter
-!ENDIF
+!    filename2=filename(nd_proc*nfile)
+!    write(filename2(1:1),'(A1)') 'i'
+!    OPEN(unit=51,file=filename2) 
+!    call inter
+!  ENDIF
 !
 !! Intershell stress
-!!  if( tintershell ) THEN
+!!  IF ( tintershell ) THEN
 !!   write(*,*) 'calling inter'
 !!   OPEN(unit=51,file='inter.out') 
 !!   call inter 
@@ -90,28 +91,31 @@ IF(np==0) THEN
      nfile=ipas/scrivo  !se npasd=10^6  1<nfile<100
                         !se npasd=30^6  1<nfile<300
 !
-!   write (123,*) nfile,scrivo,ipas,npas 
-   CALL subnomi
-      OPEN(10,file=filename(nfile),status='unknown')
-      REWIND(10)
+! WRITE (123,*) nfile,scrivo,ipas,npas
+! IF ((nfile .ge. 1).or.(nd_proc-1 .ge. 1)) THEN
+    !CALL subnomi
+       !OPEN(10,file=filename(nd_proc*nfile),status='unknown')
+       !REWIND(10)
 !
-nt = natom
-IF ( wires ) nt = 2*natom
-!
-      WRITE(10,*) nt
-      WRITE(10,'(a2,1x,a2,1f15.6,1f9.4)') elem1,elem2,etot,save_delta
-       DO i=1,natom          
-         icolor=itype(i)                    
-         xuar=(x(i)+u(i))*aretebim*fattor
-         yvar=(y(i)+v(i))*aretebim*fattor
-         zwar=(z(i)+w(i))*aretebim*fattor
-         WRITE(10,'(a3,1x,4f16.5,i4)') elem(i),xuar,yvar,zwar,icolor, &
-                                       & potener(i)+ener_env_atom(i) 
-         IF( wires ) WRITE(10,'(a3,1x,3f16.5,i4)') elem(i),xuar,yvar,zwar+pbcz*aretebim,icolor+1
-        ENDDO
-        CLOSE(10)
-!
-ENDIF !!su np
+   nt = natom
+   IF ( wires ) THEN 
+         nt = 2*natom
 
+!         WRITE(10,*) nt
+!         WRITE(10,'(a2,1x,a2,1f15.6,1f9.4)') elem1,elem2,etot,save_delta
+          DO i=1,natom          
+            icolor=itype(i)                    
+            xuar=(x(i)+u(i))*aretebim*fattor
+            yvar=(y(i)+v(i))*aretebim*fattor
+            zwar=(z(i)+w(i))*aretebim*fattor
+!           WRITE(10,'(a3,1x,4f16.5,i4)') elem(i),xuar,yvar,zwar,icolor, &
+!                                       & potener(i)+ener_env_atom(i) 
+!            WRITE(10,'(a3,1x,3f16.5,i4)') elem(i),xuar,yvar,zwar+pbcz*aretebim,icolor+1
+           ENDDO
+!           CLOSE(10)
+!
+   ENDIF !!su np
+! ENDIF
 
+ENDIF
 END SUBROUTINE scrittoq
