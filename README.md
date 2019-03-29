@@ -18,7 +18,7 @@
 The LoDiS package is a 0D classical molecular dynamics software designed to simulate processes for finite-size systems
 between 10-10000 atoms. Incorporated tools allow for investigations into growth, coalescence, quenching, phase transition, 
 canonical esemble (NVT), microcanonical esemble (NVE) and metadynamics with the choice of a vacuum or ligand environment, and the presence of
-a MgO substrate if desired with two available geometries.  
+a MgO substrate.  
 
 Supported nanosystems include:
 * Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential) [1]
@@ -54,14 +54,14 @@ Additional files required for simulation include:
 * .xyz file with second cluster atom positions (only during coalescence)
 
 
-List the files to be read by the sofware in the **input.in** with either the relative path or ideally the absolute path.
+List the files to be read by the sofware in the **input.in** with either the relative path or the absolute path.
 Example files for reference are provided in the **example_input_files** directory.
 
-To run the simulation, use the following command line in terminal:
+To run the simulation, use the following command line in the terminal:
 ```
-./PATH/LODIS_all <input.in> output.out
+PATH/LODIS_all <input.in> output.out
 ```
-/PATH is the relative path from the **input.in** file directory (i.e the current directory) to the LoDiS_GIT directory.
+/PATH is either the relative from the **input.in** file directory (i.e the current directory) to the LoDiS_GIT directory, or the absolute path.
 Upon initializing the simulation, LoDiS will run in the background till completion.
 
 ## Outputs
@@ -94,6 +94,11 @@ NOTE: neither Ag_309.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 * Francesca Baletto (francesca.baletto@kcl.ac.uk)
 * Raphael Pinto-Miles (raphpmx@gmail.com)
 * Kevin Rossi (k1992@hotmail.it)
+* Vagner Rigo (vagnerrigo@gmail.com)
+* Riccardo Ferrando (ferrando@fisicaunige.it)
+* Christine Mottet (mottet@cinam.univ-mrs.fr)
+
+
 
 ## References
 [1] V. Rosato, M. Guillope and B. Legrand, *Philosophical Magazine A* **59**, 321 (1989)

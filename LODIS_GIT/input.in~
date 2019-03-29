@@ -13,7 +13,6 @@
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
-  cn_cal        = .false.,           ! Use HeCN/HoCN calculations (bi-metallic)? (Otherwise uses the Fermi distribution formalisation)
   filepos      = '.xyz',             ! Initial atom positions file, ONLY .xyz format
   filepot      = '.pot',             ! Potential parameters file, ONLY .pot format
   mgo_pot      = '.pot',             ! File of parameters for MgO substrate, ONLY .pot format
@@ -22,6 +21,7 @@
   pot_b = 1.5d0                      ! Same case as pot_a, but for chemical species 2 in bi-metallic cluster
   eta_a = 0.02d0                     ! Strength of the interaction between species 1 and environment
   eta_b = 0.02d0                     ! Strength of the interaction between species 2 and environment
+  cn_cal        = .false.,           ! Use HeCN/HoCN calculations ('bim') for environment? (Otherwise Fermi distribution formalisation)
 /
 
 &system
@@ -53,13 +53,13 @@
   tmin            = 1.d-5,           ! Minimum temperature we want to reach, automatically stop
 /
 
-&melt
+&calor
   deltat          = 50.d0,            ! Temperature step
   tcaloric        = 1500.d0,          ! Final temperature
 /
 
 &canon
-  vel_af = .true.
+  vel_af = .true.                     !Tells the system to call the velocity autocorrelation function
 /
 
 &metalist
@@ -119,14 +119,4 @@
   !__________________________________________________________________________________________
   ! d_com (Squared distance of CoM) [latt bulk ref element A ^2]
   d_com_gwidth    = 2.d0,            ! Gaussian width
-/
-
-&restart
-  restart_mode    = false,           ! If the program should restart from a file
-  restart_from_file = 'mid00.temp'   ! The file
-  save_progress   = false,           ! Save the state of system at the end  (file will be named label.temp)
-  periodic_save = .true.,            ! Periodically save the state of system
-  periodic_save_every = 20,          ! Save every n frames, if performance allows, put this equal to scrivo
-  periodic_save_last = 2,            ! Save the last n frames (files will be named <label>0.temp, ... , <label>(n-1).temp
-  progress_file_label = 'mid',       ! Label
 /

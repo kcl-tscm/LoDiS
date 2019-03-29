@@ -13,7 +13,6 @@
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
-  cn_cal        = .false.,           ! Use HeCN/HoCN calculations (bi-metallic)? (Otherwise uses the Fermi distribution formalisation)
   filepos      = '.xyz',             ! Initial atom positions file, ONLY .xyz format
   filepot      = '.pot',             ! Potential parameters file, ONLY .pot format
   mgo_pot      = '.pot',             ! File of parameters for MgO substrate, ONLY .pot format
@@ -22,10 +21,11 @@
   pot_b = 1.5d0                      ! Same case as pot_a, but for chemical species 2 in bi-metallic cluster
   eta_a = 0.02d0                     ! Strength of the interaction between species 1 and environment
   eta_b = 0.02d0                     ! Strength of the interaction between species 2 and environment
+  cn_cal        = .false.,           ! Use HeCN/HoCN calculations ('bim') for environment? (Otherwise Fermi distribution formalisation)
 /
 
 &system
-  type_potential  = 'rgl',           ! Potential type between 'lj' (for noble gases), 'rgl' (for metallic systems) and Girifalco (for carbon systems)
+  type_potential  = 'rgl',           ! Potential type between 'lj' (for noble gases), 'rgl' (for metallic systems) and 'gir' (for carbon systems)
   natom           = 147,             ! Initial number of atoms in the cluster
   fattor          = 1.d0,            ! LEAVE IT, stupid units conversion
   elem1           = 'Ag',            ! Chemical species one
@@ -59,7 +59,7 @@
 /
 
 &canon
-  vel_af = .true.
+  vel_af = .true.                     !Tells the system to call the velocity autocorrelation function
 /
 
 &metalist

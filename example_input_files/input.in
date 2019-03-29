@@ -13,19 +13,19 @@
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
-  cn_cal        = .false.,           ! Use Polynomial formalisation to calculate the coordination number? (Otherwise uses the Fermi distribution formalisation)
   filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
   filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
   mgo_pot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
-  impl_env = .true.
-  pot_a = 1.5d0
-  pot_b = 1.5d0
-  eta_a = 0.02d0
-  eta_b = 0.02d0
+  impl_env = .true.                  ! Simulate with an implicit environment?
+  pot_a = 1.5d0                      ! Metal-environment interaction type. 1 - pairwise, <1 - covalent, >1 - strong interacting environment
+  pot_b = 1.5d0                      ! Same case as pot_a, but for chemical species 2 in bi-metallic cluster
+  eta_a = 0.02d0                     ! Strength of the interaction between species 1 and environment
+  eta_b = 0.02d0                     ! Strength of the interaction between species 2 and environment
+  cn_cal        = .false.,           ! Use HeCN/HoCN calculations ('bim') for environment? (Otherwise Fermi distribution formalisation)
 /
 
 &system
-  type_potential  = 'rgl',           ! Potential type between 'lj' (for noble gases), 'rgl' (for metallic systems) and Girifalco (for carbon systems)
+  type_potential  = 'rgl',           ! Potential type between 'lj' (for noble gases), 'rgl' (for metallic systems) and 'gir' (for carbon systems)
   natom           = 147,             ! Initial number of atoms in the cluster
   fattor          = 1.d0,            ! LEAVE IT, stupid units conversion
   elem1           = 'Ag',            ! Chemical species one
@@ -37,7 +37,7 @@
 &coal
   filepos2 = '~/Documents/LoDiS/input_example_files/Ag_309.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
   natom2 = 309                        ! Initial number of atoms in the coalescence cluster
-  somedist = 80.0d0                  ! 
+  somedist = 80.0d0                   ! Initial distance between the clusters
 /
 
 &growth
@@ -61,7 +61,7 @@
 /
 
 &microcanonical
-  vel_af = .true.
+  vel_af = .true.                     !Tells the system to call the velocity autocorrelation function
 /
 
 &metalist
