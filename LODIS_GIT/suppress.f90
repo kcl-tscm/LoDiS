@@ -1,6 +1,3 @@
-!TO DO 
-!-->Figure out if there is meaning to using x or dx (and why does gromacs use dx when tensor etc is calculated for x?)
-
 subroutine suppress
 
 use CLUSTER
@@ -160,7 +157,7 @@ do i = 1,3
 		tmp(i,j) = group_I(i,j)
 	enddo
 enddo
-!-->not sure what the commented part really does... (seen in gromacs, seems to make the inverse calculation less accurate...)
+!
 
 !rfac = (tmp(1,1) + tmp(2,2) + tmp(3,3))/3
 !fac = 1.d0/rfac
@@ -196,7 +193,7 @@ I_inv(3,3) = deter_1*(tmp(1,1)*tmp(2,2) - tmp(2,1)*tmp(1,2))
 
 !Now inverse of I = I_inv(3,3)
 !-->I_inv x J = W
-!----> check that matrix is actually the inverse !!!!!!!!!!!!!!!!!!!!
+!
 !do i = 1,3
 !	do j = 1,3
 !		do k = 1,3
@@ -242,36 +239,3 @@ do i = 1,natom
 enddo
 
 end subroutine
-
-
-	
-
-	
-	
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

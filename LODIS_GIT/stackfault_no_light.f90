@@ -1,8 +1,9 @@
 SUBROUTINE sfnum_light
 !======================================
-! Calculating the stacking fault number
-! The derivative are not calculated in
-! order toimprove the performance
+! Stacking Fault Number light
+!======================================
+! A computationally cheaper algorithm to return the SFN.
+! The derivatives are not calculated in order to improve the performance.
 !======================================
    
    USE PARACLUSTER  

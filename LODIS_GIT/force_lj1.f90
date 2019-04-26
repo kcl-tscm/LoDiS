@@ -1,6 +1,6 @@
 SUBROUTINE force_lj1
 USE PARACLUSTER
-USE CLUSTER    !modul where cluster variabiles and parameters are defined
+USE CLUSTER
 USE POTENTIAL
 USE ENFORCE
 USE DISTANCE
@@ -19,9 +19,8 @@ Real :: eneri!,eri!,f,for,forsudik,denik
 !aretebim=arete(1)      
 ! pay attention to the units: in fact,
 ! we have all the routine which calculates the velocities and the positions
-! on eV (for energy!) and on units of arete (for position!)
-! Doye considers energy in eV BUT position in A
-! the parameters are in eV and angstrom
+! in eV (for energy!) and arete (for position!)
+! Initially considers energy in eV BUT position in Angstrom
 
       ener=0.d0  
       eneri=0.d0  
@@ -62,9 +61,9 @@ nat3d=natom
           yik=y(k)+v(k)-y(i)-v(i) 
           zik=z(k)+w(k)-z(i)-w(i)
 
-          dik=sqrt(xik*xik+yik*yik+zik*zik)   !in unita' di arete
+          dik=sqrt(xik*xik+yik*yik+zik*zik)   !Arete units
           rik=aretebim*dik         !in A
-          rik=rik/R0               ! in unita' adimensionali
+          rik=rik/R0
           
 !          if((ipas.eq.1).or.(ipas.eq.3))write(*,*) rik,'rik',i,k     
           
@@ -81,7 +80,7 @@ nat3d=natom
                wtote=(1.d0/rik12-2.d0/rik6) !in A
             
     ! this is the potential
-         ener=ener+wtote          !! adimensionale
+         ener=ener+wtote
          
     ! this is the force  in 1/arete
 
@@ -94,7 +93,7 @@ nat3d=natom
               fDy(k)=fDy(k)-aretebim*yik*wtot/rik2
               fDz(k)=fDz(k)-aretebim*zik*wtot/rik2
                             
-        enddo !su k
+        enddo
 
         fx(i)=fDx(i)*12.d0*U0*aretebim    !in ev/arete
         fy(i)=fDy(i)*12.d0*U0*aretebim

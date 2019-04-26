@@ -1,6 +1,6 @@
 SUBROUTINE scrittometa
-  USE PARACLUSTER  !uso il modulo di definizione dei parametri
-  USE CLUSTER      !uso il modulo dove definisco variabili e parametri cluster
+  USE PARACLUSTER  
+  USE CLUSTER      
   USE POTENTIAL
   USE ENFORCE
   USE META

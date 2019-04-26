@@ -1,8 +1,11 @@
 SUBROUTINE c2num
-!========================================
-! Calculating the second neighbour number
-!========================================
-   
+!======================================
+! 2nd Neighbour Number
+!======================================
+! Calculates the second nearest neighbour number for each atom in the cluster.
+! Calculates the derivatives.
+! Use the c2num light version disregard the derivative loop and improve performance.
+!======================================
    USE PARACLUSTER  
    USE CLUSTER   
    USE POTENTIAL

@@ -1,8 +1,10 @@
 SUBROUTINE d_com_light
-   !=====================
-   ! d_com light version
-   ! (No derivatives) 
-   !=====================
+!======================================
+! d^2 COM light version
+!======================================
+! Calculates the squared distance of the Centre of Mass.
+! No derivatives! 
+!=====================
    USE PARACLUSTER  
    USE CLUSTER   
    USE POTENTIAL

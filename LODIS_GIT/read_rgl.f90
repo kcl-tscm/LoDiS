@@ -1,6 +1,6 @@
 SUBROUTINE bimet_rgl
-  USE PARACLUSTER  !uso il modulo di definizione dei parametri
-  USE CLUSTER     !uso il modulo dove definisco variabili e parametri cluster
+  USE PARACLUSTER  
+  USE CLUSTER     
   USE POTENTIAL
   USE ENFORCE
 
@@ -101,32 +101,6 @@ SUBROUTINE bimet_rgl
 !
 
 
-!  IF(legaNA) THEN
-!     pv(9)=pv(4)    
-!     qv(9)=qv(4)    
-!     arete(1)=ratv(imet1)*rac8
-!     arete(2)=ratv(imet2)*rac8
-!     rmet1=1.d0/rac8
-!     rmet2=rmet1*ratv(imet2)/ratv(imet1)
-!     dist(1)=rmet1+rmet1
-!     dist(2)=rmet1+rmet1
-!     dist(3)=rmet1+rmet1 !!solo Ag      
-!  ENDIF
-!
-!    IF( sys == 'mon' ) THEN
-!     dc1 = dist(1)
-!     dc11= dist(1)
-!    ELSEIF( sys == 'bim' ) THEN 
-!     dc1=MAX(dist(1),dist(2))
-!     dc11=MIN(dist(1),dist(2))
-!    ENDIF
-!     dc2=rac2*dc1 
-!     dc3=rac3*dc11
-!     dc4=2.d0*dc3
-!     dc5=rac5/rac2!!dc3+1.d0 !!rac5/rac2
-!     dc33=dc3*dc3
-!     dc55=dc5*dc5
-!
 !Cutoff parameters a5,a4,a3,x5,x4,x3
 !
   do i=1,3 
@@ -160,103 +134,3 @@ SUBROUTINE bimet_rgl
    WRITE(*,*) 'ATOMIC RADIUS',ratv(imet2)
   ENDIF
 END SUBROUTINE BIMET_RGL
-
-  !raccordo potenziale
-  !IF(no_alc)THEN
-  !   DO it=1,itt
-  !      u2=EXP(-p(it)*(rac2-1.d0))
-  !      v2=EXP(-2.d0*q(it)*(rac2-1.d0))
-  !      zr=12.d0+6.d0*u2
-  !      zrp=(12.d0+6.d0*u2*rac2)*p(it)
-  !      za=SQRT(12.d0+6.d0*v2)
-  !      zap=(12.d0+6.d0*v2*rac2)*q(it)/za
-  !      a(it)=ecoh(it)*zap/(za*zrp-zr*zap)
-  !      qsi(it)=ecoh(it)*zrp/(za*zrp-zr*zap)
-  !   ENDDO
-  !   IF((itt==2).AND.((imet1==6).AND.(imet2==4)))THEN
-  !      a(1)=0.2096d0
-  !      qsi(1)=1.8153d0
-  !      a(2)=0.1031d0
-  !      qsi(2)=1.1895d0
-  !   ELSEIF((itt==2).AND.((imet2==6).AND.(imet1==4))) THEN
-  !      a(1)=0.1031d0
-  !      qsi(1)=1.1895d0
-  !      a(2)=0.2096d0
-  !      qsi(2)=1.8153d0
-  !   ENDIF
-!
-  !ELSEIF((itt==1).AND.(imet1==7)) THEN
-  !   a(1)=av(1)
-  !   qsi(1)=qsiv(1)
-  !ELSEIF ((itt==1).AND.(imet1==8))  THEN
-  !   a(1)=av(2)
-  !   qsi(1)=qsiv(2)
-  !ELSEIF((itt==1).AND.(imet1==14)) THEN
-  !  a(1)=av(3)
-  !  qsi(1)=qsiv(3)
-  !  p(1)=pv(10)
-  !  q(1)=qv(10)
-  !ENDIF
-
-  !
-  !c nanoalloy-system Cu3Au; Cu-Ag; Pd-Ag; Ni-Ag; Pt-Co
-  !
-  !IF(((elem1.EQ.'Cu').AND.(elem2.EQ.'Ag')).OR.&
-  !     &((elem1.EQ.'Ag').AND.(elem2.EQ.'Cu'))) THEN
-  !   p(3)=10.700d0
-  !   q(3)=2.805d0
-  !   a(3)=0.0977483d0
-  !   qsi(3)=1.22746d0
-  !ELSE IF(((elem1.EQ.'Pd').AND.(elem2.EQ.'Ag')).OR.&
-  !     &((elem1.EQ.'Ag').AND.(elem2.EQ.'Pd'))) THEN
-  !   p(3)=10.895d0
-  !   q(3)= 3.492d0
-  !   a(3)=0.16069328d0
-  !   qsi(3)=1.559693d0
-  !ELSE IF(((elem1=='Ni').AND.(elem2=='Ag')).OR.&
- !      &((elem1=='Ag').AND.(elem2=='Ni'))) THEN
- !    p(3)=11.095d0
- !    q(3)= 2.725d0
- !    a(3)=0.096d0
- !    qsi(3)=1.340d0
- ! ELSE IF(((elem1.EQ.'Cu').AND.(elem2.EQ.'Au')).OR.&
- !      &((elem1.EQ.'Au').AND.(elem2.EQ.'Cu'))) THEN
- !    p(3)=11.590d0
- !    q(3)= 3.280d0
- !    a(3)=0.1085d0
- !    qsi(3)=1.44d0
- ! ELSE IF(((elem1.EQ.'Ag').AND.(elem2.EQ.'Au')).OR.&
- !      &  ((elem1.EQ.'Au').AND.(elem2.EQ.'Ag'))) THEN!AuAg
- !    p(3)= 10.494d0
- !    q(3)=  3.607d0
- !    a(3)=  0.1488d0
- !    qsi(3)=1.4874d0
- ! ELSE IF(((elem1.EQ.'Co').AND.(elem2.EQ.'Pt')).OR.&
- !      &  ((elem1.EQ.'Pt').AND.(elem2.EQ.'Co'))) THEN
- !     p(3)=  9.97d0
- !    q(3)=  3.32d0
- !    a(3)=  0.2447d0
- !    qsi(3)= 2.3848d0
- ! ELSE  
- !    p(3)=p(1)
- !    q(3)=q(1) 
- !    a(3)=a(1) 
- !    qsi(3)=qsi(1) 
- ! ENDIF
-!
-!  DO i=1,3 
-!     dik0=dist(i) 
-!     ar=-a(i)*EXP(-p(i)*(dc2/dik0-1.))/((dc3-dc2)**3) 
-!     br=-(p(i)/dik0)*a(i)*EXP(-p(i)*(dc2/dik0-1.d0))/(dc3-dc2)**2 
-!     cr=-((p(i)/dik0)**2)*a(i)*EXP(-p(i)*(dc2/dik0-1.d0))/(dc3-dc2) 
-!     ab=-qsi(i)*EXP(-q(i)*(dc2/dik0-1.d0))/(dc3-dc2)**3 
-!     bb=-(q(i)/dik0)*qsi(i)*EXP(-q(i)*(dc2/dik0-1.d0))/(dc3-dc2)**2 
-!     cb=-((q(i)/dik0)**2)*qsi(i)*EXP(-q(i)*(dc2/dik0-1.d0))/(dc3-dc2) 
-!     x5(i)=(12.d0*ab-6.d0*bb+cb)/(2.d0*(dc3-dc2)**2)
-!     x4(i)=(15.d0*ab-7.d0*bb+cb)/(dc3-dc2) 
-!     x3(i)=(20.d0*ab-8.d0*bb+cb)/2.d0
-!     a5(i)=(12.d0*ar-6.d0*br+cr)/(2.d0*(dc3-dc2)**2)
-!     a4(i)=(15.d0*ar-7.d0*br+cr)/(dc3-dc2) 
-!     a3(i)=(20.d0*ar-8.d0*br+cr)/2.d0 
-!  ENDDO
-!

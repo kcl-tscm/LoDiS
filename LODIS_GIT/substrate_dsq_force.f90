@@ -147,7 +147,7 @@ ENDDO !!su i
     mgo_fz(n) = da_dz(1)*(t8-2.d0*t4) &
 	         & + 2.d0*a_(1)*t4_dz*(t8-t4)
 	!
-	!LP's implementation	  
+	!  
  !               & a_(1) *(t9 *(-2.d0*da_dx(2)*t10+2.d0*a_(2)*da_dx(3)) &
  !               &         -2.d0*t8*(-da_dx(2)*t10 +a_(2)*da_dx(3)) ) 
  !   mgo_fy(n)= da_dy(1) *(t9-2.d0*t8) &

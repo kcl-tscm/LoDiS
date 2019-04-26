@@ -1,13 +1,17 @@
 SUBROUTINE collective
-   ! Subroutine to calculate collective variables
-   ! collective variables considered:
-   ! > coordination number (CN)      - sigmoid function
-   ! > 2nd neighbour number (C2N)    - window function
-   ! > stacking fault number (SFN)   - window function
-   ! > common neighbour number (CNN) - common neighbour function
-   ! > CN_bim - sigmoid function for a subset of pairs (AA and/or BB and/or AB) 
-   ! > d_com  - squared distance between CoM of atoms A and B
-   
+!======================================
+! Collective Variables Choice
+!======================================
+! Subroutine to calculate collective variables
+! collective variables considered:
+! > coordination number (CN)      - sigmoid function
+! > 2nd neighbour number (C2N)    - window function
+! > stacking fault number (SFN)   - window function
+! > common neighbour number (CNN) - common neighbour function
+! > CN_bim - sigmoid function for a subset of pairs (AA and/or BB and/or AB) 
+! > d_com  - squared distance between CoM of atoms A and B
+!======================================
+
    USE META
    USE CLUSTER
    USE PARACLUSTER

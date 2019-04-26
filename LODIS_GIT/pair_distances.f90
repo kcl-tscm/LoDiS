@@ -1,5 +1,4 @@
 subroutine pair_distances
-   ! LP
    ! Calculate pair_dist(i,j) : distances for all the pairs of atoms
    !              x_dist(i,j) is xyz_dist(1,i,j)
    !              y_dist(i,j) is xyz_dist(2,i,j)

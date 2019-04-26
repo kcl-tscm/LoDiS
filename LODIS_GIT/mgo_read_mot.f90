@@ -5,7 +5,7 @@ SUBROUTINE mgo_read_mot
  ! arete(1) have to be already known
 
  USE paracluster
- USE cluster     !uso il modulo dove definisco variabili e parametri cluster
+ USE cluster     
  USE potential
  USE substrate
 

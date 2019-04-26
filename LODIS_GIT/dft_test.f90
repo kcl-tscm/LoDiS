@@ -1,4 +1,4 @@
-subroutine dff_test
+subroutine dff_test2
 use enforce
 use cluster
 use paracuster
@@ -24,38 +24,9 @@ do k=1,npas
 	write(60,*) freq,dft(k)*dft(k)
 enddo
 
-end subroutine dff_test
+end subroutine dff_test2
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+!======================================================
 
 
 subroutine dff_test

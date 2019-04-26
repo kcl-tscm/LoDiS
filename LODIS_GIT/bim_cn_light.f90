@@ -1,7 +1,9 @@
 SUBROUTINE bim_cn_light
-   !=====================
+   !======================
    ! CN_bim light version
-   ! (No derivatives) 
+   !======================
+   ! Make use of this version when running computationally slow, taxing simulations i.e large clusters and long simulations.
+   ! No derivatives are calculated in this version to speed calculation times and save memory.  
    !=====================
    USE PARACLUSTER  
    USE CLUSTER   
@@ -41,7 +43,7 @@ SUBROUTINE bim_cn_light
 		 end if
 		        
 		 ! Evaluating the ref distance for the couple of atoms 
-		 dij0 = dist(itypik) !~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LP: check if it's ok
+		 dij0 = dist(itypik) 
 
 		 ! Calculating the distance between atom i and atom j
 		 dij = pair_dist (i,j) - dij0       

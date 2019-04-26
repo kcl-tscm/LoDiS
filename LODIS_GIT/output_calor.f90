@@ -1,6 +1,6 @@
 SUBROUTINE scrittoc
-USE PARACLUSTER  !uso il modulo di definizione dei parametri
-USE CLUSTER     !uso il modulo dove definisco variabili e parametri cluster
+USE PARACLUSTER  
+USE CLUSTER     
 USE POTENTIAL
 USE ENFORCE
 USE DISTANCE
@@ -39,7 +39,7 @@ IMPLICIT NONE
 !
      tpar  = tpar + temp
      edelta= edelta + etot
-  !  emedia= emedia + etot   ! Modified by LP: emedia is not initialized and this value is not used...
+  !  emedia= emedia + etot   ! emedia is not initialized and this value is not used...
 
 
 !====================================

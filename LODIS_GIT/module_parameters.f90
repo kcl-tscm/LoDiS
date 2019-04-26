@@ -1,6 +1,4 @@
 MODULE PARACLUSTER
-!riporto i parametri che servono per la MD per un cluster di NATOM
-!che legge da cluster.in
 
 IMPLICIT NONE
 !

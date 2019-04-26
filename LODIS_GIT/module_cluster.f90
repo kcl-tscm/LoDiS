@@ -18,7 +18,6 @@ module cluster
     logical :: output_xyz
     logical :: mgo_substrate, metal_on_top, writeheader, cn_cal
     character(len = 59) :: mgo_pot
-    integer :: geometry_type
     logical :: impl_env
     real :: pot_a, pot_b, eta_a, eta_b    
 

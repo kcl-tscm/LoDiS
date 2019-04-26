@@ -1,5 +1,11 @@
 SUBROUTINE ENVCN2
-   
+!======================================
+! Environmental CNi Fermi
+!======================================
+! Calculates the CNi for a cluster interacting with an implicit environment.
+! Uses the Fermi formulation of the CNi.
+! To use the polynomial CNi, change to the ENVCN subroutine.
+!====================================== 
  USE PARACLUSTER  
  USE CLUSTER   
  USE POTENTIAL

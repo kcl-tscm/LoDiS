@@ -5,7 +5,7 @@ USE POTENTIAL
 USE ENFORCE
 USE DISTANCE
 !
-!uso il modulo dove defin1:natomco variabili e parametri cluster
+!
 !
 Implicit None
 Intrinsic sqrt
@@ -24,11 +24,11 @@ Real :: eneri!,eri!,f,for,forsudik,denik
 !!Real :: den(nsiz),frx(nsiz),fry(nsiz),frz(nsiz)
       
 !aretebim=arete(1)      
-! pay attention to the units: in fact,
-! we have all the routine which calculates the velocities and the positions
-! on eV (for energy!) and on units of arete (for position!)
-! Doye considers energy in eV BUT position in A
-! the parameters are in eV and angstrom
+! Pay attention to the units: in fact,
+! we have all the routines which calculate the velocities and the positions
+! in eV (for energy!) and on units of arete (for position!).
+
+! The parameters are in eV and angstrom
       ! for C60 cluster => girifalco potential
       ener=0.d0  
       eneri=0.d0  
@@ -70,7 +70,7 @@ nat3d=natom
           yik=y(k)+v(k)-y(i)-v(i)
           zik=z(k)+w(k)-z(i)-w(i)
 
-          dik=sqrt(xik*xik+yik*yik+zik*zik)   !in unita' di arete
+          dik=sqrt(xik*xik+yik*yik+zik*zik)   !In arete units
           rik=dik*conver
                     
           rik3=rik*rik*rik
@@ -90,8 +90,8 @@ nat3d=natom
           rikm9=rikm3*rikm3*rikm3
           rikm10=rikm9*rikmeno
  
- !!calculus the forces in eV e A
- !!then ic onvert again in eV and arete
+ !!calculate the forces in eV and A
+ !!then is converted again in eV and arete
  !! f(i)= f(i)(in eV/A)*arete  !!
                         
         VAik=alpha*(1/(rik*rikm3)+1/(rik*rikp3)-2/rik4)      
@@ -122,11 +122,11 @@ nat3d=natom
               fDz(k)=fDz(k)+zzz
                             
 !   20   continue                                                          
-enddo !su 20
+enddo
         fx(i)=fDx(i)*aretebim
         fy(i)=fDy(i)*aretebim
         fz(i)=fDz(i)*aretebim
 !   10 continue 
-enddo !su 10
+enddo
 
 END SUBROUTINE force_gir

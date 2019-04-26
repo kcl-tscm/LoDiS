@@ -1,6 +1,10 @@
 SUBROUTINE mgo_coord
- ! Luca
- ! Calculating the analytic coordination number for MgO
+!======================================
+! MgO Fermi CNi
+!======================================
+! Calculating the fermi coordination number for MgO
+! Use the mgo_coor_fb subroutine to make use of the polynomial CNi
+!======================================
 
  !USE OMP_LIB                                                 !>>> CPU_TIME
  USE PARACLUSTER

@@ -1,6 +1,6 @@
 SUBROUTINE THERMA
 USE PARACLUSTER
-USE CLUSTER  !uso il modulo dove defin1:natomco variabili e parametri cluster
+USE CLUSTER
 USE POTENTIAL
 USE ENFORCE
 USE DISTANCE
@@ -37,7 +37,7 @@ ENDDO
 ! 
 IF (wires) THEN
 !!PBC along Z
-!      zdmax=(pbcz+0.1d0)  !!eventuale con la dilatazione
+!      zdmax=(pbcz+0.1d0)  !!possible with dilation
       zdmin = MINVAL(z(:)) - 0.21213*(1.00+dilat)
       zdmax = pbcz + 0.49497*(1.00+dilat)
       zlarge=zdmax-zdmin

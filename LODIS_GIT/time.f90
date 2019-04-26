@@ -20,12 +20,9 @@ SUBROUTINE ev_time
  REAL(8) :: partialx(nsiz), partialy(nsiz), partialz(nsiz)
  REAL(8), DIMENSION(nsiz, num_cv) :: fxmeta, fymeta, fzmeta !Used to check the forces when collvar_wanted is .true.
 
- ! Luca Pavan, 7 Mar 2014
- ! IMPROVEMENT: calculation of pair distances could be done only once and
- ! not repeated in voisin/force.
- ! Now metadynamics/CVs stuff and MgO substrate stuff use their own shared
- ! parallel soubroutine, called only once per time step, when these
- ! functions are swithed on.
+
+ ! Metadynamics/CVs and MgO substrate stuff use their own shared
+ ! parallel soubroutine, called only once per time step, when these functions are swithed on.
  ! However standard MD does not use it. 
 
  !%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,12 +72,10 @@ SUBROUTINE ev_time
     CALL voisin   !!calculating the number of first neighbour
     !
     CALL force_choice
-    !comment on units
-    !RGL force is calculated as eV/[units of dik0 which is fixed to 1/sqrt(2) thus in the so-called arete units
-    !in time.f90 all forces shoudl be in the same units
-    ! PLEASE make sure that both meta-force
-    ! and substrate force are then in eV/arete -eventually divide the force in eV/A by aretebim
-    !KEEP THE UNTS OF THE FORCES in eV/arete as the time step is done with respect that choice.[FB on May 2016]
+    !
+    !
+    ! RGL force, meta-force and substrate force are then in eV/arete <-- force in eV/A are divided by aretebim
+    !KEEP THE UNTS OF THE FORCES in eV/arete as the time step is done with respect that choice.
     !
     !-----------------------------------------------
     ! Start of Metadynamics/CVs related calculations
@@ -143,7 +138,7 @@ SUBROUTINE ev_time
           if (collvar_wanted) then
              !-------------------------------------------------------------------------------------------
              ! Writing the value of collective variables and forces at each step (AS A CHECK) 
-             ! ~~~~~~~~~~~~~~~~~NOTE: It's better to open a proper file somewhere, out of the iterations
+             !
              if (ipas.eq.1) then
                 write (101, *) '# ipas, ', trim(collvar_name(1)), ', ', trim(collvar_name(2))
                 IF (metadyn.eq.'ya') THEN 
@@ -214,9 +209,9 @@ SUBROUTINE ev_time
     ! Adding forces from the substrate MgO
     IF (mgo_substrate) THEN
        IF (metal_on_top) THEN
-          CALL mgo_force_mot
+          CALL force_mgo_mot
        ELSE
-          CALL force_geometry
+          CALL force_mgo
        ENDIF
 
        fx = fx + mgo_fx
@@ -224,8 +219,7 @@ SUBROUTINE ev_time
        fz = fz + mgo_fz 
 
        ! Summing the energy of the sub to the pot energy of the system
-       ! Writing it somewhere?            YES, all output but growth
-       ! Does it work also for quenching? YES 
+
        ener = ener + ener_sub
     ENDIF
     !-------------------------------------------------------------
@@ -299,7 +293,7 @@ SUBROUTINE ev_time
     CALL therma  
 
     !
- ENDDO !!endloop on ipas
+ ENDDO !!end loop on ipas
 
  !if ((canonical == 'ya') .and. (vel_af)) then
 !	 call dff_test

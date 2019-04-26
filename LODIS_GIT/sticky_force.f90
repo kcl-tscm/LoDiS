@@ -8,7 +8,7 @@ SUBROUTINE sticky_force
   
   INTEGER :: i, k
   
-  ! This is done in main_MD because always only the same atoms have theese
+  ! This is done in main_MD because always only the same atoms have these
   ! quantities different from zero 
   ! sticky_fx = 0.d0
   ! sticky_fy = 0.d0

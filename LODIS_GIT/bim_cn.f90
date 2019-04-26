@@ -1,7 +1,10 @@
 SUBROUTINE bim_cn
    !=====================
    ! CN_bim
-   ! L.Pavan 11Mar14
+   !=====================
+   !Calculates the Analytic Coordination Number for bimetallic clusters.
+   !Use this version for small-to-medium clusters and compuationally fast simulations.
+   !Otherwise make use of the CN_bim light subroutine to speed up calculations.
    !=====================
      
    !USE OMP_LIB                                                 !>>> CPU_TIME

@@ -1,6 +1,6 @@
 SUBROUTINE bigvoi
-USE PARACLUSTER !uso il modulo di definizione dei parametri
-USE CLUSTER     !uso il modulo dove defin1:natomco variabili e parametri cluster
+USE PARACLUSTER
+USE CLUSTER
 USE POTENTIAL
 USE ENFORCE
 
@@ -22,7 +22,7 @@ nv4(1:natom)=0.d0
 ! PBC for no_cluster system
 !------------------------------------------------------------------------------
 IF ( wires ) THEN
-!!!  condizioni periodiche lungo la direzione del filo e' l'asse z   
+!   
           IF (ABS(zij+pbcz)<ABS(zij)) zij=zij+pbcz                         
           IF (ABS(zij-pbcz)<ABS(zij)) zij=zij-pbcz                        
 ENDIF
@@ -67,4 +67,4 @@ ENDIF
 
       ENDDO                                                          
 !
-EndSubroutine bigvoi
+End SUBROUTINE bigvoi

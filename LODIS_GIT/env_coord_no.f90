@@ -1,6 +1,10 @@
 SUBROUTINE ENVCN
-   ! KR
-   ! Calculating the analytic coordination number
+!======================================
+! Environment CNi
+!======================================
+! Calculating the analytic CNi for a cluster with an interacting evnvironment.
+! To use the Fermi formulation of the CNi use 2nd version of the subroutine, ENVCN2.
+!======================================
      
    USE PARACLUSTER  
    USE CLUSTER   

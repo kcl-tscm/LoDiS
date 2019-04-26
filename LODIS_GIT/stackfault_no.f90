@@ -1,7 +1,11 @@
 SUBROUTINE sfnum
 !======================================
-! Calculating the stacking fault number
+! Stacking Fault Number
 !======================================
+! Determines the Stacking Fault Number to use as a set of CVs for a metadynamics run.
+! Derivatives are generated in this version ==> use for less taxing simulations.
+! Otherwise use the light version to increase performance
+!====================================== 
    
    USE PARACLUSTER  
    USE CLUSTER   

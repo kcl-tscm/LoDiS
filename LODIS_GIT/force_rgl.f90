@@ -1,7 +1,7 @@
 SUBROUTINE force_rgl
 !
   USE PARACLUSTER
-  USE CLUSTER !uso il modulo dove defin1:natomco variabili e parametri cluster
+  USE CLUSTER 
   USE POTENTIAL
   USE ENFORCE
   USE DISTANCE

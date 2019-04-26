@@ -90,14 +90,16 @@ filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! 
 
 NOTE: neither Ag_309.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 
-## Contributors
+## The LoDiS Team
 * Francesca Baletto (francesca.baletto@kcl.ac.uk)
 * Raphael Pinto-Miles (raphpmx@gmail.com)
 * Kevin Rossi (k1992@hotmail.it)
 * Vagner Rigo (vagnerrigo@gmail.com)
 * Riccardo Ferrando (ferrando@fisicaunige.it)
 * Christine Mottet (mottet@cinam.univ-mrs.fr)
-
+* Henrik Moerkved (henrik.morkved@kcl.ac.uk)
+* Wei Zhao (wei.1.zhao@kcl.ac.uk)
+* Robert Jones (robert.m.jones@kcl.ac.uk)
 
 
 ## References
@@ -110,3 +112,29 @@ NOTE: neither Ag_309.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 [4] K. Rossi, *Journal of Physics: Condensed Matter* **29**, 145402 (2017)
 
 [5] K. Rossi and F. Baletto, *Physical Chemistry Chemical Physics* **19**, 11057 (2017)
+
+[6] L. Verlet, *Phys. Rev.* **159**, 98 (1967)
+
+[7] H.C.Andersen,*The Journal of Chemical Physics* **72**, 2384 (1980)
+
+[8] F. Cleri and V. Rosato, *Phys. Rev. B* **48**, 22 (1993)
+
+[9] F. Baletto, R. Ferrando, A. Fortunelli, F. Montalenti, and C. Mottet, *The Journal of Chemical Physics* **116**, 3856 (2002)
+
+[10] J. E. Jones and S. Chapman, *Proceedings of the Royal Society of London. Series A, Containing Papers of a Mathematical and Physical Character* **106**, 463 (1924)
+
+[11] R. Cortes-Huerto, J. Goniakowski, and C. Noguera, *The Journal of Chemical Physics* **138**, 244706 (2013)
+
+[12] I. Atanasov, G. Barcaro, F. Negreiros, A. Fortunelli, and R. Johnston, *The Journal of chemical Physics* **138**, 224703 (2013).
+
+[13] W. Vervisch, C. Mottet, and J. Goniakowski, *Phys. Rev. B* **65**, 245411 (2002)
+
+[14] F. Baletto, C. Mottet, and R. Ferrando, *Phys. Rev. Lett.* **84**, 5544 (2000)
+
+[15] F. Baletto, *Journal of Physics: Condensed Matter* **31**, 113001 (2019)
+
+[16] A. Laio and M. Parrinello, *Proceedings of the National Academy of Sciences* **99**, 12562 (2002)
+
+[17] G. A. Tribello, J. Cuny, H. Eshet, and M. Parrinello, *The Journal of Chemical Physics* **135**, 114109 (2011)
+
+[18] G. Santarossa, A. Vargas, M. Iannuzzi, and A. Baiker, *Phys. Rev. B* **81**, 174205 (2010)

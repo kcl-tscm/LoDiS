@@ -1,56 +1,19 @@
-# -*- coding: utf-8 -*-
-"""
-Created on: Sat Jun 17 11:04:59 2017
-Final version: Sat Sep 9 20017
-
-@author: NZ
-
-Disclamer: Please note the code is not perfectly optimized and further improvements are possible.
-
-# Variable are named in an intuitive way to help understand the code.
-
-# Please note the code ONLY works for mono-metalic elements. 
-It can be further developed to be able to support bi-metallic clusters. The work to be done added is not much.
-If you are interested in having this developed and require guidance please get in touch.
-
-***** I suggest adding a 'conversion' array that will assign the type of element to a give index [atom_type becomes array], this way a numerical value can be assigned to each type of element used, allowing for 'safety' checks.
-I have created the CCC coefficient array in such a way to allow for easy implementation for the second set of coefficients as now we have dimensions [2,3,3,3] where the first index will allow for second element type.
-
-# Double check the distribution of NN defined by code arithmetically with the one from PDF  #
-
-# Tests confirm the accurate values, precaution is advised due to the importance of the cut-off distance
-
-# Further optimization for cut-off distance is required to improve on the code
-
-# Possible memory saving improvement and speed boost can be achieved by moving from a defaultdict to a specific size array
-
-Contact:    Norbert.Zicher@physics.ox.ac.uk
-"""
+#======================================
+# Cluster Repositioning
+#======================================
+# This code is designed to translate the initial cluster to an optimal distance
+# from the double square MgO substrate placed at z = 0.
+# Run this code before starting a simulation with a substrate present.
+# Works for both monometallic and bimetallic clusters.
+#======================================
 import os
 import math
 import numpy
 import sys
 from collections import defaultdict
 
-"""
-Variable list:
-  Data Files:    f_init, f_final, g_rdf, g_pdf, substrate_pot_file
-  Variables :    atom, atom_type, atomic_radius
-                 i, j, k, l, m
-                 N, NN, NN_cutoff, NN_dist
-                 line, columns
-                 ccc, ccA, ccB
-                 metal_1, metal_2, aa, min_z, max_coord
-                 t1, t2, t3, t4, t5, t6
-                 ener_mgo_fixed, ener_mgo_min, mgo_min_dist
-                 reposition_dist
-                 
-                 
-  Position: init_x, init_y, init_z, final_z
-            average_x, average_y, average_z
-            dist_x, dist_y, dist_z, dist_tot     
-    
-"""
+
+
 
 ################################
 #      Initiate files          #

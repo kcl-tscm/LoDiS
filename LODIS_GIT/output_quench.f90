@@ -1,8 +1,8 @@
 SUBROUTINE scrittoq
 !!!WRITING output after a quenching procedure
 !
-USE PARACLUSTER  !uso il modulo di definizione dei parametri
-USE CLUSTER     !uso il modulo dove definisco variabili e parametri cluster
+USE PARACLUSTER 
+USE CLUSTER     
 USE ENFORCE
 USE POTENTIAL
 USE DISTANCE

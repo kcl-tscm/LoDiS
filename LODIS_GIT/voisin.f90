@@ -1,6 +1,6 @@
 SUBROUTINE voisin
-  USE PARACLUSTER  !uso il modulo di definizione dei parametri
-  USE CLUSTER   !uso il modulo dove defin1:natomco variabili e parametri cluster
+  USE PARACLUSTER 
+  USE CLUSTER   
   USE POTENTIAL
   USE ENFORCE
 
@@ -106,4 +106,4 @@ SUBROUTINE voisin
   !enddo
   !
   !
-EndSubroutine voisin
+End SUBROUTINE voisin

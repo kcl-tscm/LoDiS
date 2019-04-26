@@ -40,7 +40,7 @@
 
 PROGRAM main
   USE PARACLUSTER !! module containing the parameters
-  USE CLUSTER     !! variabili per il file del cluster
+  USE CLUSTER     
   USE POTENTIAL
   USE ENFORCE
   USE DISTANCE
@@ -144,7 +144,7 @@ PROGRAM main
   ENDIF
   !
   IF(caloric=='ya')   THEN
-     npassifreezing=ABS(tcaloric-tinit)/deltat ! I moved this here from down there...
+     npassifreezing=ABS(tcaloric-tinit)/deltat
      nome=npassifreezing*npas/scrivo
   ENDIF
   IF(metadyn=='ya') THEN

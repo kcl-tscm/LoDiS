@@ -1,8 +1,9 @@
 SUBROUTINE c2num_light
 !======================================
-! Calculating the stacking fault number
-! The derivative are not calculated in
-! order toimprove the performance
+! 2nd Neighbour Number light
+!======================================
+! Finds the 2nd neighbour number using the stacking fault formulation. 
+! The derivatives are not calculated in this version.
 !======================================
    
    USE PARACLUSTER  

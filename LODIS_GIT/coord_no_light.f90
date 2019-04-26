@@ -1,10 +1,11 @@
 SUBROUTINE cnum_light
   
-   ! LP
-   ! Calculating the analytic coordination number
-   ! in a better way.
-   ! Here the derivative are not calculated in order to
-   ! improve the performance
+!======================================
+! Coordination Number light
+!======================================
+! Calculating the analytic coordination number
+! Here the derivative are not calculated in order to improve the performance
+!======================================
 
    USE PARACLUSTER  
    USE CLUSTER   

@@ -1,6 +1,11 @@
 SUBROUTINE cnum
-   ! LP
-   ! Calculating the analytic coordination number
+!======================================
+! Coordination Number
+!======================================
+! Calculates the Analytic Coordination Number for monometallic clusters
+! Derivatives are calculated in this version
+! To imporve performance, switch to the cnum light version
+!======================================
      
    !USE OMP_LIB                                                 !>>> CPU_TIME
    USE PARACLUSTER  

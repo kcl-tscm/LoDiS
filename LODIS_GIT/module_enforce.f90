@@ -5,8 +5,8 @@ IMPLICIT NONE
  !
  ! CALCULATED VALUES
  !Position
- REAL*8 :: x0(nsiz),y0(nsiz),z0(nsiz) !!coordinate iniziali atomi
- REAL*8, ALLOCATABLE :: x(:),y(:),z(:) !!coordinate atomi
+ REAL*8 :: x0(nsiz),y0(nsiz),z0(nsiz) !!initial coordinates for atom i
+ REAL*8, ALLOCATABLE :: x(:),y(:),z(:) !!position array for atoms
  REAL*8, ALLOCATABLE :: u(:),v(:),w(:) ! displacement at time t                          
  REAL*8, ALLOCATABLE :: du(:),dv(:),dw(:) ! disp at time t-dt
  REAL*8, ALLOCATABLE :: v_acf(:,:,:),vel_act_est(:) !velocity and acf for calculation 

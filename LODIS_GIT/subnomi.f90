@@ -1,7 +1,7 @@
 Subroutine subnomi
 !
 USE PARACLUSTER
-USE CLUSTER     !variabili per il file del cluster            
+USE CLUSTER             
 USE ENFORCE
 !
 Implicit None
@@ -10,9 +10,9 @@ Integer :: i,nd
 !!if(quenching=='ya') nd=1
 !if (metadynamics=='ya') nd=1
 nd=nd_proc
-!!        ndasaltare=1000*nd    !se nd<9 =>     1000<i<9100 oppure 9300
-                              !se nd<99 =>   10000<i<99100 oppure 99300
-                              !se nd<999 => 100000<i<999100 oppure 999300
+!!        ndasaltare=1000*nd    ! nd<9 =>     1000<i<9100 or 9300
+                              ! nd<99 =>   10000<i<99100 or 99300
+                              ! nd<999 => 100000<i<999100 or 999300
 
 !!to use the cna written by G. Rossi
 !!i want out#.xyz

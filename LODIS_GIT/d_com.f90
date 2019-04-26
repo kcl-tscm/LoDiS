@@ -1,8 +1,11 @@
 SUBROUTINE d_com
-   !=====================
-   ! d_com
-   ! L.Pavan 12Mar14
-   !=====================
+!======================================
+! d^2 COM
+!======================================
+! Finds the sqaured distance of the Centre of Mass for a bimetallic cluster.
+! Calculates the derivatives.
+! Use the d_com light version to speed up calculation for taxing simulations.
+!======================================
    USE PARACLUSTER  
    USE CLUSTER   
    USE POTENTIAL

@@ -5,7 +5,7 @@ SUBROUTINE mgo_read
  ! aretebim have to be already known
 
  USE PARACLUSTER
- USE CLUSTER   !uso il modulo dove definisco variabili e parametri cluster
+ USE CLUSTER
  USE POTENTIAL
  USE SUBSTRATE
 

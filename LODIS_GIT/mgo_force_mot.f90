@@ -1,4 +1,4 @@
-SUBROUTINE mgo_force_mot
+SUBROUTINE force_mgo_mot
 
   USE PARACLUSTER
   USE CLUSTER 
@@ -114,4 +114,4 @@ SUBROUTINE mgo_force_mot
     !WRITE(901,*) ipas, n, mgo_cn(n), mgo_dcn_dx(n), mgo_dcn_dy(n), mgo_dcn_dz(n)
     !WRITE(902,*) ipas, n, mgo_cn_mot(n), mgo_dcn_mot_dx(n), mgo_dcn_mot_dy(n), mgo_dcn_mot_dz(n)
  ENDDO
-END SUBROUTINE mgo_force_mot
+END SUBROUTINE force_mgo_mot

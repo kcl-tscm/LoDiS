@@ -33,10 +33,10 @@ IMPLICIT NONE
  TYPE(atoms) :: lb_at
 
 NAMELIST/simul/irand,tstep,npas,scrivo,npast,tinit,&
-              &type_process,mgo_substrate,geometry_type,metal_on_top,&
+              &type_process,mgo_substrate,metal_on_top,&
               &vnu,filepos,filepot,mgo_pot,sticky_atoms,sticky_k,cn_cal,&
               &impl_env, pot_a, pot_b, eta_a, eta_b
-!geometry_type, added variable for geometry
+
 NAMELIST/system/type_potential,natom,fattor,elem1,elem2,clusters,wires,&
                &surface,bulk,pbcz,pbcy,pbcx,sys,lcutoff,lsubstrate
 !NAMELIST/support/sub_geom
@@ -71,7 +71,6 @@ tinit =1.d0
 tfin = tinit
 type_process = 'no'
 mgo_substrate = .false.
-geometry_type = 0
 metal_on_top = .false.
 vnu = 5.0d11
 filepos = 'pos.in'
@@ -267,7 +266,7 @@ IF(caloric == 'ya') THEN
   END IF
 END IF
 IF(canonical=='ya') THEN
-   READ(UNIT=5, nml=quench, iostat = ios) !LP: does this make any sense? Why canonical >> quench?
+   READ(UNIT=5, nml=quench, iostat = ios) 
    READ(UNIT=5, nml=canon, iostat=ios)
 END IF
 IF(deposizione =='ya') READ(UNIT=5, nml=growth, iostat = ios)
@@ -282,11 +281,6 @@ IF (mgo_substrate) THEN
    STOP
   ENDIF
 !  
-  IF(geometry_type == 0) THEN
-   WRITE(*,*) "read_input> Error: the geometry is not implemented"
-   WRITE(uniterr,*) "Error: the geometry is incorrect"
-   STOP
-  ENDIF
 !   
  IF (metal_on_top)  WRITE(*,*) 'read_input> Warning: metal_on_top (MOT) NOT TESTED'
 
