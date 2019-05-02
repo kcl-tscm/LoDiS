@@ -9,7 +9,6 @@
   type_process = 'melting',          ! Process to simulate: 'quenching', 'canon', 'melting', 'freezing', 'coalescence' or 'metadynamics'
   output_xyz = .true.,               ! Output movie .xyz format (with hdf5 format)
   mgo_substrate = .false.,           ! Run process with the substrate force-field?
-  geometry_type = 1                  ! Geometry of MgO substrate: 1 - double square, 2 - triangle
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
@@ -22,6 +21,7 @@
   eta_a = 0.02d0                     ! Strength of the interaction between species 1 and environment
   eta_b = 0.02d0                     ! Strength of the interaction between species 2 and environment
   cn_cal        = .false.,           ! Use HeCN/HoCN calculations ('bim') for environment? (Otherwise Fermi distribution formalisation)
+!  geometry_type = 1                  ! Geometry of MgO substrate: 1 - double square, 2 - triangle
 /
 
 &system

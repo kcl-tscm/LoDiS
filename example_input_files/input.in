@@ -6,16 +6,16 @@
   npast  = 2000,                     ! Thermalization time
   tinit  = 400,                      ! Initial temperature
   vnu    = 5.d11,                    ! Andersen thermostat frequency (5.d11)
-  type_process = 'melting',          ! Process to simulate: 'quenching', 'microcan', 'melting', 'freezing', 'coalescence' or 'metadynamics'
+  type_process = 'melting',          ! Process to simulate: 'quenching', 'canonical', 'melting', 'freezing', 'coalescence' or 'metadynamics'
   output_xyz = .true.,               ! Output movie .xyz format (with hdf5 format)
   mgo_substrate = .false.,           ! Run process with the substrate force-field?
   geometry_type = 1                  ! Geometry of MgO substrate: 1 - double square, 2 - triangle
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
-  filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! Initial atom positions file, ONLY .xyz format
-  filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
-  mgo_pot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
+  filepos      = '~/Documents/LoDiS/input_example_files/Au_147.xyz',             ! Initial atom positions file, ONLY .xyz format
+  filepot      = '~/Documents/LoDiS/input_example_files/Au_Au.pot',             ! Potential parameters file, ONLY .pot format
+  mgo_pot      = '~/Documents/LoDiS/input_example_files/Au_Au.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
   impl_env = .true.                  ! Simulate with an implicit environment?
   pot_a = 1.5d0                      ! Metal-environment interaction type. 1 - pairwise, <1 - covalent, >1 - strong interacting environment
   pot_b = 1.5d0                      ! Same case as pot_a, but for chemical species 2 in bi-metallic cluster
@@ -28,15 +28,15 @@
   type_potential  = 'rgl',           ! Potential type between 'lj' (for noble gases), 'rgl' (for metallic systems) and 'gir' (for carbon systems)
   natom           = 147,             ! Initial number of atoms in the cluster
   fattor          = 1.d0,            ! LEAVE IT, stupid units conversion
-  elem1           = 'Ag',            ! Chemical species one
-  elem2           = 'Ag',            ! Chemical species two
+  elem1           = 'Au',            ! Chemical species one
+  elem2           = 'Au',            ! Chemical species two
   sys             = 'mon',           ! Monometallic cluster 'mon' or bimetallic cluster 'bim'?
 /
   
 ! &coal : procedure for coalescence
 &coal
-  filepos2 = '~/Documents/LoDiS/input_example_files/Ag_309.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
-  natom2 = 309                        ! Initial number of atoms in the coalescence cluster
+  filepos2 = '~/LoDiS/input_example_files/Ag_147.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
+  natom2 = 147                        ! Initial number of atoms in the coalescence cluster
   somedist = 80.0d0                   ! Initial distance between the clusters
 /
 
@@ -60,7 +60,7 @@
   tcaloric        = 1500.d0,          ! Final temperature
 /
 
-&microcanonical
+&canon
   vel_af = .true.                     !Tells the system to call the velocity autocorrelation function
 /
 

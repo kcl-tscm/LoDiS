@@ -39,7 +39,7 @@
 !---------------------------------------------------------------------
 
 PROGRAM main
-  USE PARACLUSTER !! module containing the parameters
+  USE PARACLUSTER 
   USE CLUSTER     
   USE POTENTIAL
   USE ENFORCE
@@ -144,7 +144,7 @@ PROGRAM main
   ENDIF
   !
   IF(caloric=='ya')   THEN
-     npassifreezing=ABS(tcaloric-tinit)/deltat
+     npassifreezing=ABS(tcaloric-tinit)/deltat ! I moved this here from down there...
      nome=npassifreezing*npas/scrivo
   ENDIF
   IF(metadyn=='ya') THEN

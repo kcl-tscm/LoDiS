@@ -79,7 +79,7 @@ a coalescence.
 
 
 ## Example
-A rapid 100K/ns melting simulation of an Ag 147 atom icosahedron is readily available with the use of the provided files in the **example_input_files** directory.
+A rapid 100K/ns melting simulation of an Au 147 atom icosahedron is readily available with the use of the provided files in the **example_input_files** directory.
 
 Edit the paths to the for Ag147.xyz and Ag_Ag.pot files before running the simulation:
 ```
@@ -87,15 +87,16 @@ filepos      = '~/Documents/LoDiS/input_example_files/Ag147.xyz',             ! 
   
 filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
 ```
-
-NOTE: neither Ag_309.xyz nor Ag_Ag.MgO.pot are used in this particular run.
+Modifying the input.in will allow to run the other processes for the Au 147 cluster including a coalescence run with the additional Ag_Au.pot and Ag_147.xyz files.
+To correctly run a coalescence simulation, the input parameter **natom** is uniquely set at the sum number of atoms within the two clusters.
+The parameter, **natom2**, is the number of atoms in the second cluster! 
 
 ## The LoDiS Team
 * Francesca Baletto (francesca.baletto@kcl.ac.uk)
 * Raphael Pinto-Miles (raphpmx@gmail.com)
 * Kevin Rossi (k1992@hotmail.it)
 * Vagner Rigo (vagnerrigo@gmail.com)
-* Riccardo Ferrando (ferrando@fisicaunige.it)
+* Riccardo Ferrando (ferrando@fisica.unige.it)
 * Christine Mottet (mottet@cinam.univ-mrs.fr)
 * Henrik Moerkved (henrik.morkved@kcl.ac.uk)
 * Wei Zhao (wei.1.zhao@kcl.ac.uk)
@@ -138,3 +139,9 @@ NOTE: neither Ag_309.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 [17] G. A. Tribello, J. Cuny, H. Eshet, and M. Parrinello, *The Journal of Chemical Physics* **135**, 114109 (2011)
 
 [18] G. Santarossa, A. Vargas, M. Iannuzzi, and A. Baiker, *Phys. Rev. B* **81**, 174205 (2010)
+
+[19] L. Pavan, K. Rossi, and F. Baletto, *The Journal of Chemical Physics* **143**, 184304 (2015)
+
+[20] K. Rossi,  G. G. Asara,  and  F. Baletto, *Phys. Chem. Chem. Phys.*  **21**, 4888-4898 (2019)
+
+[21] F. Baletto, and R. Ferrando, *Rev. Mod. Phys.* **77**, 371 (2005)

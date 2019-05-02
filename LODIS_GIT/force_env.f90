@@ -12,9 +12,9 @@ SUBROUTINE FENVIRONMENT
 integer :: n
  !Chooses the CN calculation method based on the input
 IF (cn_cal) THEN
-  CALL ENVCN
-ELSE
   CALL ENVCN2
+ELSE
+  CALL ENVCN
 END IF
 
  ! Now I have cn(i) and and its derivative w.r.t. x, y, z

@@ -1,7 +1,7 @@
 subroutine dff_test2
 use enforce
 use cluster
-use paracuster
+use paracluster
 
 implicit none
 
@@ -67,12 +67,12 @@ end do
 
 do freq = 1,npas
 	do N_i = 1,npas	
-		arg = -(2*pi*dble(N_i)/npas)
-		!write(13,*) N_i,arg
-		dft(freq,1) = dft(freq,1) + cos(arg*dble(freq)*tstep))*vel_act_est(N_i)!/npas
-		!write(14,*) N_i ,dft(N_i,1) , cos(arg) ,vel_act_est(freq)
-		!dft(N_i,2) = dft(N_i,2) + sin(arg*dble(freq))*vel_act_est(freq)!/npas
-		!write(15,*) N_i,dft(N_i,2) , sin(arg) ,vel_act_est(freq)
+	arg = -(2*pi*dble(N_i)/npas)
+	!write(13,*) N_i,arg
+	dft(freq,1) = dft(freq,1) + cos(arg*dble(freq)*tstep)*vel_act_est(N_i)!/npas
+	!write(14,*) N_i ,dft(N_i,1) , cos(arg) ,vel_act_est(freq)
+	!dft(N_i,2) = dft(N_i,2) + sin(arg*dble(freq))*vel_act_est(freq)!/npas
+	!write(15,*) N_i,dft(N_i,2) , sin(arg) ,vel_act_est(freq)
 	end do
 write(60,*) freq , dft(freq,1)*dft(freq,1) !+ dft(N_i,2)*dft(N_i,2)
 end do

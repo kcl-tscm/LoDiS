@@ -14,11 +14,7 @@ SRCS =  module_parameters.f90 \
         read_input.f90 \
         mgo_read.f90 \
         mgo_coord_no.f90 \
-        mgo_coord_no_FB.f90 \
         force_mgo.f90\
-	substrate_force_choice.f90 \
-	substrate_hex_force.f90 \
-	substrate_dsq_force.f90 \
         mgo_read_mot.f90 \
         force_mgo_mot.f90 \
         mgo_coord_no_mot.f90 \
@@ -58,11 +54,7 @@ OBJS = 	module_parameters.o \
         read_input.o \
         mgo_read.o \
         mgo_coord_no.o \
-        mgo_coord_no_FB.o \
         force_mgo.o\
-	substrate_force_choice.o \
-	substrate_hex_force.o \
-	substrate_dsq_force.o \
         mgo_read_mot.o \
         force_mgo_mot.o \
         mgo_coord_no_mot.o \
@@ -89,19 +81,16 @@ OBJS = 	module_parameters.o \
         output_calor.o output_quench.o output_growth.o output_coalescence.o \
         output_meta.o subnomi.o \
 
-
 ##================================================================================
-#Write the Fortran compiler (F90), FFLAGS and any libraires you wish to use below:
-
-
-
+# Write here your Fortran 90 compiler (F90), FFLAGS and any libraries (LIBS) you wish to make use of.
+# Note that LoDiS is designed to be run using OpenMP!!!!!!!!
+#
 ##================================================================================
-
 
 all: $(PROG)
 
 $(PROG): $(OBJS)
-	$(F90) $(FFLAGS) -o $@ $(OBJS) 
+	$(F90) $(FFLAGS) -o $@ $(OBJS)  $(LIBS)
 
 clean:
 	rm -f $(PROG) $(OBJS) *.mod
