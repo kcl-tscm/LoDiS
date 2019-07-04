@@ -35,7 +35,7 @@ Clone the repository into a local directory:
 https://github.com/kcl-tscm/LoDiS.git
 ```
 
-Open the Makefile and select the correct version of fortran (listed under gfortran/ifort) and its libraries on your local computer by removing the necessary '#' symbols.
+Open the Makefile and select the correct version of Fortran (listed under gfortran/ifort) and its libraries on your local computer by removing the necessary '#' symbols.
 
 Compile all the .f90 files by running the Makefile:
 ```
