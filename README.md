@@ -57,7 +57,7 @@ Other files required for simulation include:
 List the files to be read by the software in the **input.in** with either the relative path or ideally the absolute path.
 Example files for reference are provided in the **example_input_files** directory.
 
-To run the simulation, use the following command line in terminal:
+To run the simulation, use the following command line in the terminal:
 ```
 ./PATH/LODIS_all <input.in> output.out
 ```
