@@ -20,7 +20,7 @@ between 10-10000 atoms. Incorporated tools allow for investigations into growth/
 canonical NVT and metadynamics with or without the presence of an MgO substrate. 
 
 Supported nanosystems include:
-* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential) [1]
+* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrand potential) [1]
 * Noble gases (Lennard-Jones potential) [2]
 * Carbon-based systems (Pacheco-Girifalco potential) [3]
 
