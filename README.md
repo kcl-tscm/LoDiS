@@ -50,7 +50,7 @@ Before configuring the simulation, several files must be prepared beforehand:
 
 
 LoDiS comes equipped with two input schemes: an interactive interface and an input.in file. The former is a more user friendly method for those unfamiliar
-with the program, providing visual aids and error check before simulation. In addition, post-simulation analysis unique to the scheme can be automatically run.
+with the program, providing visual aids and error checks before simulation. In addition, post-simulation analysis unique to the scheme can be automatically run.
 To run the interface and by extension LoDiS, use the following command on terminal:
 ```
 python /PATH/LoDiS_GIT/py_interface/lodis_gui.py
@@ -76,9 +76,7 @@ Running a simulation regardless of the procedure will output the following six f
 * pr.out - the final positions of the components
 * output.out - a file containing a runthorugh of the process, inluding parameters and errors.
 
-An additional 4 file types depending on the process can be generated. The first two, '**meta.out**' and '**metahistory.out**', are produced 
-after a metadynamics run whilst undergoing a NVE/NVT/quenching will give a '**velocity.out**' file. The last file type '**coalescing.out**' is outputted
-a coalescence.   
+Depending on the procedure, additional files may be generated such as **meta.out** for Metadynamics and **coalescing.out** for Coalescence.   
 
 
 ## Example
