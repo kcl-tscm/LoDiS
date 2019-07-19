@@ -1,0 +1,14 @@
+In this folder are to be found:
+
+1) The fork of the LoDiS code to implement pressure calculations and output (using R. Ferrando's algorithm)
+
+2) The post-processing codes written in Python, both as a script .py and an interactive Jupyter Notebook.
+    They automatically read the movie.xyz and energy.out files produced by LoDiS, and generate a 3D pressure map,
+    the distribution of pressure values through time, their radial distribution, and the total pressure evolution.
+    More details in the respective codes.
+    
+3) Some examples of the post-processing results for:
+    - Ag147 (Quenching)
+    - Ag147 (Melting)
+    - Ag316 (Quenching)
+    - Ag316 (Melting)
