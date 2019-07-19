@@ -1,0 +1,10 @@
+The Pressure calculation has almost entirely been taken from Riccardo Ferrando's Fortran code.
+
+It can be found in the following files:
+- force_rgl.f90 (where the calculation takes place, the pressure being computed from the force)
+- module_cluster.f90 (where the pressure array is defined as an allocatable)
+- the various output_*.f90 files (where the pressure is saved onto the movie.xyz files for all processes)
+
+
+Finally, a boolean paramter has been included such as to be read in the input.in: the !output_pres variable. 
+Set to True to save the pressure on the .xyz, and to False to only output the positions.
