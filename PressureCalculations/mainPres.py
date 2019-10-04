@@ -13,12 +13,6 @@ from itertools import groupby
 from collections import namedtuple
 
 
-PATH_TO_POT = './PtPt.pot'
-
-MOVIE_NAME = 'Pt1415_sim7_md'
-PATH_TO_MOVIE = './Movie_Files/{}.xyz'.format(MOVIE_NAME)
-PATH_TO_NEW_MOVIE = './Pressure_Results/{}_WithPres.xyz'.format(MOVIE_NAME)
-
 
 def readMovieFileXYZ(path_to_movie):
     """
@@ -170,67 +164,6 @@ def readPotentialFile(path_to_potfile):
 
     return(potential)
 
-
-# In[90]:
-
-
-def getNeighbourTypesForAll(frame):
-    """
-    Reads a frame of a movie input and returns the lists of list containing
-    at index i the atoms j with certain interaction types.
-    
-    NN: nearest neighbours
-    AN: almost neighbours
-    ZE: zero interaction
-    """
-    
-    list_NN = []
-    list_AN = []
-    list_ZE = []
-    for i in range(len(frame)):
-        atom_i = frame[i]
-        list_NN_i = []
-        list_AN_i = []
-        list_ZE_i = []    
-        #for j in range(i+1, len(res)):
-        for j in range(len(frame)):
-
-            # Compute interatomic distance (only once ij = ji)
-            atom_j = frame[j]
-            dist_ij = np.sqrt((atom_j[1]-atom_i[1])**2+(atom_j[2]-atom_i[2])**2+(atom_j[3]-atom_i[3])**2)
-
-            # Determine type of neighbouring interaction
-            dist_type = ''
-
-            if dist_ij<cutoff_start and dist_ij>0:
-                dist_type = 'NN'
-            elif dist_ij<cutoff_end:
-                dist_type = 'AN'
-            elif dist_ij>cutoff_end:
-                dist_type = 'ZE'
-
-            # Build lists of neighbours
-
-            if dist_type=='ZE':
-                list_ZE_i.append(j)
-    #            print(i, j, dist_ij, '\t', dist_type)
-            if dist_type=='NN':
-                list_NN_i.append(j)
-            if dist_type=='AN':
-                list_AN_i.append(j)
-
-        list_NN.append(list_NN_i)
-        list_AN.append(list_AN_i)
-        list_ZE.append(list_ZE_i)
-    
-    
-    return([list_NN, list_AN, list_ZE])
-# The lists list_NN,AN,ZE are of N_atom lengths and are lists of list. Containing at index i the atoms j with 
-# certain bonding with atom i
-# Eg. list_NN[3] contains the labels of atoms j which are nearest neighbours with atom 4.
-
-
-
 def getPressureTwoAtoms(atom_i, atom_j, potential):
     """
     For two atoms 1 and 2 -- given as arrays of form [Atom, x, y, z, Colour]--
@@ -238,49 +171,70 @@ def getPressureTwoAtoms(atom_i, atom_j, potential):
     stored in the potential named tuple.
     """
     
+    ###### den_i should be set zero only wehn I change i but summing over all j
+    
     # 1. Determining interaction type
     if atom_i[0] == potential.AtomTypes[0] and atom_j[0] == potential.AtomTypes[0]:
         interaction_type = 0 # Monometallic interaction between atoms of type 1 (cf Pot file)
     if atom_i[0] == potential.AtomTypes[1] and atom_j[0] == potential.AtomTypes[1]:
         interaction_type = 1 # Monometallic interaction between atoms of type 2 (cf Pot file)
     else:
-        interaction_type = 0 # Monometallic interaction between atoms of type 1 (cf Pot file)
+        interaction_type = 2 # Bimetallic interaction
     
     # 2. Determining interatomic distance
-    dist_ij = np.sqrt((atom_j[1]-atom_i[1])**2+(atom_j[2]-atom_i[2])**2+(atom_j[3]-atom_i[3])**2)
+    dist_ij = np.sqrt((atom_j[1]-atom_i[1])**2\
+                          +(atom_j[2]-atom_i[2])**2\
+                          +(atom_j[3]-atom_i[3])**2)
     
     # 3. Pressure calculations
-    if dist_ij<potential.CutoffStart and dist_ij>0:
+    if dist_ij<=potential.CutoffStart and dist_ij>0: #Distances in A
         
     # 3.1 Pressure calculation for NN
         espo = (dist_ij/potential.dik0)-1
 
-        pres_repul = potential.P[interaction_type]*potential.A[interaction_type]*(np.exp(-potential.P[interaction_type]*espo))/potential.dik0
+        pres_repul = potential.P[interaction_type]*potential.A[interaction_type]*\
+        (np.exp(-potential.P[interaction_type]*espo))/potential.dik0
 
-        pres_bond =-potential.Q[interaction_type]*(potential.Qsi[interaction_type]**2)*(np.exp(-2*potential.Q[interaction_type]*espo))/potential.dik0
+        pres_bond =-potential.Q[interaction_type]*(potential.Qsi[interaction_type]**2)*\
+        (np.exp(-2*potential.Q[interaction_type]*espo))/potential.dik0
+
+        #summing over all j-atoms contributing to force on i
+        denom_i = -potential.Qsi[interaction_type]**2*np.exp(-2*potential.Q[interaction_type]*espo)
+        # Units denom: eV**2
+
 
     # 3.2 Pressure calculation for AN
-    elif dist_ij<potential.CutoffEnd:
+    elif dist_ij<=potential.CutoffEnd:
         dist_ij_m = dist_ij - potential.CutoffEnd
         
-        pres_repul = (5*potential.a5[interaction_type]*(dist_ij_m**4))+(4*potential.a4[interaction_type]*(dist_ij_m**3))+(3*potential.a3[interaction_type]*dist_ij_m**2)
+        pres_repul = (5*potential.a5[interaction_type]*(dist_ij_m**4))+\
+        (4*potential.a4[interaction_type]*(dist_ij_m**3))+\
+        (3*potential.a3[interaction_type]*dist_ij_m**2)
         
-        pres_bond = (potential.x5[interaction_type]*(dist_ij_m**5)+potential.x4[interaction_type]*(dist_ij_m**4)+potential.x3[interaction_type]*(dist_ij_m**3))*(5*potential.x5[interaction_type]*(dist_ij_m**4)+4*potential.x4[interaction_type]*(dist_ij_m**3)+3*potential.x3[interaction_type]*(dist_ij_m**2))
+        pres_bond = (potential.x5[interaction_type]*(dist_ij_m**5)+\
+                     potential.x4[interaction_type]*(dist_ij_m**4)+\
+                     potential.x3[interaction_type]*(dist_ij_m**3))*\
+        (5*potential.x5[interaction_type]*(dist_ij_m**4)+\
+         4*potential.x4[interaction_type]*(dist_ij_m**3)+\
+         3*potential.x3[interaction_type]*(dist_ij_m**2))
+        
+        denom_i = (potential.x5[interaction_type]*(dist_ij_m**5)+\
+                   potential.x4[interaction_type]*(dist_ij_m**4)+\
+                   potential.x3[interaction_type]*(dist_ij_m**3))**2
+        # Units denom: eV**2
         
     # 3.3 No need to calculate pressure for far neighbours
 
     elif dist_ij>potential.CutoffEnd:
         pres_repul = 0
         pres_bond = 0
-        
+        denom_i = 0
+    
     # 4. Calculate final pressure between atoms i and j, accounting for distance    
-    return(np.array([pres_repul*dist_ij, pres_bond*dist_ij]))
-
-
+    return(np.array([pres_repul*dist_ij, pres_bond*dist_ij, denom_i]))
 
 
 ### Loop over all atoms to get pressure for each
-
 def pressureMain():
     """
     Reads .pot and movie files and outputs to location
@@ -299,12 +253,17 @@ def pressureMain():
         # Pressure Calculation for that frame
         atom_pressures = []
         for i in range(len(current_frame)): # Loop over i
-            pressure_i = np.array([0.0, 0.0])
+            pressure_repul_i = 0.0
+            pressure_bond_i = 0.0
+            summed_denom_i = 0.0
             for j in range(len(current_frame)): # Loop over j of i
-                pressure_i += getPressureTwoAtoms(current_frame[i], current_frame[j], potential) 
-                #Increment the repulsion and bonding pressures for atoms before summing
-
-            atom_pressures.append(np.sum(pressure_i))
+                pressure_repul_i += getPressureTwoAtoms(current_frame[i], current_frame[j], potential)[0]
+                pressure_bond_i += getPressureTwoAtoms(current_frame[i], current_frame[j], potential)[1]
+                summed_denom_i +=getPressureTwoAtoms(current_frame[i], current_frame[j], potential)[2]
+            
+            pressure_bond_i = pressure_bond_i/np.sqrt(summed_denom_i)
+            
+            atom_pressures.append(pressure_repul_i+pressure_bond_i)
 
         # Check that we have one pressure value for each atom
         if (len(atom_pressures)!= NATOM):
@@ -313,14 +272,27 @@ def pressureMain():
         #return(atom_pressures)
         # 3. Output Pressure to xyz file
         with open(PATH_TO_NEW_MOVIE, 'a+') as newmovie: # Mode chosen: append
-            newmovie.write('\n'+str(NATOM)+'\n')
+            
+            num_lines = sum(1 for line in open(PATH_TO_NEW_MOVIE))
+
+            if (num_lines==0): # No newline for first line -- bugs Ovito if there is newline at beginning
+                newmovie.write(str(NATOM)+'\n')
+            else:
+                newmovie.write('\n' + str(NATOM)+'\n')
+                
             newmovie.write('\t'.join(str(item) for item in movie.Headers[frame_num]))
             
             for atom_index, atom_info in enumerate(current_frame):
-                atom_info.append(atom_pressures[atom_index]) # Adding pressure to tuple
+                atom_info[-1] = atom_pressures[atom_index] # Adding pressure to tuple
                 newmovie.write('\n')
                 newmovie.write('  \t'.join(str(item) for item in atom_info))
 
+                
+for MOVIE_NAME in ['Pt147_sim7_md', 'Pt309_sim7_md']:#, 'Pt561_Sim5_md', 'Pt561_sim8_all_md', 'Pt1415_sim7_md']:
+    PATH_TO_POT = './PtPt.pot'
 
-pressureMain()
+    PATH_TO_MOVIE = './Movie_Files/{}.xyz'.format(MOVIE_NAME)
+    PATH_TO_NEW_MOVIE = './Pressure_Results/{}_WithPres.xyz'.format(MOVIE_NAME)
+
+    pressureMain()
 
