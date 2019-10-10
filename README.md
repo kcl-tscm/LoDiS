@@ -21,7 +21,7 @@ canonical esemble (NVT), microcanonical esemble (NVE) and metadynamics with the 
 a MgO substrate.  
 
 Supported nanosystems include:
-* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrande potential) [1]
+* Mono- and bi-metallic clusters (metal-metal interactions are modelled by the Rosato-Guillope-Legrand potential) [1]
 * Noble gases (Lennard-Jones potential) [2]
 * Carbon-based systems (Pacheco-Girifalco potential) [3]
 
