@@ -4,6 +4,7 @@
 # In[ ]:
 
 ##### Code written by Russell Brooks @Russellzoom #########
+# A Python code to calculate Spider algorithm
 
 '''retrieve XYZ'''
 def retrieve_position(tc_index):
