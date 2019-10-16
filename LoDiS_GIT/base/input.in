@@ -6,7 +6,7 @@
   npast  = 2000,                     ! Thermalization time
   tinit  = 400,                      ! Initial temperature
   vnu    = 5.d11,                    ! Andersen thermostat frequency (5.d11)
-  type_process = 'melting',          ! Process to simulate: 'quenching', 'canon', 'melting', 'freezing', 'coalescence' or 'metadynamics'
+  type_process = 'melting',          ! Process to simulate: 'quenching', 'microcanonical', 'melting', 'freezing', 'coalescence', 'metadynamics', 'itmd', 'nvt' or 'growth'
   output_xyz = .true.,               ! Output movie .xyz format (with hdf5 format)
   mgo_substrate = .false.,           ! Run process with the substrate force-field?
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
