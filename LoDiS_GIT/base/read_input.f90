@@ -43,7 +43,7 @@ NAMELIST/sysbim/sologeom,NA_elem
 NAMELIST/canon/vel_af
 NAMELIST/growth/ndepmax,lcs,at_tipo2,prob,tsorg,rad
 NAMELIST/quench/itremp,tmin
-NAMELIST/calor/tcaloric,deltat
+NAMELIST/calor/tcaloric,deltat,tfin
 NAMELIST/coal/filepos2,natom2,somedist
 
 !----- beginning of new part (Metadynamics) -----------------------------------
@@ -210,7 +210,7 @@ ENDIF
 !
 IF(scrivo>npas) THEN
  WRITE(*,*) "read_input> Error: the output cannot be written"
- WRITE(uniterr,*) "Error: the output cannot be written"
+ WRITE(uniterr,*) "read_input> Error: the output cannot be written"
  STOP
 ENDIF
 
@@ -223,6 +223,21 @@ IF(natom==0) THEN
 ENDIF
 !
 !
+!----------------------------------------------------
+! RANDOM NUMBER GENERATOR
+WRITE(*,*) 'read_input> Initializing random number generator'
+WRITE(*,*) 'read_input> Checking if irand is odd', MOD(irand,2)
+IF((irand<4095).AND.(irand>1000).AND.MOD(irand,2)/=0)THEN
+    irand_seed(1)=irand
+    irand_seed(2)=irand_seed(1)+1
+    irand_seed(3)=irand_seed(2)+1
+    irand_seed(4)=2*irand_seed(3)+1
+ELSE
+    WRITE(uniterr,*) 'wrong irand, irand should be odd, current irand is=',irand
+    STOP
+ENDIF
+
+! Checking program/type_process
 type_process = TRIM(type_process)
 IF (type_process == 'no' ) THEN
    WRITE(*,*) 'read_input> No type_process selected'
@@ -231,23 +246,62 @@ IF (type_process == 'no' ) THEN
    WRITE(uniterr,*) '######################'
    STOP
 ELSE
+!default values no process selected
+!---------------------------------------------
    quenching = 'no'
    deposizione = 'no'
    caloric = 'no'
    canonical = 'no'
    metadyn = 'no'
    coalescence = 'no'
-   IF(type_process == 'Quenching' )quenching = 'ya'
-   IF(type_process == 'NVT' ) canonical = 'ya'
-   IF(type_process == 'itMD' )  caloric = 'ya'
-   IF(type_process == 'Growth' )   deposizione = 'ya'
-   IF(type_process == 'Metadynamics' ) metadyn = 'ya'
-   IF(type_process == 'Coalescence') coalescence = 'ya'
-ENDIF
+!
+! assigning character label for running the code
 !
    WRITE(*,*) 'read_input> Process type: ', TRIM(type_process)
 !
-IF(quenching=='ya')    READ(UNIT=5, nml=quench, iostat = ios)
+   IF(type_process == 'Quenching' .or. type_process=='quenching') quenching = 'ya'
+   IF(type_process == 'microcan' .or. type_process == 'NVE' .or. type_process =='microcanonical') then
+       canonical = 'ya'
+       vnu = 0.d0
+       tfin = tinit
+       WRITE(*,*) 'read_input> Selected NVE at temperature', tinit, 'thermostat freq.',vnu
+     !!! check that tinit is given
+     ENDIF
+   IF(type_process == 'NVT'.or. type_process=='nvt') then
+         canonical = 'ya'
+         tfin = tinit
+         write(*,*) 'read_input> NVT at temperature',tinit,'freq thermostat',vnu
+   ENDIF
+   IF(type_process == 'itMD'.or. type_process=='itmd' )  caloric = 'ya'
+   IF(type_process == 'melting'.or. type_process=='melt') then
+        caloric='ya'
+        write(*,*) 'tinit is=',tinit,' tfin is =',tfin,''
+        IF (tfin < tinit) THEN
+         write(*,*) 'read_input> Error: tfin in melting must be > tinit'
+         stop
+        ENDIF
+   ENDIF
+   IF(type_process == 'freezing'.or. type_process=='freeze') then
+        caloric='ya'
+        write(*,*) 'tinit is=',tinit,' tfin is =',tfin, ''
+        IF (tfin > tinit) THEN
+        write(*,*) 'read_input> Error: tfin in freezing must be < tinit'
+        stop
+        ENDIF
+        write(*,*) 'tinit is=',tinit,' tcaloric is =',tcaloric, ''
+        IF (tcaloric > tinit) THEN
+        write(*,*) 'read_input> Error: tcaloric in freezing must be < tinit'
+        stop
+        ENDIF
+
+    ENDIF
+   IF(type_process == 'Growth'.or. type_process=='growth' )   deposizione = 'ya'
+   IF(type_process == 'Metadynamics'.or. type_process=='metadynamics' ) metadyn = 'ya'
+   IF(type_process == 'Coalescence'.or. type_process=='coalescence' ) coalescence = 'ya'
+ENDIF
+!
+!
+IF(quenching=='ya') READ(UNIT=5, nml=quench, iostat = ios)
 IF(caloric == 'ya') THEN
   READ(UNIT=5, nml=calor, iostat = ios) 
 END IF
@@ -357,8 +411,8 @@ END IF
 !! CONTROL ON PROCEDURE CHOICE
 !
 IF((quenching=='ya').AND.(itremp>npas)) THEN
- WRITE(uniterr,*) "Error: quenching choosen but never runable"
- WRITE(*,*) "read_input> Error: quenching choosen but never runable"
+ WRITE(uniterr,*) "Error: quenching chosen but never runable"
+ WRITE(*,*) "read_input> Error: quenching chosen but never runable because itremp>npas"
  STOP
 ENDIF
 !
@@ -376,18 +430,18 @@ END IF
 !
 IF(deposizione=='ya') THEN
  IF(ndepmax==0) THEN
-  WRITE(uniterr,*) "Error: deposition choosen but no atoms are deposited"
-  WRITE(*,*) "read_input> Error: deposition choosen but no atoms are deposited"
+  WRITE(uniterr,*) "Error: deposition chosen but no atoms are deposited"
+  WRITE(*,*) "read_input> Error: deposition chosen but no atoms are deposited"
   STOP
  ENDIF
  IF((lcs==2).AND.(prob==0.d0)) THEN
-  WRITE(uniterr,*) "Error: bi-deposition choosen with non prob"
-  WRITE(*,*) "read_input> Error: bi-deposition choosen with non prob"
+  WRITE(uniterr,*) "Error: bi-deposition chosen with non prob"
+  WRITE(*,*) "read_input> Error: bi-deposition chosen with non prob"
   STOP
  ENDIF
  IF(lcs==0) THEN
-  WRITE(uniterr,*) "Error: deposition choosen but no species are defined"
-  WRITE(*,*) "read_input> Error: deposition choosen but no species are defined"
+  WRITE(uniterr,*) "Error: deposition chosen but no species are defined"
+  WRITE(*,*) "read_input> Error: deposition chosen but no species are defined"
   STOP
  ENDIF
  IF((natom+ndepmax)>nsiz) THEN
@@ -422,7 +476,7 @@ ENDIF
 !
 ! Initial position
 !
-WRITE(*,*) 'read_input> Reading initial positions'
+WRITE(*,*) 'read_input> Reading initial positions '
 OPEN(UNIT=11,file=TRIM(filepos), status = 'old')
   READ(11,*)
   READ(11,*)
@@ -509,20 +563,7 @@ IF (mgo_substrate) THEN
    WRITE(*,*) 'read_input> Minimum cluster-substrate distance is [A]: ', mgo_mindist
 ENDIF
 
-
-! RANDOM NUMBER GENERATOR
-WRITE(*,*) 'read_input> Initializing random number generator'
-IF((irand<4095).AND.(irand>0))THEN
-    irand_seed(1)=irand
-    irand_seed(2)=irand_seed(1)+1
-    irand_seed(3)=irand_seed(2)+1
-    irand_seed(4)=2*irand_seed(3)+1
-ELSE
-    WRITE(uniterr,*) 'wrong irand',irand
-    STOP
-ENDIF
-
-! Checking program
+!--------------------------------------------------------------
 WRITE(*,*) 'read_input> Checking program'
 nproc=0
 IF (quenching=='ya')   nproc = nproc+1
@@ -533,18 +574,21 @@ IF (metadyn=='ya')     nproc = nproc+1
 IF (coalescence == 'ya') nproc = nproc+1
 IF (nproc /= 1) THEN
     WRITE(uniterr,*) "Error:you chosen ",nproc,"processes, please choose exacly one"
-    WRITE(*,*) "read_input> Error:you chosen ",nproc,"processes, please choose exacly one"
+    WRITE(*,*) "read_input> Error:you chosen ",nproc,"processes, please choose exacly one, make sure you write the process as: &
+quenching, microcan, melting, freezing, coalescence, metadynamics, itmd, nvt or growth"
     STOP
 ENDIF
+
+WRITE(*,*) 'read_input> Checking program (2)'
 
 !!!!!!!control on coherence of parameter!!!!!!!!
 IF(caloric == 'ya') THEN
     IF(tcaloric==0.d0) THEN
-        WRITE(uniterr,*) "Error: caloric choosen but no tfin is given"
+        WRITE(uniterr,*) "Error: caloric chosen but no tfin is given"
         STOP
     ENDIF
     IF (deltat==0.d0) THEN
-        WRITE(uniterr,*) "Error: caloric choosen but no deltat is given"
+        WRITE(uniterr,*) "Error: caloric chosen but no deltat is given"
         STOP
     ENDIF
 ENDIF
