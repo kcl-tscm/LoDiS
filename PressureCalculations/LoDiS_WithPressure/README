@@ -6,5 +6,5 @@ It can be found in the following files:
 - the various output_*.f90 files (where the pressure is saved onto the movie.xyz files for all processes)
 
 
-Finally, a boolean paramter has been included such as to be read in the input.in: the !output_pres variable. 
+Finally, a boolean parameter has been included such as to be read in the input.in: the !output_pres variable. 
 Set to True to save the pressure on the .xyz, and to False to only output the positions.
