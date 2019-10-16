@@ -74,6 +74,10 @@ PROGRAM main
   !IN THIS SUBROUTINE DEFINE THE VARIABLES FROM INPUT FILE
   WRITE (*,*) 'main_MD> Reading input file'
   CALL read_input
+  !--------------------------------------------------------
+  ! Read type_process and irand
+  ! check what it is read as type_process
+  !
 
   !---------------------------------------------------------
   ! Read the parameters for MgOsubstrate if wanted
@@ -615,7 +619,7 @@ PROGRAM main
 
   WRITE(*,*) 'main_MD> Time-loop is starting for ', TRIM(type_process)
   WRITE(*,*) 'main_MD> Now the computation of EXECUTION TIME starts'
-  time_start = OMP_GET_WTIME()
+  time_start =  OMP_GET_WTIME()
   !
   tpar = 0.d0     !averaged T
   edelta = 0.d0   !averaged energy
@@ -830,4 +834,7 @@ IF ((canonical == 'ya') .and. (vel_af) ) THEN
     deallocate(v_acf)
     deallocate(vel_act_est)
 end if
+
+WRITE (*,*) 'main_MD> This process has finished'
+
 END PROGRAM main
