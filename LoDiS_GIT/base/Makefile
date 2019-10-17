@@ -86,6 +86,10 @@ OBJS = 	module_parameters.o \
 #
 ##================================================================================
 
+#For example, uncomment this:
+#F90=gfortran -fopenmp
+
+
 all: $(PROG)
 
 $(PROG): $(OBJS)
