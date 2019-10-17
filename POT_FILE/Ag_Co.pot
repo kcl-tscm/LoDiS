@@ -1,0 +1,17 @@
+# INPUT PARAMETRIZATION FOR MolDyn CODE
+# METALS
+Ag	Co
+############################################################################
+# PARAMETRIZATION OF Ag-Ag, Co-Co, Ag-Co INTERACTION
+10.79d0			9.210d0			10.001d0	p
+3.19d0			2.975d0			3.085d0		q
+0.104331912d0	        0.17570d0 		0.14440d0	a
+1.194019029d0	        1.84300d0		1.47760d0	qsi
+############################################################################
+# OTHER METAL PROPERTIES
+2.95d0		4.45d0			Cohesion energy [eV]
+1.445d0		1.25d0			Atomic radius [Angstrom]
+108.d0		59.d0			Mass [amu]
+############################################################################
+# CUTOFF_START AND CUTOFF_END [Angstrom] 
+4.087077141d0          4.330126762d0

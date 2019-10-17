@@ -1,0 +1,19 @@
+## INPUT PARAMETRIZATION FOR MolDyn CODE (Bruma Nanoscale 2013 - DFT fit)
+###########################
+Au Pd
+# PARAMETRIZATION OF Au-Cu INTERACTION
+#      Au                    Pd			Au-Pd
+   10.243d0                10.85335d0           10.569d0     	p
+   4.0445d0                 2.7485d0             3.913d0		q
+   0.2019d0      	   0.1653d0             0.1843d0		a(eV)
+   1.8097d0       	   1.6805d0             2.082d0		qsi(eV)
+#########################################
+## OTHER METAL PROPERTIES
+ 3.49d0      3.89d0       Cohesion energy [eV]
+ 1.28d0       1.37d0        Atomic radius [Angstrom]
+ 64d0        106.42d0         Mass [amu]
+############################################################################
+# CUTOFF_START AND CUTOFF_END [Angstrom]
+     3.89        5.777
+#
+

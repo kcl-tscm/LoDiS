@@ -1,0 +1,19 @@
+## INPUT PARAMETRIZATION FOR MolDyn CODE (Gould, Lodsdail, Catlow JPCC 2015)
+###########################
+Au Ag
+# PARAMETRIZATION OF Au-Ag INTERACTION
+#      Au                    Ag			Au-Ag
+   10.229d0                10.928d0           10.5785d0     	p
+   4.036d0                  3.139d0           3.5875d0		q
+   0.2061d0      	   0.1028d0          0.15445d0		a(eV)
+   1.790d0       	   1.178d0           1.484d0		qsi(eV)
+#########################################
+## OTHER METAL PROPERTIES
+ 3.5471478968d0      2.703743984d0       Cohesion energy [eV]
+ 1.442d0             1.444d0        Atomic radius [Angstrom]
+196.96657d0          107.87d0         Mass [amu]
+############################################################################
+# CUTOFF_START AND CUTOFF_END [Angstrom]
+     4.06        10.5
+#
+

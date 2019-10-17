@@ -1,0 +1,16 @@
+#
+# PARAMETRIZATION OF Rh-Rh INTERACTION
+#
+p       13.31d0                 13.31d0                 13.31d0 
+q       3.15d0                  3.15d0                  3.15d0
+a       0.150700796180235       0.150700796180235       0.150700796180235
+qsi     2.14106801218906        2.14106801218906        2.14106801218906
+#
+# CUTOFF START AND CUTOFF END 
+#
+
+#
+# PARAMETRIZATION OF Rh-MgO INTERACTION
+#
+no
+
