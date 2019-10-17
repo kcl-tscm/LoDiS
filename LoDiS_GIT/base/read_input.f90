@@ -267,7 +267,7 @@ ELSE
        WRITE(*,*) 'read_input> Selected NVE at temperature', tinit, 'thermostat freq.',vnu
      !!! check that tinit is given
      ENDIF
-   IF(type_process == 'NVT'.or. type_process=='nvt') then
+   IF(type_process == 'NVT'.or. type_process=='nvt'.or. type_process=='canonical') then
          canonical = 'ya'
          tfin = tinit
          write(*,*) 'read_input> NVT at temperature',tinit,'freq thermostat',vnu
