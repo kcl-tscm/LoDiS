@@ -1,0 +1,41 @@
+#!/bin/bash
+
+input=''
+read line
+while [ -n "$line" ]
+do input="$input $line"; read line
+done
+
+b=($input)
+npar=${#b[@]}
+ng=$((npar/3))
+
+# Print the first 27 parameters in Riccardo's order
+for ir in 0 1 2
+do
+  for igg in 0 1 2
+  do
+    ig=$((3*igg+ir))
+    printf "%10.6f %10.6f %10.6f\n" ${b[$((3*ig))]} ${b[$((3*ig+1))]} ${b[$((3*ig+2))]}
+    ((igg++))
+  done
+done
+
+# Print the rest in groups of 3
+ig=0
+i=$((27+3*ig))
+while [ $i -lt $npar ]
+do
+  for ir in 0 1 2
+  do 
+    i=$((27+3*ig+ir))
+    if [ $i -lt $npar ]
+    then printf "%10.6f " ${b[$i]}
+    fi
+  done
+  echo
+  ((ig++))
+  i=$((27+3*ig))
+done
+
+exit 0
