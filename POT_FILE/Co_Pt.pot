@@ -1,0 +1,17 @@
+ ## INPUT PARAMETRIZATION FOR MolDyn CODE
+ ## METALS 
+Co    Pt
+##########################################
+### Rosato-Guillope-Legrand- parameters
+8.8000         	11.1400   	9.97        p
+2.9600   	 3.6800  	3.32        q
+0.18882279  	 0.24241404  	0.244705    a(eV)
+1.90663612  	 2.50600600  	2.384765    qsi(eV)
+ #########################################
+ ## OTHER METAL PROPERTIES
+ 4.39	  5.8400         Cohesion energy [eV]
+ 1.25	  1.3850    	 Atomic radius [Angstrom]
+59.0	  195.0          Mass [amu]
+ ############################################################################
+ # CUTOFF_START AND CUTOFF_END [Angstrom]
+     3.917371750        4.330127239

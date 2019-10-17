@@ -1,0 +1,41 @@
+# INPUT PARAMETRIZATION FOR BASIN_HOPPING CODE
+# METALS
+Pd      Pt
+############################################################################
+# PARAMETRIZATION OF Pd-Pd, Pt-Pt, Pd-Pt INTERACTION
+17.00d0                 13.00d0                 13.539727d0     p
+2.09d0                  3.13d0                  2.0912045d0     q
+5.008013017289627E-002  0.160173937375913d0     0.069820d0      a
+1.19237170890138d0      2.18551717306347d0      1.47740854201d0 qsi
+############################################################################
+# OTHER METAL PROPERTIES
+3.89d0          5.86d0          Cohesion energy [eV]
+1.3753226894078 1.385d0         Atomic radius [Angstrom]
+106.d0          195.d0          Mass [amu]
+############################################################################
+# CUTOFF_START AND CUTOFF_END [Angstrom] 
+4.79778073697d0         5.54d0 
+############################################################################
+# PARAMETRIZATION OF Pd-CaO INTERACTION
+   -0.112944       -0.054145        0.010784
+   -1.016407        2.638792       -1.098624
+    6.840376       -1.606917       -0.733460
+    0.885134        0.386593        0.038144
+    2.570851       -2.718253        1.195440
+   -4.426882        1.349236        0.852039
+    8.257075        4.324423        0.691276
+   69.731948      -62.438497       31.678471
+   83.018384       16.718076        3.662097
+############################################################################
+# O-O DISTANCE IN THE OXIDE [Angstrom]
+4.80974032563d0         4.80974032563d0
+############################################################################
+# CUTOFF FOR Ag-Ag, Pd-Pd, Ag-Pd and Pd-Ag 
+# METAL-SUBSTRATE INTERACTION (NEIGHBOURS COUNT)  
+3.6d0   3.6d0   3.6d0   3.6d0   cutz [Angstrom]
+8       8                       Max number of first neighbours for Ag and Pd
+############################################################################
+# ANY OTHER COMMENTS
+The cutoff distance for metal/substrate interaction is the cutoff used to 
+evaluate the number of first-neighbours, zn.
+

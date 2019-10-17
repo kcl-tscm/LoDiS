@@ -1,0 +1,17 @@
+ ## INPUT PARAMETRIZATION FOR MolDyn CODE
+ ## METALS
+ Co    Co
+#################################
+### RGL -PARAMETERS
+ 8.8000   8.8000   0.0000            p
+ 2.9600   2.9600   0.0000            q
+0.18882279  0.18882279  0.00000000        a(eV)
+1.90663612  1.90663612  0.00000000      qsi(eV)
+ #########################################
+ ## OTHER METAL PROPERTIES
+4.4500  4.4500         Cohesion energy [eV]
+1.2500000  1.2500000     Atomic radius [Angstrom]
+  59.0    59.0                   Mass [amu]
+ ############################################################################
+ # CUTOFF_START AND CUTOFF_END [Angstrom]
+     3.535533905        4.330127239

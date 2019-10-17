@@ -1,0 +1,12 @@
+#other useful param for copper
+c         Cu
+      leg(3)='Cu'
+      ratv(3)=1.28d0
+#
+#meaning that the second neighbour distance is 3,62 AA
+# the third neighbour distance is 4,434 AA
+#consider the cutoff between second and third neighbours
+#
+      ecohv(3)=3.50d0
+      dmas(3)=64.d0
+

@@ -1,0 +1,19 @@
+## INPUT PARAMETRIZATION FOR MolDyn CODE (Cheng j phys cond matt 2013)
+###########################
+Ni Pt
+# PARAMETRIZATION OF Cu-Ni INTERACTION
+#      Ni                    Pt			Ni-Pt
+   11.730d0                 13.00d0          14.838d0     	p
+   1.93d0                  3.13d0            3.036d0		q
+   0.0845d0      	   0.1602d0          0.1346d0		a(eV)
+   1.405d0       	   2.1855d0          2.338d0		qsi(eV)
+#########################################
+## OTHER METAL PROPERTIES
+ 4.931d0      5.84d0       Cohesion energy [eV]
+ 1.24d0       138.5d0        Atomic radius [Angstrom]
+58.7d0        195.08d0         Mass [amu]
+############################################################################
+# CUTOFF_START AND CUTOFF_END [Angstrom]
+     3.524        5.51
+#
+
