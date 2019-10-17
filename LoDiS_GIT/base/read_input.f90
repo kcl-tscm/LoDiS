@@ -260,7 +260,7 @@ ELSE
    WRITE(*,*) 'read_input> Process type: ', TRIM(type_process)
 !
    IF(type_process == 'Quenching' .or. type_process=='quenching') quenching = 'ya'
-   IF(type_process == 'microcan' .or. type_process == 'NVE' .or. type_process =='microcanonical') then
+   IF(type_process == 'microcan' .or. type_process == 'NVE' .or. type_process == 'nve' .or. type_process =='microcanonical') then
        canonical = 'ya'
        vnu = 0.d0
        tfin = tinit
