@@ -1,0 +1,68 @@
+ ###############################################################################
+ RUN CONFIGURATION
+ ###############################################################################
+  type of optimization: unseeded    
+  refresh random numbers: no
+  substrate: no
+  cutoff: si
+  parametrization: cucu.in             
+ ##############################################################################
+ MC STEPS AND TEMPERATURE
+ ##############################################################################
+  number of MC steps:       200000
+  variable temperature: no
+  temperature:    2500.0000000000000     
+  amplitude of sinusoidal variation of temperature:    0.0000000000000000     
+ period of sinusoidal variation of temperature:    0.0000000000000000     
+ ##############################################################################
+ MOVES
+ ##############################################################################
+ minimum and maximum radius for the shake move:    0.0000000000000000        1.3999999999999999     
+ minimum distance to accept the move:    3.0000000000000000     
+ probability of choosing move n.1:    0.0000000000000000     
+ probability of choosing move n.2:   0.20000000000000001     
+ probability of choosing move n.3:    0.0000000000000000     
+ probability of choosing move n.4:   0.59999999999999998     
+ probability of choosing move n.5:   0.20000000000000001     
+ probability of choosing move n.6:    0.0000000000000000     
+ probability of choosing move n.7:    0.0000000000000000     
+ type of exchange move: all
+ ##############################################################################
+ ALGORITHMS AND ORDER PARAMETERS
+ ##############################################################################
+ weight of the histogram:    10.000000000000000     
+  order parameters:           4           5
+  starting value of the first order parameter:    3.0000000000000000     
+  step of the first histogram:   1.00000000000000002E-002
+  number of intervals of the first histogram:          500
+  starting value of the second order parameter:    0.0000000000000000     
+  step of the second histogram:    100.00000000000000     
+  number of intervals of the second histogram:            1
+  refresh frequency of the histogram:      1000001
+  turn-over algorithm to be applied to walkers:            1
+  frequency of walker turnover, if turnover=3:            5
+  number of walkers:            2
+  walkers` repulsive interaction:   0.69999999999999996     
+  widths of the repulsive interactions:   2.99999999999999989E-002   200.00000000000000     
+  algorithm: _pew_
+  restart: no
+  energy threshold for restart [eV]:   -99.819999999999993     
+ ##############################################################################
+ OUTPUT
+ ##############################################################################
+  want different output for different walkers? no
+  want a list of the minima encountered during optimization? T
+  order parameter range where collecting minima:    0.0000000000000000        1.0000000000000000     
+  order parameter step to distinguish minima:          100
+ ##############################################################################
+ CLUSTER
+ ##############################################################################
+  number of atoms in the cluster =          100
+  monometallic cluster of Cu
+  number of Cu atoms =          100
+
+  type of box: cartesian   
+  limits of the box
+ x_min,x_max=  -4.0000000000000000        4.0000000000000000     
+ y_min,y_max=  -4.0000000000000000        4.0000000000000000     
+ z_min,z_max=  -4.0000000000000000        4.0000000000000000     
