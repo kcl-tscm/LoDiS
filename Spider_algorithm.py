@@ -156,7 +156,7 @@ print("calculated RD's")
 # In[4]:
 
 
-'''GCN calculation'''
+'''atop GCN calculation'''
 
 cn_bulk = 12
 gcn = [0]*atom_tot
@@ -224,21 +224,26 @@ plt.show()
 import random 
 import math
 
-'''episilon start at e.g. helium and leave as parameter
+'''
+ideally such parameters shoudl be read by the .pot file
+epsilon start at e.g. helium and leave as parameter
 
-	Atomic radius (Angstrom):                  Lattice constant (Angstrom):                 Mass:
+	Atomic radius (Angstrom):                  Lattice constant (Angstrom):                 Mass (amu):
 	Au = 1.4600000000000000                    Au = 4.0782                                  Au = 197.0
 	Cu = 1.2800000000000000                    Cu = 3.6149                                  Cu = 64.0
 	Ag = 1.4450000999999999                    Ag = 4.0853                                  Ag = 108.0
 	Pt = 1.3850000000000000                    Pt = 3.9242                                  Pt = 195.0
-	Pd = 1.3753226894078000                    Pd =                                         Pd = 106.0
-    He = 0.30
-    
+	Pd = 1.3753226894078000                    Pd = 3.8899                                  Pd = 106.0
+        He = 0.30
+	O  = ...
+	OH = ...
+	O2 = ...
+	NO = ...
 '''
 eta_val=[]  #eta sets the size of the molecule which can land on site
 ss_list=[]  #Surface Sites at each eta 0=bulk 1=surface site
 ss_no=[]    #sum of surface sites at each et
-r=1.4450000999999999 
+r=1.4450000999999999 #this works only for one type of atoms
 count=0
 
 #loop through eta values
@@ -266,7 +271,7 @@ for eta in [float(j)/10 for j in range(0,30)]: # <----choose range of eta
             
             #generate random points around each surface atom at a distance d_min
             while True:
-                #genertes spherical angles theta and phi
+                #generates spherical angles theta and phi
                 theta=random.uniform(0,2*math.pi)
                 phi=random.uniform(0,math.pi)
                 rand_point=[]
