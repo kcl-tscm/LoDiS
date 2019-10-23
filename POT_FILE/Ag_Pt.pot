@@ -1,12 +1,12 @@
- ## INPUT PARAMETRIZATION FOR MolDyn CODE
+ ## INPUT PARAMETRIZATION FOR MolDyn CODE -- source not found mixing just averaged
  ## METALS
 Ag    Pt
  #########################################
  ########################################
-10.8500  10.7100   0.0000            p
- 3.1800   3.8450   0.0000            q
-0.10308871  0.27442825  0.00000000        a(eV)
-1.18954349  2.62094617  0.00000000      qsi(eV)
+10.8500  10.7100   10.78            p
+ 3.1800   3.8450   3.5125            q
+0.10308871  0.27442825  0.18875848        a(eV)
+1.18954349  2.62094617  1.90524483      qsi(eV)
  #########################################
  ## OTHER METAL PROPERTIES
 2.9500  5.8600         Cohesion energy [eV]
