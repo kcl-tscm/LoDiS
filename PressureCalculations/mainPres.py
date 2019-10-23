@@ -25,7 +25,8 @@ def readMovieFileXYZ(path_to_movie):
     Returns:
         Named tuple read_movie:
             - read_movie.Frames: list of frames; each is an array of atoms each described by [Atom, x, y, z, Col]
-            - read_movie.Headers: list of the movie frames headers    """
+            - read_movie.Headers: list of the movie frames headers    
+            - pressure is in TPa 10^12 Pa"""
     
     read_file_chars = []
 
@@ -171,7 +172,7 @@ def getPressureTwoAtoms(atom_i, atom_j, potential):
     stored in the potential named tuple.
     """
     
-    ###### den_i should be set zero only wehn I change i but summing over all j
+    ###### den_i should be set zero only when I change the sum over atom-i but summing over all j
     
     # 1. Determining interaction type
     if atom_i[0] == potential.AtomTypes[0] and atom_j[0] == potential.AtomTypes[0]:
@@ -256,12 +257,17 @@ def pressureMain():
             pressure_repul_i = 0.0
             pressure_bond_i = 0.0
             summed_denom_i = 0.0
+            atomic_volume = (4./3.)*pi*atom_rad_val[0]**3
+            # by definition the pressure is divided by the atomic volume --Wales suggested the Wigner-Seitz volume instead
+            # the atomic one as written here
+            # being all distances in Ang and energy in eV this should be in eV/A^3 ~ 0.1602 TPa
             for j in range(len(current_frame)): # Loop over j of i
                 pressure_repul_i += getPressureTwoAtoms(current_frame[i], current_frame[j], potential)[0]
                 pressure_bond_i += getPressureTwoAtoms(current_frame[i], current_frame[j], potential)[1]
                 summed_denom_i +=getPressureTwoAtoms(current_frame[i], current_frame[j], potential)[2]
             
-            pressure_bond_i = pressure_bond_i/np.sqrt(summed_denom_i)
+            pressure_bond_i = atomic_volume*pressure_bond_i/np.sqrt(summed_denom_i)
+            pressure_bond_i = 0.1602*pressure_bond_i #in TPa
             
             atom_pressures.append(pressure_repul_i+pressure_bond_i)
 
