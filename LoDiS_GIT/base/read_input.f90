@@ -272,29 +272,30 @@ ELSE
          tfin = tinit
          write(*,*) 'read_input> NVT at temperature',tinit,'freq thermostat',vnu
    ENDIF
-   IF(type_process == 'itMD'.or. type_process=='itmd' )  caloric = 'ya'
+   IF(type_process == 'itMD'.or. type_process=='itmd' )  then
+     caloric = 'ya'
+     READ(UNIT=5, nml=calor, iostat = ios) 
+     Write(*,*) 'WARINING in read_input > itMD used without melting/freezing'
+ ENDIF
    IF(type_process == 'melting'.or. type_process=='melt') then
         caloric='ya'
-        write(*,*) 'tinit is=',tinit,' tfin is =',tfin,''
-        IF (tfin < tinit) THEN
-         write(*,*) 'read_input> Error: tfin in melting must be > tinit'
+        READ(UNIT=5, nml=calor, iostat = ios) 
+        write(*,*) 'tinit is=',tinit,' tcaloric is =',tcaloric,''
+        IF (tcaloric < tinit) THEN
+         write(*,*) 'read_input> Error: tcaloric in melting must be > tinit'
          stop
         ENDIF
    ENDIF
    IF(type_process == 'freezing'.or. type_process=='freeze') then
         caloric='ya'
-        write(*,*) 'tinit is=',tinit,' tfin is =',tfin, ''
-        IF (tfin > tinit) THEN
-        write(*,*) 'read_input> Error: tfin in freezing must be < tinit'
-        stop
-        ENDIF
+        READ(UNIT=5, nml=calor, iostat = ios) 
         write(*,*) 'tinit is=',tinit,' tcaloric is =',tcaloric, ''
         IF (tcaloric > tinit) THEN
-        write(*,*) 'read_input> Error: tcaloric in freezing must be < tinit'
-        stop
+         write(*,*) 'read_input> Error: tcaloric in freezing must be < tinit'
+         stop
         ENDIF
-
     ENDIF
+
    IF(type_process == 'Growth'.or. type_process=='growth' )   deposizione = 'ya'
    IF(type_process == 'Metadynamics'.or. type_process=='metadynamics' ) metadyn = 'ya'
    IF(type_process == 'Coalescence'.or. type_process=='coalescence' ) coalescence = 'ya'
@@ -302,9 +303,6 @@ ENDIF
 !
 !
 IF(quenching=='ya') READ(UNIT=5, nml=quench, iostat = ios)
-IF(caloric == 'ya') THEN
-  READ(UNIT=5, nml=calor, iostat = ios) 
-END IF
 IF(canonical=='ya') THEN
    READ(UNIT=5, nml=quench, iostat = ios) 
    READ(UNIT=5, nml=canon, iostat=ios)
