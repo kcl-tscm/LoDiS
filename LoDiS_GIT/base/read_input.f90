@@ -259,8 +259,7 @@ ELSE
 !
    WRITE(*,*) 'read_input> Process type: ', TRIM(type_process)
 !
-   IF(type_process == 'Quenching' .or. type_process=='quenching') quenching = 'ya'
-   IF(type_process == 'microcan' .or. type_process == 'NVE' .or. type_process == 'nve' .or. type_process =='microcanonical') then
+   IF(type_process == 'Quenching' .or. type_process=='quenching') THEN quenching = 'ya'
        canonical = 'ya'
        vnu = 0.d0
        tfin = tinit
@@ -296,19 +295,22 @@ ELSE
         ENDIF
     ENDIF
 
-   IF(type_process == 'Growth'.or. type_process=='growth' )   deposizione = 'ya'
-   IF(type_process == 'Metadynamics'.or. type_process=='metadynamics' ) metadyn = 'ya'
-   IF(type_process == 'Coalescence'.or. type_process=='coalescence' ) coalescence = 'ya'
+   IF(type_process == 'Growth'.or. type_process=='growth' ) THEN  deposizione = 'ya'
+   IF(type_process == 'Metadynamics'.or. type_process=='metadynamics' ) THEN metadyn = 'ya'
+   IF(type_process == 'Coalescence'.or. type_process=='coalescence' ) THEN coalescence = 'ya'
 ENDIF
 !
 !
-IF(quenching=='ya') READ(UNIT=5, nml=quench, iostat = ios)
+IF(quenching=='ya') THEN
+   READ(UNIT=5, nml=quench, iostat = ios)
 IF(canonical=='ya') THEN
    READ(UNIT=5, nml=quench, iostat = ios) 
    READ(UNIT=5, nml=canon, iostat=ios)
 END IF
-IF(deposizione =='ya') READ(UNIT=5, nml=growth, iostat = ios)
-IF (coalescence == 'ya') READ(UNIT = 5, nml = coal, iostat = ios)
+IF(deposizione =='ya') THEN
+   READ(UNIT=5, nml=growth, iostat = ios)
+IF (coalescence == 'ya') THEN
+   READ(UNIT = 5, nml = coal, iostat = ios)
 
 !!!!!!!!!!!!!!! ====================================
 ! Instruction for a substrate implemented in &system
@@ -320,7 +322,8 @@ IF (mgo_substrate) THEN
   ENDIF
 !  
 !   
- IF (metal_on_top)  WRITE(*,*) 'read_input> Warning: metal_on_top (MOT) NOT TESTED'
+ IF (metal_on_top) THEN
+   WRITE(*,*) 'read_input> Warning: metal_on_top (MOT) NOT TESTED'
 
 ENDIF
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -358,9 +361,12 @@ IF ((collvar_wanted) .OR. (metadyn == 'ya'))   THEN
          !------------------------
          ! Checks on CN_bim
          WRITE(*,*) 'read_input> CV chosen: ',TRIM(collvar_name(l_cv)),','
-         IF(cn_aa) WRITE(*,*) 'read_input> considering  A-A  pairs of atoms.'
-         IF(cn_bb) WRITE(*,*) 'read_input> considering  B-B  pairs of atoms.'
-         IF(cn_ab) WRITE(*,*) 'read_input> considering mixed pairs of atoms.'
+         IF(cn_aa) THEN
+            WRITE(*,*) 'read_input> considering  A-A  pairs of atoms.'
+         IF(cn_bb) THEN
+            WRITE(*,*) 'read_input> considering  B-B  pairs of atoms.'
+         IF(cn_ab) THEN
+            WRITE(*,*) 'read_input> considering mixed pairs of atoms.'
          IF (sys .NE. 'bim') THEN
             WRITE(*,*) 'read_input> Warning: the system is monometallic and a chemical order CV has been selected'
             IF (.NOT.(cn_aa)) THEN
@@ -450,11 +456,11 @@ IF(deposizione=='ya') THEN
  ENDIF
 ENDIF
 !
-IF((deposizione=='ya').AND.(lcs>1).AND.(elem1==elem2)) elem2=elemd
+IF((deposizione=='ya').AND.(lcs>1).AND.(elem1==elem2)) THEN elem2=elemd
 !
-IF ( deposizione == 'no' ) elemd = elem1
+IF ( deposizione == 'no' ) THEN elemd = elem1
 !
-IF ( sys == 'mon' )   elem2 = elem1
+IF ( sys == 'mon' ) THEN  elem2 = elem1
 IF(( sys == 'bim' ) .AND. ( elem1 == elem2 )) THEN
  WRITE(*,*) 'read_input> If the system is mono-type, sys == mon'
  WRITE(*,*) 'read_input> ###########################'
