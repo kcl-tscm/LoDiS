@@ -297,7 +297,7 @@ ELSE
     ENDIF
 
    IF(type_process == 'Growth'.or. type_process=='growth' )   deposizione = 'ya'
-   IF(type_process == 'Metadynamics'.or. type_process=='metadynamics' ) metadyn = 'ya'
+   IF(type_process == 'Metadynamics'.or. type_process=='metadynamics' .or. type_process=='metadyn' ) metadyn = 'ya'
    IF(type_process == 'Coalescence'.or. type_process=='coalescence' ) coalescence = 'ya'
 ENDIF
 !
