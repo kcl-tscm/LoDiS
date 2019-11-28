@@ -19,10 +19,10 @@ SUBROUTINE force_mgo_mot
   REAL(8), DIMENSION(4,3) :: b, db_dx, db_dy
   
  !-----------------------------------------------------
- ! Inizialisation of local variables
+ ! Initialisation of local variables
  ener_mgo = 0.d0
  !------------------------------------------------------
- ! Inizialisation of global variables
+ ! Initialisation of global variables
  ener_sub = 0.d0 ! This is global  
  mgo_fx   = 0.d0
  mgo_fy   = 0.d0
