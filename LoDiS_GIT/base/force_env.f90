@@ -24,10 +24,10 @@ END IF
  ! In this moment the unit is [1/Angstrom], and can be modified in mgo_coord_no
  ! Normalised positions  (in Angstrom and then *mgo_alat)
 
- ! Inizialisation of local variables
+ ! Initialisation of local variables
  ener_env_atom(:) = 0.d0
  !------------------------------------------------------
- ! Inizialisation of global variables
+ ! Initialisation of global variables
 
  ener_env    = 0.d0 ! This is global  
  env_fx(:)   = 0.d0
