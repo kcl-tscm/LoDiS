@@ -2,7 +2,7 @@ SUBROUTINE d_com
 !======================================
 ! d^2 COM
 !======================================
-! Finds the sqaured distance of the Centre of Mass for a bimetallic cluster.
+! Finds the squared distance of the Centre of Mass for a bimetallic cluster.
 ! Calculates the derivatives.
 ! Use the d_com light version to speed up calculation for taxing simulations.
 !======================================
