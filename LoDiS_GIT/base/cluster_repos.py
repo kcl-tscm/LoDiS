@@ -359,7 +359,7 @@ else:
 	j=0
 	for line in f_init:
 		columns = line.split()   # used to split the input string data
-		atom[j] = columns[0]     #initialing the input data from file
+		atom[j] = columns[0]     #initializing the input data from file
 		init_x[j] =  float(columns[1])
 		init_y[j] =  float(columns[2])
 		init_z[j] =  float(columns[3])
