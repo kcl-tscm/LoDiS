@@ -55,7 +55,7 @@ SUBROUTINE bim_cn_light
 		    cn_s(j,i) = cn_s(i,j)
 		 else
 		    ratio = dij/rij0(itypik)
-		    ! I need to rise to (X_pwr-1) for the derivetive  
+		    ! I need to rise to (X_pwr-1) for the derivative  
 		    ratio_ton = ratio**(cn_n_pwr)    
 		    ratio_tom = ratio_ton*(ratio**(mminusn_pwr))
 		    
