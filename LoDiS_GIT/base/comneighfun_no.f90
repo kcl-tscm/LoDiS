@@ -5,7 +5,7 @@ SUBROUTINE cnfnum
 ! Calculating the number of pairs that have the same number of common nearest neighbours. 
 ! The derivative are also calculated.
 ! OLD VERSION (BUT USING LOCAL VARIABLES)
-! For compuationally taxing runs, use the cnfnum_light subroutine instead.
+! For computationally taxing runs, use the cnfnum_light subroutine instead.
 !========================================
    
    !USE OMP_LIB                                                 !>>> CPU_TIME
