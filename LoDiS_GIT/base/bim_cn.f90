@@ -3,7 +3,7 @@ SUBROUTINE bim_cn
    ! CN_bim
    !=====================
    !Calculates the Analytic Coordination Number for bimetallic clusters.
-   !Use this version for small-to-medium clusters and compuationally fast simulations.
+   !Use this version for small-to-medium clusters and computationally fast simulations.
    !Otherwise make use of the CN_bim light subroutine to speed up calculations.
    !=====================
      
@@ -67,11 +67,11 @@ SUBROUTINE bim_cn
          IF(pair_yesno_mat(j,i)) THEN      
 		 IF (dij(j,i) .GT. 0.d0) THEN
 		    ratio = dij(j,i)/rij0(pairkindmat(j,i))
-		    ! I need to rise to (X_pwr-1) for the derivetive  
+		    ! I need to rise to (X_pwr-1) for the derivative  
 		    ratio_ton = ratio**(cn_n_pwr-1)    
 		    ratio_tom = ratio_ton*(ratio**(mminusn_pwr))
 		    
-		    ! Calculationg some pieces of derivative
+		    ! Calculating some pieces of derivative
 		    rnp = cn_n_pwr * ratio_ton
 		    rmp = cn_m_pwr * ratio_tom
 		    
