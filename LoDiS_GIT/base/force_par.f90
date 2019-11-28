@@ -1,6 +1,6 @@
 SUBROUTINE force_par
 USE PARACLUSTER
-USE CLUSTER    !module where cluster variabiles and parameters are defined
+USE CLUSTER    !module where cluster variables and parameters are defined
 USE POTENTIAL
 USE ENFORCE
 USE DISTANCE
