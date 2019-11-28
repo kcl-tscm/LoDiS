@@ -105,7 +105,7 @@ SUBROUTINE metaforce
       CASE (2:)                                                                  ! 2 or more CVs
          dVg_ds(:) = 0.d0 ! Initialization of derivative
         
-         ! Calculation of the of the derivative of the history-dependent
+         ! Calculation of the derivative of the history-dependent
          ! meta-potential Vg with respect of every CV (s)
          !----------------------------------------------------
          ! Sum over the past gaussians
