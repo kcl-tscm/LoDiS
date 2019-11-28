@@ -82,11 +82,11 @@ OBJS = 	module_parameters.o \
         output_meta.o subnomi.o \
 
 ##================================================================================
-# Write your Fortran compiler and it's libraries here including -fopenmp. 
+# Write your Fortran compiler and its libraries here including -fopenmp. 
 #
 ##================================================================================
 
-#For example, uncomment this:
+#For example, uncomment (delete the #) the line below:
 #F90=gfortran -fopenmp
 
 
