@@ -55,11 +55,11 @@ SUBROUTINE ENVCN
       DO j = i+1, natom      
          IF (env_dij(j,i) .GT. 0.d0) THEN
             env_ratio = env_dij(j,i)/env_rij0(pairkindmat(j,i))
-            ! I need to rise to (X_pwr-1) for the derivetive  
+            ! I need to rise to (X_pwr-1) for the derivative  
             env_ratio_ton = env_ratio**(env_n_pwr-1)    
             env_ratio_tom = env_ratio_ton*(env_ratio**(env_mminusn_pwr))
             
-            ! Calculationg some pieces of derivative
+            ! Calculating some pieces of derivative
             env_rnp = env_n_pwr * env_ratio_ton
             env_rmp = env_m_pwr * env_ratio_tom
             
