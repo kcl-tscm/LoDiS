@@ -24,10 +24,10 @@ CALL mgo_coord
 
  ! Normalised positions  (in Angstrom and then *mgo_alat)
 
- ! Inizialisation of local variables
+ ! Initialisation of local variables
 ener_mgo = 0.d0
  !------------------------------------------------------
- ! Inizialisation of global variables
+ ! Initialisation of global variables
 ener_sub = 0.d0 ! This is global  
 mgo_fx   = 0.d0
 mgo_fy   = 0.d0
