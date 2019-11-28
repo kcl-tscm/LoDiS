@@ -66,11 +66,11 @@ SUBROUTINE cnum
       DO j = i+1, natom      
          IF (dij(j,i) .GT. 0.d0) THEN
             ratio = dij(j,i)/rij0(pairkindmat(j,i))
-            ! I need to rise to (X_pwr-1) for the derivetive  
+            ! I need to rise to (X_pwr-1) for the derivative  
             ratio_ton = ratio**(n_pwr-1)    
             ratio_tom = ratio_ton*(ratio**(mminusn_pwr))
             
-            ! Calculationg some pieces of derivative
+            ! Calculating some pieces of derivative
             rnp = n_pwr * ratio_ton
             rmp = m_pwr * ratio_tom
             
