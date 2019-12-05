@@ -12,7 +12,8 @@ class Distance():
         
         self.species = species
 
-
+#This function calculates the pairwise distance between all possible atom pairings
+        
     def Euc_Dist(Vector):
         Distances=[]; Temp=np.array(np.delete(Vector, (0),axis=1), dtype=np.float64)
         for i in range(len(Vector)-1):
@@ -25,7 +26,8 @@ class Distance():
 
 
 
-
+#This function calculates distances between homo atom pairings only
+    
     def M1_M1(Vector,Species):
         
         tick=time.time()
@@ -40,8 +42,8 @@ class Distance():
         return Distances
 
 
-
-
+#This function calculates distances between hetero atom pairings only.
+    
     def M1_M2(Vector):
         
         tick=time.time()
