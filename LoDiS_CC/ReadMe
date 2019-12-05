@@ -1,0 +1,23 @@
+This shall be the development directory for the LoDiS_CC (Classification and characteriation) programme.
+
+The intention is for this to be a seperate, stand-alone code which can take the input of an xyz and energy file
+created by LoDiS and generate information regarding the structure as a whole and each atom's local environment.
+
+To use this, you must have installed in your python environment:
+
+asap3
+ase
+
+{More to come as the code grows}
+
+
+
+The "Descriptor_Draft" script is the one which is intended to be the user-interface script to be run
+
+The idea being that a user will be able to manually input the parameters and directories they wish to work with
+and decide on the fly which properties they would like analysed.
+
+
+
+Ultimately, the goal is to use these decriptors of each atom and its environment to decide whether or not it exists
+on the surface of the nanocluster and (maybe??) its propensity to be an adsorbate site.
