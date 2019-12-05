@@ -21,3 +21,12 @@ and decide on the fly which properties they would like analysed.
 
 Ultimately, the goal is to use these decriptors of each atom and its environment to decide whether or not it exists
 on the surface of the nanocluster and (maybe??) its propensity to be an adsorbate site.
+
+
+
+
+Scripts contributed by Armand, Elena, and Matteo:
+pdf   ---   Scipy linear interpolator with arbitrary cutoff
+ptm   ---   Calculates PTM and returns information about structural params
+cn    ---   Returns coordination number for each atom (Then plots a histogram?)
+cna   ---   Performs Analysis on extracted common neighbourvalues found above?
