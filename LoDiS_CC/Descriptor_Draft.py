@@ -12,6 +12,8 @@ import pickle
 import sys
 import os
 
+#The following imports are the dependencies found in the \
+#parent directory.
 
 import Movie_Read as Read
 import Kernels
@@ -19,15 +21,18 @@ from Kernels import KB_Dist as KB
 import Distances as Dist
 
 
-print("Welcome to this LoDiS post-processing scheme. If you wish"
-      " to analyse your data, please run this script from the"
-      "directory in which your raw data is to be found."
+print("Welcome to this LoDiS post-processing scheme."
       "This script takes energy.out and movie.xyz files as arguments"
       "unless otherwise specified by name in the following input"
       "requests.")
 
+#Below is the general scheme by which one takes the trajectory input.
+
 Energy, Trajectory, Elements, filepath = Read.Manual_Input()
 
+
+#A little bit of proof-of-concept code to plot the first
+#few PDDFs using this scheme.
 
 if __name__ == '__main__':
 
