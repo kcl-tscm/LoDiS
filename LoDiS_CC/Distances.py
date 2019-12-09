@@ -103,6 +103,35 @@ hetero combinations.
         tock=time.time()
         print("Time to calculate distances: %.2f [s]" %(tock-tick))
         return Distances
+    
+def get_cutoff_distance(distances, r_cut):
+    
+    """ Robert
+    
+    distances: A numpy array containing the unsorted list of calculated pair 
+    distances as calculated by a given function in the Distances class.
+    
+    r_cut: An initial estimate for the nearest neighbour distance. Without loss
+    of gnerality, one may set this to be the maximum distance as found in the 
+    above function. Naturally this comes with a computational price.
+    
+    Function returns an estimate for the optimal r_cut value by searching for the 
+    first local minimum of the PDDF.
+    
+    Code contributed by Matteo.
+    
+    
+    
+    y, bin_edges = np.histogram(distances, bins = np.linspace(0, r_cut, r_cut*100+1))
+    x = bin_edges[:-1] + 0.005
+    y = np.array(y) / sum(np.array(y))
+    x = np.asarray(x)
+    minima = []
+    for i in range(len(y)-10):
+        if y[i] < y[i+10] and y[i] < y[i-10]:
+            minima.append(x[i])
+    r_cut_cn = minima[0]
+    return r_cut_cn
                 
                 
 
