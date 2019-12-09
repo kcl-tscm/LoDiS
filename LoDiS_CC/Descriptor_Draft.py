@@ -17,6 +17,7 @@ import numpy as np
 import pickle
 import sys
 import os
+import wikiquote
 
 #The following imports are the dependencies 
 #found in the parent directory.
@@ -35,6 +36,7 @@ print("Welcome to this LoDiS post-processing scheme."
 #Below is the general scheme by which one takes the trajectory input.
 
 Energy, Trajectory, Elements, filepath = Read.Manual_Input()
+wikiquote.quotes(wikiquote.random_titles(max_titles=1))[0]
 
 
 #A little bit of proof-of-concept code to plot the first
