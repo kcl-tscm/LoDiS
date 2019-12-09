@@ -36,6 +36,7 @@ hetero combinations.
         So bear in mind that this function scales poorly with system size!
         """
         
+        Number = '1'
         
         Distances=[]; Temp=np.array(np.delete(Vector, (0),axis=1), dtype=np.float64)
         for i in range(len(Vector)-1):
@@ -68,15 +69,14 @@ hetero combinations.
         from the input trajectory.
         """
         
-        tick=time.time()
+        Number = '2'
+        
         Distances=[]; Temp=np.array(np.delete(Vector, (0),axis=1), dtype=np.float64)
         for i in range(len(Vector)-1):
             for j in range(i+1,len(Vector)):
                 if Vector[i,0]==Species and Vector[j,0]==Species:
                     Euc=(Temp[i,0]-Temp[j,0])**2+(Temp[i,1]-Temp[j,1])**2+(Temp[i,2]-Temp[j,2])**2
                     Distances.append(np.sqrt(Euc))
-        tock=time.time()
-        print("Time to calculate distances: %.2f [s]" %(toc-tic))
         return Distances
 
     
@@ -93,15 +93,15 @@ hetero combinations.
         function could be further generalised (albeit it a potential cost to computation time).
         """
         
-        tick=time.time()
+        Number ='3'
+        
         Distances=[]; Temp=np.array(np.delete(Vector, (0),axis=1), dtype=np.float64)
         for i in range(len(Vector)-1):
             for j in range(i+1,len(Vector)):
                 if Vector[i,0]!=Vector[j,0]:
                     Euc=(Temp[i,0]-Temp[j,0])**2+(Temp[i,1]-Temp[j,1])**2+(Temp[i,2]-Temp[j,2])**2
                     Distances.append(np.sqrt(Euc))
-        tock=time.time()
-        print("Time to calculate distances: %.2f [s]" %(tock-tick))
+
         return Distances
     
 def get_cutoff_distance(distances, r_cut):
@@ -120,6 +120,8 @@ def get_cutoff_distance(distances, r_cut):
     
     Code contributed by Matteo.
     """
+    
+    Number = '4'
     
     
     
