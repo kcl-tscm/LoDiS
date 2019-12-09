@@ -2,7 +2,9 @@ from asap3.analysis import PTM
 from ase.visualize.primiplotter import *
 from ase.io import read
 
-filename = "Au2223-FCC-Dh-Ih_test.xyz"
+#filename = "Au2223-FCC-Dh-Ih_test.xyz"
+
+#Above was used for script testing purposes.
 
 """ (Armand)
 PTM function. Given a filename and a rmsd_max cutoff,
@@ -18,6 +20,9 @@ which gives us the second line. Requires to be tested, its on the to do list.
 
 'rmsd': the RMSD error in the fitting of the template. No values will be accepted above rmsd_max,
         and the atom would instead be considered as unidentifiable.
+        
+        When you return to this. Please give a reasonable value for rmsd_max_i 
+        - Rob -
 
 this function still has the bug of only returning the last frame's PTM. Needs fixing.
 """
