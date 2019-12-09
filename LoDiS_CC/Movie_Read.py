@@ -17,6 +17,18 @@ import time
 
 
 def read_trajectory(filename):
+  
+  """ Robert
+  
+  This function depends on the ase package and will extract all of the coordinates
+  for every atom in every frame of a given trajectory.
+  
+  filename: This will typically be the name of the movie.xyz file which is pointed to
+  by the "Manual_Input" function below. However; this could be any standard xyz file.
+  """
+  
+  
+  
     traj = read(filename, index = ':')
     all_positions = [atoms.get_positions() for atoms in traj]
     all_atoms = [atoms.get_chemical_symbols() for atoms in traj]
@@ -25,6 +37,20 @@ def read_trajectory(filename):
 
 
 def Manual_Input():
+  
+  """ Robert
+  
+  This function returns all of the external information files which may be salient
+  for analysing the structure as a means of characterising and classifying it.
+  
+  At the moment, this is fed an energy.out (Could be named otherwise) file and a movie.xyz
+  (could be named otherwise) file.
+  This may be extended to include data pertaining to the velocity auto-correlation function
+  for the purposes of calculating the vibrational density of states. This has not yet been implemented.
+  """
+  
+  
+  
     filepath=input("Please specify the absolute path to the directory containing "
                    " your trajectory and enery files.")
 
