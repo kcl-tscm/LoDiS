@@ -32,7 +32,7 @@ class Kernels():
 
 
 
-    def KDE_Gauss(Data,Band):
+    def Gauss(Data,Band):
         
         """ Robert
         
@@ -68,7 +68,7 @@ class Kernels():
         return Space, Density
 
 
-    def KDE_Uniform(Data,Band):
+    def Uniform(Data,Band):
         
         """ Robert
         
@@ -108,7 +108,7 @@ class Kernels():
         return Space, Density
             
     
-    def KDE_Epan(Data,Band):
+    def Epan(Data,Band):
         
         
         """ Robert
@@ -160,6 +160,11 @@ def KB_Dist(P,Q):
     At the moment, there is no actual provision to protect against zero division errors.
     One possible solution could be to define a local varaible, epsilon, which is added to 
     every point in P and prevents it from being zero at any point. 
+    
+    Note that these two distributions must have identical dimensions or the script
+    will not run. 
+    
+    A reasonable work-around is to define both from an identical linspace.
     """
     
     
