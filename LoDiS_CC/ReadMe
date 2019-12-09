@@ -30,3 +30,5 @@ pdf   ---   Scipy linear interpolator with arbitrary cutoff
 ptm   ---   Calculates PTM and returns information about structural params
 cn    ---   Returns coordination number for each atom (Then plots a histogram?)
 cna   ---   Performs Analysis on extracted common neighbourvalues found above?
+
+pp    ---   Appears to be a testing script for ptm
