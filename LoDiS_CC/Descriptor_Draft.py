@@ -1,7 +1,13 @@
-# This project is going to be a collection of all other codes for the
-#Classification and characterisation of bi/monometallic structures
-#The general jist is that we'll be reading in movie.xyz & energy.out
-#Then producing statistical plots correlating descriptors
+"""Robert
+This is intended to be the main user interface module to be run
+for the purposes of classifying and characterising nanostructures.
+In theory, all of the sub-modules for this programme should be
+found in the same directory and it should not matter from where
+it is run. This is because the user will define the absolute path 
+to their raw data and even the file names (and possible relative path).
+"""
+
+
 
 
 import time
@@ -12,8 +18,8 @@ import pickle
 import sys
 import os
 
-#The following imports are the dependencies found in the \
-#parent directory.
+#The following imports are the dependencies 
+#found in the parent directory.
 
 import Movie_Read as Read
 import Kernels
