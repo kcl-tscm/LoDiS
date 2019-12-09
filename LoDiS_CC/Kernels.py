@@ -57,6 +57,8 @@ class Kernels():
         Gaussian distributed about the position on the grid under consideration.
         """
         
+        Number = '5'
+        
         Space=np.linspace(0,4.0,500);Density=[]
         for i in Space:
             P=0
@@ -92,6 +94,7 @@ class Kernels():
         a bandwidth of ~ 0.25.
         """
         
+        Number = '6'
         
         
         Space=np.linspace(0,4.0,500);Density=[]
@@ -132,6 +135,7 @@ class Kernels():
         Testing has had good results for a bandwidth of 0.25 when analysing PDDFs.
         """
         
+        Number = '7'
         
         
         Space=np.linspace(0,4.0,500);Density=[]
