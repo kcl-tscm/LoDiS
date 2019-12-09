@@ -26,6 +26,9 @@ import Movie_Read as Read
 import Kernels
 from Kernels import KB_Dist as KB
 import Distances as Dist
+import cna
+import cn
+import ptm
 
 
 print("Welcome to this LoDiS post-processing scheme."
