@@ -19,12 +19,12 @@ returns a list of the distances found between neighbors closer than 10A.
 def read_trajectory(filename, r_cut):
     traj = read(filename, index = ':')
 
-    #################ELEMENT COMPOSITION CHECKER#################
-    #############################################################
-    atom_number_list = [atoms.get_atomic_numbers() for atoms in traj]
-    flat_atom_number = np.concatenate(atom_number_list)
-    elements = np.unique(flat_atom_number, return_counts=False)
-    #checks the elemental composition, displays them in elements#
+###    This is not needed here, could be needed if PDFs for element-specific distances are needed in the future.
+
+#     atom_number_list = [atoms.get_atomic_numbers() for atoms in traj]
+#     flat_atom_number = np.concatenate(atom_number_list)
+#     elements = np.unique(flat_atom_number, return_counts=False)
+#     #checks the elemental composition, displays them in elements#
 
     all_distances = []
     for i, atoms in enumerate(traj): #loops over frames
@@ -59,11 +59,21 @@ def get_cutoff_distance(distances, r_cut):
     x = bin_edges[:-1] + 0.005
     y = np.array(y) / sum(np.array(y))
     x = np.asarray(x)
-    minima = []
+
+    # (Claudio) adding a 
+    # Tiny convolution of the the function y:
+    y[1:-1] = y[2:]*0.2 + y[1:-1]*0.6+y[:-2]*0.2
+    y[0] = y[0]*0.8 + y[1]*0.2
+    y[-1] = y[-1]*0.8 + y[-2]*0.2
+    
+    # (Claudio) This is not efficient, and is also not correct as for i < 10 it
+    # will look at values like y[-4] which is actually on the other side of the array.
+    # Check that case please.
     for i in range(len(y)-10):
         if y[i] < y[i+10] and y[i] < y[i-10]:
-            minima.append(x[i])
-    r_cut_cn = minima[0]
+            r_cut_cn = x[i]
+            break # (Claudio) This stops the cycle so that you don't waste time looking for more minima
+           
     return r_cut_cn
 
 """(Matteo)
