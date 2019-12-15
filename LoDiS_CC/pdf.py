@@ -104,10 +104,7 @@ def create_function(distances, r_cut):
 
 
 def get_cutoff_distance(distances, r_cut):
-    """ (Matteo)
-    uses gaussian convolution to find minima.
-        avoid loops and use arrays instead of lists.
-
+    """
     (Armand) First Minimum finder function. I haven't found where the gaussian
         convolution is...
 
@@ -162,9 +159,3 @@ def get_cutoff_distance(distances, r_cut):
            
     return r_cut_cn
 
-"""(Matteo)
-recognise particular boundaries (422 planes).
-Faster diffusion in proximity of which plane?
-monitor dynamical behaviour of this planes. Pressure calculations?
-get the versor of the planes.
-"""
