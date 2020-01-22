@@ -1,8 +1,6 @@
 from Adjacent import *
 from CNA  import *
 from Kernels import *
-from Pressure import *
-from RDF import *
 from Energy import *
 from ase.io import read
 
