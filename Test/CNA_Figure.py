@@ -42,6 +42,7 @@ for i in range(End-Start):
     plt.xticks(np.arange(len(MasterKey)),labels=MasterKey, rotation=-45,
                 ha="left", rotation_mode="anchor")
     plt.ylabel('Percentage')
+    plt.ylim(0,0.5)
     plt.bar(np.arange(len(MasterKey)), CNA_Data[i], color='r')
     plt.savefig('CNAs_{}_frame_{}.png'.format(filename[:-4],i),
                 bbox_inches='tight')
