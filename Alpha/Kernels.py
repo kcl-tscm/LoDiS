@@ -1,5 +1,7 @@
+from numpy import *
 import numpy as np
-from joblib import Parallel, delayed
+
+
 def minifunc(Data,Band,i):
     X = Data - i
     A1 = -0.5*Band <= X
@@ -111,10 +113,12 @@ class Kernels():
         
         
         
-        Space=np.linspace(0,6.0,300); Density = []
+        Space=np.linspace(2.5,6.0,200); Density = []
         for i in Space:
             Density.append(minifunc(Data, Band, i))
-        return Space, Density
+        Min = (diff(sign(diff(Density))) > 0).nonzero()[0] + 1 # local min
+        R_Cut = Space[Min[0]]
+        return Space, Density, R_Cut
             
             
             
