@@ -1,3 +1,4 @@
+from numpy import *
 import numpy as np
 
 def distance(a, b):
@@ -30,7 +31,7 @@ def Euc_Dist(i_frame, positions):
         for j in range(i+1,len(positions)):
             Euc = distance(positions[i],positions[j])
 
-            Distances.append(np.sqrt(Euc))
+            Distances.append(Euc)
     return Distances
 
 
@@ -129,6 +130,8 @@ def RDF(i_frame, positions, Res, R_Cut):
 
     for i, value in enumerate(G):
         G[i] = value / Volumes[i] #Rescaling the distribution with respect to enclosing volume
-
-    return Radii, G
+    
+    b = (diff(sign(diff(G))) > 0).nonzero()[0] + 1 # local min
+    R=Radii[b[1]]
+    return Radii, G, R
 
