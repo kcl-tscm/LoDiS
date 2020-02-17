@@ -52,6 +52,6 @@ def Adjacency_Matrix(positions, R_Cut):
     return Adjacent
 
 
-#print(wikiquote.quotes(wikiquote.random_titles(max_titles=1)[0]), "\n")
+print(wikiquote.quotes(wikiquote.random_titles(max_titles=1)[0]), "\n")
 
 #A,B=Adjacency_Matrix(filename, 0, 3.0)
