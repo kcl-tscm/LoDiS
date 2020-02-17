@@ -14,8 +14,7 @@ import numpy as np
 pipeline = import_file(filename)
 # Create bonds.
 pipeline.modifiers.append(CreateBondsModifier(cutoff = R_Cut))
-Masterkey = []
-# Compute CNA indices on the basis of the created bonds.
+
 pipeline.modifiers.append(CommonNeighborAnalysisModifier(
     mode = CommonNeighborAnalysisModifier.Mode.BondBased))
 
@@ -23,7 +22,13 @@ pipeline.modifiers.append(CommonNeighborAnalysisModifier(
 
 
 
-def Frame_CNA(frame, pipeline=None, Masterkey=None):
+def Frame_CNA(frame, R_Cut, Masterkey=None, filename=None):
+    
+    pipeline = import_file(filename)
+    pipeline.modifiers.append(CreateBondsModifier(cutoff = R_Cut))
+
+    pipeline.modifiers.append(CommonNeighborAnalysisModifier(
+        mode = CommonNeighborAnalysisModifier.Mode.BondBased))
     data = pipeline.compute(frame)
     # The 'CNA Indices' bond property is a a two-dimensional array
     # containing the three CNA indices computed for each bond in the system.
