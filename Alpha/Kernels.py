@@ -1,5 +1,6 @@
 from numpy import *
 import numpy as np
+from scipy.stats import norm
 
 
 def minifunc(Data,Band,i):
@@ -57,7 +58,7 @@ class Kernels():
         of each data point being a dirac-delta peak at its precise location in the limit
         of Band tends to zero.
         This would have the effect of re-paramterising the raw data.
-        Good results have come from using band ~ 0.125 for estimating a PDDF. Although,
+        Good results have come from using band ~ 0.05 for estimating a PDDF. Although,
         one may wish to tune this parameter depending on how they wish to present their
         data.
         
@@ -66,26 +67,16 @@ class Kernels():
         Gaussian distributed about the position on the grid under consideration.
         """
         
-        Number = '5'
-        
-        Space=np.linspace(0,8.0,400);Density=[]
-        for i in Space:
-            P=0
-            for j in range(len(Data)):
-                X = (Data[j]-i)/Band
-                Gauss = (1/np.sqrt(2*np.pi))*np.exp(-(X**2)/2)
-                P+=Gauss
-            Density.append(P/(len(Data)*Band))
-        return Space, Density
+        Space = linspace(2.5, 3.5, 200); A=[]
+        for i in range(len(Distances)):
+            A.append(norm.pdf(Space, Distances[i],Band))
+        Density = np.asarray(np.sum(A, axis=0))
+        Density = Density/np.trapz(Density, Space) #For normalisation purposes
+        Density[where(Density < 0.01)] = 0
+        Min = (diff(sign(diff(Density))) > 0).nonzero()[0] + 1 # local min
+        R_Cut = Space[Min][where(Space[Min]>3)][0]
+        return Space, Density, R_Cut
 
-
-    def minifunc(Data,Band,i):
-        X = Data - i
-        A1 = -0.5*Band <= X
-        A2 = X <= 0.5*Band
-        Temp = np.multiply(A1, A2)
-        Temp = Temp/Band
-        return np.sum(Temp)/(len(Data)*Band)
 
     def Uniform(Data, Band):
         
@@ -113,7 +104,7 @@ class Kernels():
         
         
         
-        Space=np.linspace(2.5,6.0,200); Density = []
+        Space=np.linspace(2.75,6.0,200); Density = []
         for i in Space:
             Density.append(minifunc(Data, Band, i))
         Min = (diff(sign(diff(Density))) > 0).nonzero()[0] + 1 # local min
