@@ -104,6 +104,57 @@ def Process(System = None, Quantities=None):
     
     print("Reading trajectory from frames %s to %s with an increment of %s." %(Start, End, Step), "\n")
     print('The PDF and, by extension, R_Cut will be evaluated every %s frames.' %(Skip), "\n")
+    
+    
+    try:
+        System['UniformPDF']
+        if System['UniformPDF'] is False:
+            PDF = Kernels.Gauss
+            print('The set method for calculating the PDF is with a Gaussian kernel function. \n Be aware that this method'
+                  'is slower than using a Uniform kernel. However; the distribution will be smoother.', "\n")
+            try:
+                System['Band']
+                if bool(type(System['Band']) is float or int):
+                    Band = System['Band']
+                    print('Bandwidth for the Kernel Density Estimator set to %.' %(Band), "\n")
+                else:
+                    Band = 0.05
+                    print('Bad value set for the Kernel function bandwidth. \n Defaulting to % for the Gaussian Kernel Density Estimator.' %(Band), "\n")
+            except KeyError:
+                Band = 0.05
+                print('Default setting for the Gaussian Kernel Density Estimator is set to %.' %(Band), "\n")
+                
+        else:
+            PDF = Kernels.Uniform
+            print('The selected method for calculating the PDF is with a Uniform kernel function. \n Be aware that this method'
+                  'may yield non-smooth distributions for certain structures. However; this is a much faster calculator.', "\n")
+            try:
+                System['Band']
+                if bool(type(System['Band']) is float or int):
+                    Band = System['Band']
+                    print('Bandwidth for the Kernel Density Estimator set to %.' %(Band), "\n")
+                else:
+                    Band = 0.25
+                    print('Bad value set for the Kernel function bandwidth. \n Defaulting to % for the Uniform Kernel Density Estimator.' %(Band), "\n")
+            except KeyError:
+                Band = 0.25
+                print('Default setting for the Uniform Kernel Density Estimator is set to %.' %(Band), "\n")
+                
+    except KeyError:
+        PDf = Kernels.Uniform
+        print('The default method for calculating the PDF is with a Uniform kernel function. \n Be aware that this method'
+              'may yield non-smooth distributions for certain structures. However; this is a much faster calculator.',"\n")
+        try:
+            System['Band']
+            if bool(type(System['Band']) is float or int):
+                Band = System['Band']
+                print('Bandwidth for the Kernel Density Estimator set to %.' %(Band), "\n")
+            else:
+                Band = 0.25
+                print('Bad value set for the Kernel function bandwidth. \n Defaulting to % for the Uniform Kernel Density Estimator.' %(Band), "\n")
+        except KeyError:
+            Band = 0.25
+            print('Default setting for the Uniform Kernel Density Estimator is set to %.' %(Band), "\n")
 
     Dataset = read(filename, index = 0)
 
@@ -237,7 +288,7 @@ def Process(System = None, Quantities=None):
             tick = time.time()
             result_cache['euc'] = Euc_Dist(i, result_cache['pos'])
             #metadata['euc'][int(i/Step)] = result_cache['euc']   #This is a very heavy list to carry around and the user is not advised to save it unless they DESPERATELY need it
-            result_cache['pdf'] = Kernels.Uniform(result_cache['euc'], 0.25)
+            result_cache['pdf'] = PDF(result_cache['euc'], Band)
             metadata['pdf'][int(i/(Step*Skip))] = result_cache['pdf']
             R_Cut = result_cache['pdf'][-1]
             print("PDF evaluated at frame", i,"and took %.3f seconds to calculate." %(time.time() - tick),"\n")
