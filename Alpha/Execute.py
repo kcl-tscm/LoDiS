@@ -112,49 +112,61 @@ def Process(System = None, Quantities=None):
             PDF = Kernels.Gauss
             print('The set method for calculating the PDF is with a Gaussian kernel function. \n Be aware that this method'
                   'is slower than using a Uniform kernel. However; the distribution will be smoother.', "\n")
+            metadata['pdftype'] = 'Gauss'
             try:
                 System['Band']
                 if bool(type(System['Band']) is float or int):
                     Band = System['Band']
                     print('Bandwidth for the Kernel Density Estimator set to %.' %(Band), "\n")
+                    metadata['Band'] = Band
                 else:
                     Band = 0.05
                     print('Bad value set for the Kernel function bandwidth. \n Defaulting to % for the Gaussian Kernel Density Estimator.' %(Band), "\n")
+                    metadata['Band'] = Band
             except KeyError:
                 Band = 0.05
                 print('Default setting for the Gaussian Kernel Density Estimator is set to %.' %(Band), "\n")
+                metadata['Band'] = Band
                 
         else:
             PDF = Kernels.Uniform
             print('The selected method for calculating the PDF is with a Uniform kernel function. \n Be aware that this method'
                   'may yield non-smooth distributions for certain structures. However; this is a much faster calculator.', "\n")
+            metadata['pdftype'] = 'Uniform'
             try:
                 System['Band']
                 if bool(type(System['Band']) is float or int):
                     Band = System['Band']
                     print('Bandwidth for the Kernel Density Estimator set to %.' %(Band), "\n")
+                    metadata['Band'] = Band
                 else:
                     Band = 0.25
                     print('Bad value set for the Kernel function bandwidth. \n Defaulting to % for the Uniform Kernel Density Estimator.' %(Band), "\n")
+                    metadata['Band'] = Band
             except KeyError:
                 Band = 0.25
                 print('Default setting for the Uniform Kernel Density Estimator is set to %.' %(Band), "\n")
+                metadata['Band'] = Band
                 
     except KeyError:
         PDf = Kernels.Uniform
         print('The default method for calculating the PDF is with a Uniform kernel function. \n Be aware that this method'
               'may yield non-smooth distributions for certain structures. However; this is a much faster calculator.',"\n")
+        metadata['pdftype'] = 'Uniform'
         try:
             System['Band']
             if bool(type(System['Band']) is float or int):
                 Band = System['Band']
                 print('Bandwidth for the Kernel Density Estimator set to %.' %(Band), "\n")
+                metadata['Band'] = Band
             else:
                 Band = 0.25
                 print('Bad value set for the Kernel function bandwidth. \n Defaulting to % for the Uniform Kernel Density Estimator.' %(Band), "\n")
+                metadata['Band'] = Band
         except KeyError:
             Band = 0.25
             print('Default setting for the Uniform Kernel Density Estimator is set to %.' %(Band), "\n")
+            metadata['Band'] = Band
 
     Dataset = read(filename, index = 0)
 
@@ -457,7 +469,7 @@ def Process(System = None, Quantities=None):
 
 
     if bool(globals()['SimTime']) is True:
-        metadata['time'] = energy[:,0]
+        metadata['SimTime'] = energy[:,0]
 
     if bool(globals()['EPot']) is True:
         metadata['EPot'] = energy[:,1]
