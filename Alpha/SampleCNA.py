@@ -1,7 +1,7 @@
 # Import OVITO modules.
-from ovito.io import *
-from ovito.modifiers import *
-from ovito.data import *
+from ovito.io import import_file
+from ovito.modifiers import CreateBondsModifier, CommonNeighborAnalysisModifier
+from ovito.data import particles, BondsEnumerator
 # Import standard Python and NumPy modules.
 import sys
 import numpy as np
