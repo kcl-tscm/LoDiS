@@ -1,27 +1,8 @@
-from Execute import *
-import pandas as pd
-
-
-def Meta_Csv(Data, filename):
-    df = pd.DataFrame.from_dict(Data, orient = "index")
-    df.to_csv(System['base_dir']+filename+'.csv')
-
-"""
-Robert:
-    Change the arguments in the System dictionary to 
-    reflect the directory and files you are working with.
-"""
-
-"""
-
-Robert:
-    
-    This list below is just to inform you as to what quantities you can calculate.
-    
-"""
+import Process
+import pickle
 
 Supported=[
-        'euc', 'rdf', 'cna', 'adj', 'pdf', 'pdfhomo', 'agcn', 'nn', 'pos',
+        'rdf', 'cna', 'adj', 'pdf', 'pdfhomo', 'agcn', 'nn',
         'SimTime', 'EPot', 'ETot', 'EKin', 'EDelta', 'MeanETot', 'Temp'
            ]
 
@@ -32,8 +13,8 @@ System = {
         
         'Homo' : 'Cu', # Don't worry about this guy just yet, it will become relevant soon.
         
-        'Start' : 0, 'End' : 100, 'Step' : 1, 'Skip' : 50, 'UniformPDF' : False, 'Band' : 0.05,
-        'PdfStats' : True, 'HomoStats' : True, 'RdfStats' : True, 'CnaStats' : True,
+        'Start' : 0, 'End' : None, 'Step' : 1, 'Skip' : 50, 'UniformPDF' : False, 'Band' : 0.05,
+        #'PdfStats' : True, 'HomoStats' : True, 'RdfStats' : True, 'CnaStats' : True,
         
         #Below are quantities related to the energy file
         
@@ -57,7 +38,7 @@ Quantities = {
         'EKin' : None, 'EDelta' : None, 'MeanETot' : None, 'Temp' : None
         }
 
-TestMetadata = Process(System, Quantities)
+TestMetadata = Process.Process(System, Quantities)
 
-
-Meta_Csv(TestMetadata, 'TestingMeta')
+with open('MetadataSample.csv', "wb") as f:
+    pickle.dump(TestMetadata,f, pickle.HIGHEST_PROTOCOL)
