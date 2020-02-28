@@ -1,15 +1,3 @@
-#from asap3 import FullNeighborList
-#from ase import Atoms
-#from ase.io import read
-
-#from matplotlib import pyplot as plt
-
-#import time
-
-#from scipy.interpolate import interp1d
-
-#import pandas as pd
-
 import scipy.sparse as spa
 import numpy as np
 
@@ -123,7 +111,3 @@ def agcn_generator(adj=None):
         agcn.append("%.3f" % (sum(Temp_List)/12.0))
         Tick+=Matrix[i]
     return(agcn,Matrix)
-            
-            
-            
-        
