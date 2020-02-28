@@ -5,15 +5,7 @@ import wikiquote
 import scipy.sparse as spa
 
 
-if __name__ == '__main__':
-    filename='/home/k1899676/Documents/JanusMeltMovie1.xyz'
-    Cut=3 #The cut-off distance for an atom to be considered adjacent
-
-#In theory, Cut should be evaluated framewise with respect to CNA
-
-
-
-def Adjacency_Matrix(positions, R_Cut):
+def Adjacency_Matrix(positions, distances, R_Cut):
     
     """ Robert
         Args:
@@ -36,13 +28,19 @@ def Adjacency_Matrix(positions, R_Cut):
     
 
 
-    Distances=np.zeros((len(positions),len(positions)))
+    Adj = []; NumAdj = np.zeros((len(positions), len(positions)), dtype=np.float64)
+    Tick = 0
+    for i in range(1,len(positions)):
+        Adj.append(distances[Tick:Tick+len(positions)-i])
+        Tick += (len(positions)-i)
+    
+    
     for i in range(len(positions)):
-        for j in range(len(positions)):
-            Euc=(positions[i,0]-positions[j,0])**2+(positions[i,1]-positions[j,1])**2+(positions[i,2]-positions[j,2])**2
-            
-            Distances[i][j]=np.sqrt(Euc)
-    Adjacent=(Distances<R_Cut).astype(int) #Evaluate if a pair are within R_Cut of eachother
+        for j in range(len(positions)-(i+1)):
+            NumAdj[i][j+i+1] = Adj[i][j]
+            NumAdj[j+i+1][i] = Adj[i][j]
+    
+    Adjacent=(NumAdj<R_Cut).astype(int) #Evaluate if a pair are within R_Cut of eachother
     np.fill_diagonal(Adjacent,0)
     
     
@@ -53,5 +51,3 @@ def Adjacency_Matrix(positions, R_Cut):
 
 
 print(wikiquote.quotes(wikiquote.random_titles(max_titles=1)[0]), "\n")
-
-#A,B=Adjacency_Matrix(filename, 0, 3.0)
