@@ -1,4 +1,3 @@
-from numpy import *
 import numpy as np
 from scipy.stats import norm
 
@@ -67,14 +66,15 @@ class Kernels():
         Gaussian distributed about the position on the grid under consideration.
         """
         
-        Space = linspace(2.5, 3.5, 200); A=[]
-        for i in range(len(Distances)):
-            A.append(norm.pdf(Space, Distances[i],Band))
+        Space = np.linspace(2, 8, 100); A=[]; Data=np.asarray(Data)
+        Data = [elem for elem in Data if 1 < elem < 9]
+        for i in range(len(Data)):
+            A.append(norm.pdf(Space, Data[i],Band))
         Density = np.asarray(np.sum(A, axis=0))
         Density = Density/np.trapz(Density, Space) #For normalisation purposes
-        Density[where(Density < 0.01)] = 0
-        Min = (diff(sign(diff(Density))) > 0).nonzero()[0] + 1 # local min
-        R_Cut = Space[Min][where(Space[Min]>3)][0]
+        Density[np.where(Density < 0.01)] = 0
+        Min = (np.diff(np.sign(np.diff(Density))) > 0).nonzero()[0] + 1 # local min
+        R_Cut = Space[Min][np.where(Space[Min]>3)][0]
         return Space, Density, R_Cut
 
 
@@ -104,10 +104,10 @@ class Kernels():
         
         
         
-        Space=np.linspace(2.75,6.0,200); Density = []
+        Space=np.linspace(2,int(max(Data)/2),300); Density = []
         for i in Space:
             Density.append(minifunc(Data, Band, i))
-        Min = (diff(sign(diff(Density))) > 0).nonzero()[0] + 1 # local min
+        Min = (np.diff(np.sign(np.diff(Density))) > 0).nonzero()[0] + 1 # local min
         R_Cut = Space[Min[0]]
         return Space, Density, R_Cut
             
