@@ -1,4 +1,3 @@
-from numpy import *
 import numpy as np
 
 def distance(a, b):
@@ -25,29 +24,60 @@ def distance(a, b):
  
     return np.sqrt(dx**2 + dy**2 + dz**2)
 
-def Euc_Dist(i_frame, positions):
-    Distances=[]
-    for i in range(len(positions)-1):
-        for j in range(i+1,len(positions)):
-            Euc = distance(positions[i],positions[j])
-
-            Distances.append(Euc)
-    return Distances
 
 
-def Homo(i_frame, positions, elements, specie):
+def get_CoM(positions):
+    return (np.average(positions[:,0]), np.average(positions[:,1]), np.average(positions[:,2]) )
+
+def get_subspecieslist(specie, elements, positions):
+    Temp = np.column_stack((elements,positions))
+    Temp = [x for x in Temp if x[0] == specie]
+    return np.delete(Temp,0,1)
+
+def CoM_Dist(positions, homo = False, specie = None, elements = None):
+    
+    if homo == False:
+        CoM = get_CoM(positions)
+        return [distance(x, CoM) for x in positions]
+    elif homo == True:
+        Temp = get_subspecieslist(specie, elements, positions)
+        CoM = get_CoM(positions)
+        return [distance(x, CoM) for x in Temp]
+    else:
+        raise TypeError("You weren't supposed to do that.")
         
+    
+                 
+    
 
-    Vector=np.column_stack((elements,positions))
-    Distances=[]; Temp=np.array(np.delete(Vector, (0),axis=1), dtype=np.float64)
-    for i in range(len(Vector)-1):
-        for j in range(i+1,len(Vector)):
-            if Vector[i,0]==specie and Vector[j,0]==specie:
-                Euc=distance(Temp[i],Temp[j])
-                Distances.append(np.sqrt(Euc))
-    return Distances
+
+    
+
+def Euc_Dist(i_frame, positions, homo = False, specie = None, elements = None):
+    
+    if homo == False:
+        Distances=[]
+        for i in range(len(positions)-1):
+            for j in range(i+1,len(positions)):
+                Euc = distance(positions[i],positions[j])
+
+                Distances.append(Euc)
+        return Distances
+    
+    elif homo == True:
+        Temp = get_subspecieslist(specie, elements, positions)
+        for i in range(len(Temp)-1):
+            for j in range(i+1,len(Temp)):
+                Euc = distance(Temp[i],Temp[j])
+
+                Distances.append(Euc)
+        return Distances
+    else:
+        raise TypeError("You weren't supposed to do that.")
+    
+
         
-def Hetero(i_frame, positions, elements):
+def Hetero(i_frame, positions, specie, elements):
         
     """ Robert
     
@@ -56,16 +86,10 @@ def Hetero(i_frame, positions, elements):
     function could be further generalised (albeit it a potential cost to computation time).
     """
     
+    TempA = get_subspecieslist(specie, elements, positions)
+    TempB = np.setdiff1d(TempA, positions)
+    return [distance(a,b) for a in TempA for b in TempB]
     
-    Vector=np.column_stack((elements,positions))
-
-    Distances=[]; Temp=np.array(np.delete(Vector, (0),axis=1), dtype=np.float64)
-    for i in range(len(Vector)-1):
-        for j in range(i+1,len(Vector)):
-            if Vector[i,0]!=Vector[j,0]:
-                Euc=(Temp[i,0]-Temp[j,0])**2+(Temp[i,1]-Temp[j,1])**2+(Temp[i,2]-Temp[j,2])**2
-                Distances.append(np.sqrt(Euc))
-    return Distances
 
 
     
@@ -131,7 +155,7 @@ def RDF(i_frame, positions, Res, R_Cut):
     for i, value in enumerate(G):
         G[i] = value / Volumes[i] #Rescaling the distribution with respect to enclosing volume
     
-    b = (diff(sign(diff(G))) > 0).nonzero()[0] + 1 # local min
+    b = (np.diff(np.sign(np.diff(G))) > 0).nonzero()[0] + 1 # local min
     R=Radii[b[1]]
     return Radii, G, R
 
