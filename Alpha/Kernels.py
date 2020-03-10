@@ -9,6 +9,7 @@ def minifunc(Data,Band,i):
     Temp = np.multiply(A1, A2)
     Temp = Temp/Band
     return np.sum(Temp)/(len(Data)*Band)
+
 class Kernels():
     
     """ Robert
@@ -42,7 +43,7 @@ class Kernels():
 
 
 
-    def Gauss(Data,Band):
+    def Gauss(Data,Band, mon=False):
         
         """ Robert
         
@@ -73,12 +74,15 @@ class Kernels():
         Density = np.asarray(np.sum(A, axis=0))
         Density = Density/np.trapz(Density, Space) #For normalisation purposes
         Density[np.where(Density < 0.01)] = 0
-        Min = (np.diff(np.sign(np.diff(Density))) > 0).nonzero()[0] + 1 # local min
-        R_Cut = Space[Min][np.where(Space[Min]>3)][0]
-        return Space, Density, R_Cut
+        if mon == False:
+            Min = (np.diff(np.sign(np.diff(Density))) > 0).nonzero()[0] + 1 # local min
+            R_Cut = Space[Min][np.where(Space[Min]>3)][0]
+            return Space, Density, R_Cut
+        elif mon == True:
+            return Space, Density
 
 
-    def Uniform(Data, Band):
+    def Uniform(Data, Band, mon=False):
         
         """ Robert
         
@@ -107,13 +111,13 @@ class Kernels():
         Space=np.linspace(2,int(max(Data)/2),300); Density = []
         for i in Space:
             Density.append(minifunc(Data, Band, i))
-        Min = (np.diff(np.sign(np.diff(Density))) > 0).nonzero()[0] + 1 # local min
-        R_Cut = Space[Min[0]]
-        return Space, Density, R_Cut
+        if mon == False:
+            Min = (np.diff(np.sign(np.diff(Density))) > 0).nonzero()[0] + 1 # local min
+            R_Cut = Space[Min[0]]
+            return Space, Density, R_Cut
             
-            
-            
-            
+        elif mon == True:
+            return Space, Density
             
     
     def Epan(Data,Band):
