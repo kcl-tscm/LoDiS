@@ -63,7 +63,7 @@ def cn_generator (positions, r_cut_cn):
 
 
 
-def agcn_generator(adj=None):
+def agcn_generator(adj=None, NN=False):
     
     """
     
@@ -110,4 +110,7 @@ def agcn_generator(adj=None):
             Temp_List.append(Matrix[Temp[j]])
         agcn.append("%.3f" % (sum(Temp_List)/12.0))
         Tick+=Matrix[i]
-    return(agcn,Matrix)
+    if NN is True:    
+        return(agcn,Matrix)
+    elif NN is False:
+        return agcn
