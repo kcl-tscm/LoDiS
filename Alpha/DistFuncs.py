@@ -32,7 +32,7 @@ def get_CoM(positions):
 def get_subspecieslist(specie, elements, positions):
     Temp = np.column_stack((elements,positions))
     Temp = [x for x in Temp if x[0] == specie]
-    return np.delete(Temp,0,1)
+    return np.array(np.delete(Temp,0,1), dtype = np.float64)
 
 def CoM_Dist(positions, homo = False, specie = None, elements = None):
     
@@ -47,13 +47,8 @@ def CoM_Dist(positions, homo = False, specie = None, elements = None):
         raise TypeError("You weren't supposed to do that.")
         
     
-                 
-    
 
-
-    
-
-def Euc_Dist(i_frame, positions, homo = False, specie = None, elements = None):
+def Euc_Dist(positions, homo = False, specie = None, elements = None):
     
     if homo == False:
         Distances=[]
@@ -65,19 +60,23 @@ def Euc_Dist(i_frame, positions, homo = False, specie = None, elements = None):
         return Distances
     
     elif homo == True:
+        Distances = []
         Temp = get_subspecieslist(specie, elements, positions)
-        for i in range(len(Temp)-1):
-            for j in range(i+1,len(Temp)):
-                Euc = distance(Temp[i],Temp[j])
+        if (len(Temp)>1) is False:
+            return None
+        else:
+            for i in range(len(Temp)-1):
+                for j in range(i+1,len(Temp)):
+                    Euc = distance(Temp[i],Temp[j])
 
-                Distances.append(Euc)
-        return Distances
+                    Distances.append(Euc)
+            return Distances
     else:
         raise TypeError("You weren't supposed to do that.")
     
 
         
-def Hetero(i_frame, positions, specie, elements):
+def Hetero(positions, specie, elements):
         
     """ Robert
     
@@ -87,13 +86,34 @@ def Hetero(i_frame, positions, specie, elements):
     """
     
     TempA = get_subspecieslist(specie, elements, positions)
-    TempB = np.setdiff1d(TempA, positions)
-    return [distance(a,b) for a in TempA for b in TempB]
+    TempB = [ x for x in positions if x not in TempA ]
+    try:
+        np.shape(TempA)[1]
+        try:
+            np.shape(TempB)[1]
+            Dist=[]
+            for a in TempA:
+                Dist.append([ distance(a, b) for b in TempB ])
+                return Dist
+        except IndexError:
+            Dist=[]
+            for x in TempA:
+                Dist.append( [distance(x, TempB) ])
+                return Dist
+            print("You have only one of a specific atom type in your simulation. I hope that this is correct.", "\n")
+    except IndexError:
+        try:
+            np.shape(TempB)[1]           
+            return [ distance(TempA, b) for b in TempB ]
+            print("You have only one of a specific atom type in your simulation. I hope that this is correct.", "\n")
+        except IndexError:
+            print("Why the actual fuck do you only have two atoms?", "\n")
+            return None
     
 
 
     
-def RDF(i_frame, positions, Res, R_Cut):
+def RDF(positions, Res=100, R_Cut=10.0, Hetero = False, Species = None, Elements = None):
     
     """ Robert
     
@@ -136,26 +156,38 @@ def RDF(i_frame, positions, Res, R_Cut):
     Radii = np.linspace(0, R_Cut, Res)
     Volumes=np.zeros(Res)
     G=np.zeros(Res)
-    
-    for i, atom1 in enumerate(positions):
-        for j in range(Res):
-            r1 = j * dr #Inner radius for the spherical shell
-            r2 = r1 + dr #Outer radius increased by increment dr
-            v1 = 4.0 / 3.0 * np.pi * r1**3
-            v2 = 4.0 / 3.0 * np.pi * r2**3
-            Volumes[j] += v2 - v1 #Volume to consider when evaluating distribution
+    if not Hetero:
+        for i, atom1 in enumerate(positions):
+            for j in range(Res):
+                r1 = j * dr #Inner radius for the spherical shell
+                r2 = r1 + dr #Outer radius increased by increment dr
+                v1 = 4.0 / 3.0 * np.pi * r1**3
+                v2 = 4.0 / 3.0 * np.pi * r2**3
+                Volumes[j] += v2 - v1 #Volume to consider when evaluating distribution
+        
+            for atom2 in positions[i:]:
+                Distance = distance(atom1, atom2)
+                index = int(Distance / dr)
+                if 0 < index < Res:
+                    G[index] += 2 #Identifies when there is an atom at this distance
+    else:
+        TempA = get_subspecieslist(Species[0], Elements, positions)
+        TempB = get_subspecieslist(Species[1], Elements, positions)
+        for i, atom1 in enumerate(TempA):
+            for j in range(Res):
+                r1 = j * dr #Inner radius for the spherical shell
+                r2 = r1 + dr #Outer radius increased by increment dr
+                v1 = 4.0 / 3.0 * np.pi * r1**3
+                v2 = 4.0 / 3.0 * np.pi * r2**3
+                Volumes[j] += v2 - v1 #Volume to consider when evaluating distribution
 
-        for atom2 in positions[i:]:
-            Distance = distance(atom1, atom2)
-            index = int(Distance / dr)
-            if 0 < index < Res:
-                G[index] += 2 #Identifies when there is an atom at this distance
-
+            for atom2 in TempB:
+                Distance = distance(atom1, atom2)
+                index = int(Distance / dr)
+                if 0 < index < Res:
+                    G[index] += 2 #Identifies when there is an atom at this distance
+        
 
     for i, value in enumerate(G):
         G[i] = value / Volumes[i] #Rescaling the distribution with respect to enclosing volume
-    
-    b = (np.diff(np.sign(np.diff(G))) > 0).nonzero()[0] + 1 # local min
-    R=Radii[b[1]]
-    return Radii, G, R
-
+    return Radii, G
