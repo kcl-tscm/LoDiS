@@ -1,22 +1,19 @@
 #Load the required modules for post-processing
-
 import Adjacent
 import Kernels
 from ase.io import read
-import time
 import DistFuncs
-
 import AGCN
 
 import numpy as np
-
+import time
 
 def Process(System = None, Quantities=None):
 
-    tick = time.time()
+    tick = time.time(); BigT = time.time()
     
     Supported=[
-            'rdf', 'cna', 'adj', 'pdf', 'pdfhomo', 'agcn', 'nn',
+            'rdf', 'cna', 'adj', 'pdf', 'pdfhomo', 'agcn', 'nn', 'CoM',
             'SimTime', 'EPot', 'ETot', 'EKin', 'EDelta', 'MeanETot', 'Temp'
                ]
     
@@ -191,9 +188,9 @@ def Process(System = None, Quantities=None):
         try:
             Quantities[x]; print("Calculating the %s." %(x), "\n"); globals()[x] = True
             Quantities[x] = np.empty((Time,), dtype=object)
-            if x is 'pdf':
+            if x == 'pdf':
                 Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
-            if x is 'rdf':
+            if x == 'rdf':
                 Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
         except KeyError:
             print("Will not calculate %s in this run." %(x), "\n"); globals()[x] = False
@@ -201,9 +198,6 @@ def Process(System = None, Quantities=None):
 
     Dataset = read(filename, index = 0)
     all_atoms = Dataset.get_chemical_symbols()
-
-    print("Initialising system environment took %.3f seconds." %(time.time()-tick), "\n")
-
 
     """
 
@@ -228,22 +222,24 @@ def Process(System = None, Quantities=None):
             Pair distance distribution function: pdf - Kernel densiy estimator (uniform approximation) for the pdf.
             This function also sets a new R_Cut each time it is called and calculated.
         
-            Homo atoms PDDF: pdfhomo: The PDDF for similar atoms only. - NOT YET FULLY TESTED. DO NOT USE -
-        
             Atop generalised coordination number: agcn - ask Fra
         
             Nearest neighbours: nn - Number of nearest neighbours each atom has. 
     
     """
-
-
-
+            
+    try: 
+        System['HCStats']
+        if bool(System['HCStats']) is not False:
+            Quantities['h'] = np.empty((Time,), dtype=object); globals()['h'] = True
+            Quantities['c'] = np.empty((Time,), dtype=object); globals()['c'] = True
+            print("Will be calculating and evaluating collectednes and concertednes of cluster rearrangement.", "\n")
+        else:
+            print("Will not be calculating collectednes or concertednes of cluster rearrangements.", "\n")
+    except KeyError:
+        print("Will not be calculating collectednes or concertednes of cluster rearrangements.", "\n")
         
-
-
-    First = True; FirstPDF = True; FirstRDF = True
-
-
+    print("Initialising system environment took %.3f seconds." %(time.time()-tick), "\n")
 
     if bool(globals()['cna']) is True:
         import SampleCNA
@@ -255,9 +251,6 @@ def Process(System = None, Quantities=None):
     
         print("Initialising CNA environment took %.3f seconds." %(time.time()-tick), "\n")
         
-        First == True
-
-
     for i in range(Start, End, Step):
         T0=time.time()
     
@@ -278,164 +271,299 @@ def Process(System = None, Quantities=None):
             metadata['NSpecies']=len(Species)
             metadata['NFrames'] = Time
             metadata['NAtoms'] = NAtoms
-        
+            
+            print("Checking user input for calculating homo properties in this run.", "\n")
+            try:
+                System['Homo']
+                
+                if System['Homo'] is None:
+                    try:
+                        System['HomoQuants']
+                        if System['HomoQuants'] is None:
+                            print("No bimetallic properties for homo species will be calculated in this run.", "\n")
+                        else:
+                            System['Homo'] = metadata['Species']
+                            print("No homo atom species requested, but you wish to calculate bimetallic homo properties." 
+                                  "\n Instead we shall calculate homo properties for %s and hetero properties for the system." %(metadata['Species']), "\n")
+                       
+                            for x in System['HomoQuants']:
+                                for y in System['Homo']:
+                                    Quantities[x+y] = np.empty((Time,), dtype=object); globals()[x+y] = True
+                                    print("Calculating %s as a homo property." %(x+y), "\n")
+                                    if 'PDF' in x:
+                                        Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
+                                    elif 'RDF' in x:
+                                        Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
+                    except KeyError:
+                        print("Will not be calculating any homo properties this run." , "\n") 
+                        
+                        
+                elif False in [x not in metadata['Species'] for x in System['Homo']]:
+                    print("Specie entered in homo not found in the system. The only observed species are %s and you have requested to observe %s." 
+                          "\n Defaulting to atoms found in the system for evaluation." %(metadata['Species'], System['Homo']), "\n")
+                    System['Homo'] = metadata['Species']
+                    try:
+                        System['HomoQuants']
+                        if System['HomoQuants'] is None:
+                            print("No homo properties will be calculated in this run.", "\n")
+                        else:
+                            for x in System['HomoQuants']:
+                                for y in System['Homo']:
+                                    Quantities[x+y] = np.empty((Time,), dtype=object); globals()[x+y] = True
+                                    print("Calculating %s as a homo property." %(x+y), "\n")
+                                    if 'PDF' in x:
+                                        Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
+                                    elif 'RDF' in x:
+                                        Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
+                    except KeyError:
+                        print("Will not be calculating any homo properties this run as no qauntities have been given to calculate." , "\n") 
+                        
+                        
+                else:
+                    print("Homo atom properties will be caluclated for %s in this run." %(System['Homo']), "\n")
+                    try:
+                        System['HomoQuants']
+                        if System['HomoQuants'] is None:
+                            print("No bimetallic properties will be calculated in this run as none have been requested.", "\n")
+                        else:
+                            for x in System['HomoQuants']:
+                                for y in System['Homo']:
+                                    Quantities[x+y] = np.empty((Time,), dtype=object); globals()[x+y] = True
+                                    print("Calculating %s as a homo property." %(x+y), "\n")
+                                    if 'PDF' in x:
+                                        Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
+                                    elif 'RDF' in x:
+                                        Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
+                    except KeyError:
+                        print("Will not be calculating any homo properties this run." , "\n")
+                        
+                        
+            except KeyError:
+                print("No homo atoms have been requested for calculation. Checking if bimetallic properties have been requested.", "\n")
+                
+                try:
+                    System['HomoQuants']
+                    if System['HomoQuants'] is None:
+                        print("No homo properties have been requested, either. Continuing to calculate whole system properties, only.", "\n")
+                    else:
+                        print("You have requested to calculate %s while not asking for any atoms. Defaulting to considering all species identified in the system." %(System['HomoQuants']), "\n")
+                        System['Homo'] = metadata['Species']
+                        
+                        for x in System['HomoQuants']:
+                            for y in System['Homo']:
+                                Quantities[x+y] = np.empty((Time,), dtype = object); globals()[x+y] = True
+                                print("Calculating %s as a homo property." %(x+y), "\n")
+                                if 'PDF' in x:
+                                    Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype = object)
+                                elif 'RDF' in x:
+                                    Quantities[x+y] = np.empty((int((Time*Step)/(Skip)),), dtype=object)
+                                
+                except KeyError:
+                    print("No homo quantities have been requested, either.", "\n")
+            
+            print("Finished evaluating user input for homo atomic properties." , "\n")
+            
+            print("Checking user input for hetero atomic species.", "\n")
+            
+            try:
+                System['Hetero']
+                if System['Hetero'] is not True:
+                    print("Bad input detected for the 'Hetero' argument'. \n Checking if the user has requested hetero quantities to calculate.", "\n")
+                    try: 
+                        System['HeteroQuants']
+                        if System['HeteroQuants'] is None:
+                            print("Bad input variable decalred for calculating hetero quantities. Nothing hetero will happen here, today!", "\n")
+                        else:
+                            print("User has requested hetero quantities without specifying the desire to do so. We shall assume that this is an error and calculate anyway.", "\n")
+                            System['Hetero'] = True
+                            for x in System['HeteroQuants']:
+                                Quantities[x] = np.empty((Time,), dtype = object); globals()[x] = True
+                                print("Calculating %s as a hetero property." %(x), "\n")
+                                if 'PDF' in x:
+                                    Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype = object)
+                                elif 'RDF' in x:
+                                    Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype =object)
+                    except KeyError:
+                        print("No hetero quantities requested and so none shall be calculated.", "\n")
+                
+                else:
+                    print("Hetero quantities have been requested by the user.", "\n")
+                    try:
+                        System['HeteroQuants']
+                        if System['HeteroQuants'] is None:
+                            print("Bad input variable decalred for calculating hetero quantities. Nothing hetero will happen here, today!", "\n")
+                        else:
+                            print("User has requested hetero quantities.", "\n")
+                            System['Hetero'] = True
+                            for x in System['HeteroQuants']:
+                                Quantities[x] = np.empty((Time,), dtype = object); globals()[x] = True
+                                print("Calculating %s as a hetero property." %(x), "\n")
+                                if 'PDF' in x:
+                                    Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype = object)
+                                elif 'RDF' in x:
+                                    Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype =object)
+                    except KeyError:
+                        print("No hetero quantities requested and so none shall be calculated.", "\n")
+            except KeyError:
+                print("No input variable declared for 'Hetero' calculations. Checking if user has requested quantities without specifying the wish to calculate.", "\n")
+                try:
+                    System['HeteroQuants']
+                    if System['HeteroQuants'] is None:
+                        print("Bad input variable decalred for calculating hetero quantities. Nothing hetero will happen here, today!", "\n")
+                    else:
+                        print("User has requested hetero quantities.", "\n")
+                        System['Hetero'] = True
+                        for x in System['HeteroQuants']:
+                            Quantities[x] = np.empty((Time,), dtype = object); globals()[x] = True
+                            print("Calculating %s as a hetero property." %(x), "\n")
+                            if 'PDF' in x:
+                                Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype =object)
+                            elif 'RDF' in x:
+                                Quantities[x] = np.empty((int((Time*Step)/(Skip)),), dtype =object)
+                except KeyError:
+                    print("No hetero quantities requested and so none shall be calculated.", "\n")
+                    
+                    
+            print("Finished evaluating input arguments for homo/hetero calculations.", "\n")
+                       
+            #This block initialises the metadata
             for key in Quantities:
                 metadata[key] = Quantities[key]
             print("Initialising Metadata took %.3f seconds." %(time.time() - tick),"\n")
             print("This system contains", NAtoms, "atoms","\n",
                   "consisting of", Species, "as present atomic species.","\n")
-        
-        Postime = time.time()
+
+        temptime=time.time()
         result_cache['pos'] = all_positions
-            
+        result_cache['euc'] = DistFuncs.Euc_Dist(result_cache['pos'])
+          
         
-        result_cache['euc'] = DistFuncs.Euc_Dist(i, result_cache['pos'])
-        print("Determined positions and pairwise distances in frame %s in %.3f seconds." %(i, time.time() - Postime), "\n")
-            
-        
-    
-
-        if i%Skip==0 and bool(globals()['rdf']) is True:
-            tick=time.time()
-            result_cache['rdf'] = DistFuncs.RDF(i, result_cache['pos'], 100, 10.0)
+        #All RDF calculations performed in the following block
+        if i%Skip==0 and bool(globals()['rdf']) is True: 
+            result_cache['rdf'] = DistFuncs.RDF(result_cache['pos'], 100, 10.0)
             metadata['rdf'][int(i/(Step*Skip))] = result_cache['rdf'] 
-            print("RDF calculated in %.3f seconds." %(time.time()-tick),"\n")
+            try:
+                if bool(bool(System['Homo'])*bool('HoPDF' in System['HomoQuants'])) is True:
+                    for x in System['Homo']:
+                        result_cache['homopos'+x] = DistFuncs.get_subspecieslist(x, metadata['Elements'], result_cache['pos'])
+                        metadata['HoRDF'+x][int(i/(Step*Skip))] = DistFuncs.RDF(result_cache['homopos'+x])
+            except KeyError:
+                pass
+            try:
+                if bool(bool(System['Hetero'])*globals()['HeRDF']) is True:
+                    metadata['HeRDF'][int(i/(Step*Skip))] = DistFuncs.RDF(result_cache['pos'], Res=100, R_Cut=10.0, Hetero = True, 
+                                                                          Species = metadata['Species'], Elements = metadata['Elements'])
+            except KeyError:
+                pass
     
-    
-
-    
+        #All PDF calculations performed in the following block
         if i%Skip==0 and bool(globals()['pdf']) is True:
-            tick = time.time()
-            #metadata['euc'][int(i/Step)] = result_cache['euc']   #This is a very heavy list to carry around and the user is not advised to save it unless they DESPERATELY need it
             result_cache['pdf'] = PDF(result_cache['euc'], Band)
             metadata['pdf'][int(i/(Step*Skip))] = result_cache['pdf']
             R_Cut = result_cache['pdf'][-1]
-            print("PDF evaluated at frame", i,"and took %.3f seconds to calculate." %(time.time() - tick),"\n")
             print("R_Cut is now set to %s." %(R_Cut), "\n")
+            try:
+                if bool(bool(System['Homo'])*bool('HoPDF' in System['HomoQuants'])) is True:
+                    for x in System['Homo']:
+                        result_cache['homoed'+x] = DistFuncs.Euc_Dist(positions=result_cache['pos'], homo = True, specie = x, elements = metadata['Elements'])
+                        if result_cache['homoed'+x] is not None:
+                            metadata['HoPDF'+x][int(i/(Step*Skip))] = Kernels.Kernels.Uniform(result_cache['homoed'+x], Band, mon=True)
+                        else:
+                            pass
+            except KeyError:
+                pass
+            try:
+                if bool(System['Hetero']*globals()['HePDF']) is True:
+                    result_cache['heteropos'] = DistFuncs.Hetero(result_cache['pos'], metadata['Species'][0], metadata['Elements'])
+                    if result_cache['heteropos'] is not None:
+                        Temp = np.concatenate(result_cache['heteropos']).ravel()
+                        metadata['HePDF'] = Kernels.Kernels.Uniform(Temp, Band, mon=True)
+                    else:
+                        metadata['HePDF'] = None
+                        print("There was an error with the heterogenous distance array. No PDF calculated for frame %s."%(i), "\n")
+            except KeyError:
+                pass
     
-    
-    
-        if bool(FirstPDF*globals()['pdf']) is True:
-            tick = time.time()
-            metadata['pdfpstat'] = np.zeros((Time))
-            metadata['pdfkld'] = np.zeros((Time))
-            metadata['pdfjsd'] = np.zeros((Time))
-            FirstPDF=False
-            print("PDF statistics initialisation performed in %.3f seconds." %(time.time()-tick),"\n")
-    
-    
+        #This block evaluates all of the CoM calculations
+        if bool(globals()['CoM']) is True:
+            metadata['CoM'] = DistFuncs.get_CoM(result_cache['pos'])
+        try:
+            if bool(bool(System['Homo'])*bool('CoM' in System['HomoQuants'])) is True:
+                for x in System['Homo']:
+                    metadata['CoM'+x][int(i/Step)] = DistFuncs.CoM_Dist(positions = result_cache['pos'], homo=True, specie = x, elements = metadata['Elements'])
+        except KeyError:
+            pass
+ 
+        #This block calculates the CNA signatures for the whole system, only
         if bool(globals()['cna']) is True:
-            tick=time.time()
             result_cache['cna'] = SampleCNA.Frame_CNA(i, R_Cut, Masterkey, filename)[0]
             metadata['cna'][int(i/Step)] = list(result_cache['cna'].items())
             metadata['cna'][int(i/Step)].sort()
-            print("CNA signatures calculated in %.3f seconds." %(time.time()-tick),"\n")
         
-
-    
-    
-        if bool(FirstRDF*globals()['rdf']) is True:     
-            metadata['rdfpstat'] = np.zeros((Time))
-            metadata['rdfkld'] = np.zeros((Time))
-            metadata['rdfjsd'] = np.zeros((Time))
-            FirstRDF = False
-            print("RDF statistics initialisation performed in %.3f seconds." %(time.time()-tick),"\n")
-
+        
+        #This block evaluates the adjacency matrices for the whole system, homo pair(s), & hetero atoms 
         if bool(globals()['adj']) is True:
-            tick=time.time()
             result_cache['adj'] = Adjacent.Adjacency_Matrix(result_cache['pos'], result_cache['euc'], R_Cut)
             metadata['adj'][int(i/(Step))] = result_cache['adj']
-            print("Adjacency matrix evaluated at frame", i,"in %.3f seconds." %(time.time()-tick), "\n")
+        try:
+            if bool(bool(System['Homo'])*bool('HoAdj' in System['HomoQuants'])) is True:
+                for x in System['Homo']:
+                    result_cache['HomoED'+x] = DistFuncs.Euc_Dist(result_cache['pos'], homo = True, specie = x, elements = metadata['Elements'])
+                    
+                    metadata['HoAdj'+x] = Adjacent.get_coordination(Adjacent.Adjacency_Matrix(
+                                                                                               DistFuncs.get_subspecieslist
+                                                                                               (
+                                                                                               x, metadata['Elements'], result_cache['pos']
+                                                                                               ),
+                                                                                               result_cache['HomoED'+x], R_Cut) )
+        except KeyError:
+            pass
+        try:
+            if bool(System['Hetero']*globals()['HeAdj']) is True:
+                result_cache['HeDist'] = DistFuncs.Hetero(result_cache['pos'], metadata['Species'][0], metadata['Elements'])
+                if result_cache['heteropos'] is not None:
+                    metadata['HeAdj'][int(i/Step)] = Adjacent.get_coordination_hetero(result_cache['HeDist'], R_Cut)
+                else:
+                    metadata['HeAdj'] = None
+                    print("There was an error with hetero positions, no respective adjacency matrix calculated for frame %s." %(i), "\n")
+        except KeyError:
+            pass
+        
+        
+        #This  block calculates the concertedness and collectivity of atom rearrangements    
+        if bool(System['HCStats']*i) is not False:
+            result_cache['r'] = Adjacent.R(result_cache['adj'], metadata['adj'][int(i/(Step))-1])
+            metadata['h'][int(i/(Step))-1] = Adjacent.Collectivity(result_cache['r'])
+            if not(i<3):
+                metadata['c'][int(i/(Step))-2] = Adjacent.Concertedness(metadata['h'][int(i/Step)-1], metadata['h'][int(i/(Step))-3])
     
     
+        #This block evaluates the atop generalised coordination number for the whole system
         if bool(globals()['agcn']*globals()['nn']*globals()['adj']) is True:
-            tick = time.time()
-            Agcn, NN = AGCN.agcn_generator(result_cache['adj'])
+            Agcn, NN = AGCN.agcn_generator(result_cache['adj'], NN = True)
             metadata['agcn'][int(i/Step)] = Agcn; metadata['nn'][int(i/Step)] = NN
-            print("AGCN and nearest neighbours found in %.3f seconds." %(time.time()-tick), "\n")
         elif bool(globals['agcn']*globals()['adj']) is True:
-            tick = time.time()
             Agcn = AGCN.agcn_generator(result_cache['adj'])[0]
             metadata['agcn'][int(i/Step)] = Agcn
-            print("AGCN found in %.3f seconds." %(time.time()-tick), "\n")
         elif bool(globals['nn']*globals()['adj']) is True:
-            tick = time.time()
-            NN = AGCN.agcn_generator(result_cache['adj'])[1]
+            _,NN = AGCN.agcn_generator(result_cache['adj'], NN = True)
             metadata['nn'][int(i/Step)] = NN
-            print("Nearest neighbours found in %.3f seconds." %(time.time()-tick), "\n")
+    
         
+        ##This is simply a progress updater which informs the user how every 5% is getting along.
+        if i%int((End-Start)/20) == 0:
+            Per = int(i/int((End-Start)/100))
+            T1=time.time()
+            print("Step %s computed in only %.4f nanocenturies." %(i, (T1-T0)/3.156), "\n")
+            print("Currently performed %.3f%% of the calculation." %(Per), "\n")
+            print('['+int(Per/5)*'##'+(20-int(Per/5))*'  '+']', "\n")
+            if i >Start:
+                print('Estimated time for completion is %s.' %(
+                                                              time.strftime(
+                                                                            "%H:%M:%S", 
+                                                                             time.gmtime((100/Per)*(time.time()-BigT)))), "\n"                         
+                                                                            )
 
-        """"
-        
-        Robert: 
-            
-            Below are many of the statistical analysis tools being called on various distributions.
-            They are commented out at the moment as I feel it more useful for the user to use the
-            functions already defined in a way that see fit for their data.
-        
-        
-        if System['RdfStats'] == True:
-            
-            result_cache['rdfpstat'] = Dist_Stats.PStat(metadata['rdf'][:,1,:], i)
-            result_cache['rdfkld'] = Dist_Stats.Kullback(metadata['rdf'][:,1,:], i)
-            result_cache['rdfjsd'] = Dist_Stats.JSD(metadata['rdf'][:,1,:], i)
-            
-            metadata['rdfpstat'][int(i/Step)] = result_cache['rdfpstat']
-            metadata['rdfkld'][int(i/Step)] = result_cache['rdfkld']
-            metadata['rdfjsd'][int(i/Step)] = result_cache['rdfjsd']    
-    
-        result_cache['homo'] = Homo(i, result_cache['pos'], metadata['Elements'], System['Homo'])
-        
-        if i == Start:
-            metadata['homo'] = np.zeros((Time,  len(result_cache['homo'])))
-            continue
-        metadata['homo'][int(i/Step)] = result_cache['homo']
-        
-        result_cache['pdfhomo'] = Kernels.Uniform(result_cache['homo'], 0.25)globals(X[b[1]])
-        metadata['pdfhomo'][int(i/Step)] = result_cache['pdfhomo']
-        
-        
-        if i == Start and System['HomoStats'] == True:
-            metadata['homopstat'] = np.zeros((Time))
-            metadata['homokld'] = np.zeros((Time))
-            metadata['homojsd'] = np.zeros((Time))
-            
-            continue
-        if System['HomoStats'] == True:
-            
-            result_cache['homopstat'] = Dist_Stats.PStat(metadata['pdfhomo'][:,1,:], i)
-            result_cache['homokld'] = Dist_Stats.Kullback(metadata['pdfhomo'][:,1,:], i)
-            result_cache['homojsd'] = Dist_Stats.JSD(metadata['pdfhomo'][:,1,:], i)
-            
-            metadata['homopstat'][int(i/Step)] = result_cache['homopstat']
-            metadata['homokld'][int(i/Step)] = result_cache['homokld']
-            metadata['homojsd'][int(i/Step)] = result_cache['homojsd']
-    
-        if System['PdfStats'] == True:
-            
-            result_cache['pdfpstat'] = Dist_Stats.PStat(metadata['pdf'][:,1,:], i)
-            result_cache['pdfkld'] = Dist_Stats.Kullback(metadata['pdf'][:,1,:], i)
-            result_cache['pdfjsd'] = Dist_Stats.JSD(metadata['pdf'][:,1,:], i)
-            
-            metadata['pdfpstat'][int(i/Step)] = result_cache['pdfpstat']
-            metadata['pdfkld'][int(i/Step)] = result_cache['pdfkld']
-            metadata['pdfjsd'][int(i/Step)] = result_cache['pdfjsd']
-    
-    
-    
-        Robert:
-            Pro-tip. Be sure to change the final argument in Homo(frame, positions, elements, specie,)
-            to whichever compound you want to work with.
-            
-        """    
-    
-    
-    
-
-        First = False
-        T1=time.time()
-
-        print("Step %s computed in only %.4f nanocenturies." %(i, (T1-T0)/3.156), "\n")
         i += Step
 
 
@@ -443,29 +571,7 @@ def Process(System = None, Quantities=None):
     metadata['masterkey']=Masterkey
 
     """
-    Robert: 
-        The way in which I've written this function makes it a pain to call at each frame.
-        So instead, it can be called at the end, for now and then spruced up for the big release!
-    
-    
-    
-    if System['CnaStats'] == True:
-        metadata['cnapstat'] = np.zeros((Time))
-        metadata['cnakld'] = np.zeros((Time))
-        metadata['cnajsd'] = np.zeros((Time))print("R_Cut is now set to %s." %(R_Cut))
-    
-    
-    
-            
-        result_cache['cnapstat'] = Dist_Stats.PStat(metadata['cna'][i], i)
-        result_cache['cnakld'] = Dist_Stats.Kullback(metadata['cna'][i], i)
-        result_cache['cnajsd'] = Dist_Stats.JSD(metadata['cna'][i], i)
-            
-        metadata['cnapstat'][int(i/Step)] = result_cache['cnapstat']
-        metadata['cnakld'][int(i/Step)] = result_cache['cnakld']
-        metadata['cnajsd'][int(i/Step)] = result_cache['cnajsd']
-        
-        
+                
     #############################################################################################
     
     Robert:
@@ -489,7 +595,7 @@ def Process(System = None, Quantities=None):
     
     if bool(globals()['EDelta']) is True:
         metadata['EDelta'] = energy[:,4]
-
+    
     if bool(globals()['MeanETot']) is True:
         metadata['MeanETot'] = energy[:,5]
     
