@@ -1,24 +1,10 @@
-# Import OVITO modules.
 from ovito.io import import_file
 from ovito.modifiers import CreateBondsModifier, CommonNeighborAnalysisModifier
 from ovito.data import particles, BondsEnumerator
-# Import standard Python and NumPy modules.
+
 import sys
 import numpy as np
 
-
-
-
-"""
-# Load the simulation dataset to be analyzed.
-pipeline = import_file(filename)
-# Create bonds.
-pipeline.modifiers.append(CreateBondsModifier(cutoff = R_Cut))
-
-pipeline.modifiers.append(CommonNeighborAnalysisModifier(
-    mode = CommonNeighborAnalysisModifier.Mode.BondBased))
-
-"""
 
 
 
@@ -135,6 +121,4 @@ def Get_Heights(Metadata, Masterkey, Norm = False):
             if Norm == True:
                 Heights[frame] = Heights[frame]/sum(Heights[frame])
             
-            
-        
     return Heights
