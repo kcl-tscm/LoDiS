@@ -16,7 +16,7 @@
   filepos      = '~/Documents/LoDiS/input_example_files/Ag_147.xyz',             ! Initial atom positions file, ONLY .xyz format
   filepot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
   mgo_pot      = '~/Documents/LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
-  impl_env = .true.                  ! Simulate with an implicit environment?
+  impl_env = .false.                  ! Simulate with an implicit environment?
   pot_a = 1.5d0                      ! Metal-environment interaction type. 1 - pairwise, <1 - covalent, >1 - strong interacting environment
   pot_b = 1.5d0                      ! Same case as pot_a, but for chemical species 2 in bi-metallic cluster
   eta_a = 0.02d0                     ! Strength of the interaction between species 1 and environment
