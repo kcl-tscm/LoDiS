@@ -30,7 +30,7 @@ For more general information and publications visit [Baletto group website](http
 ## Installation
 Clone the repository into a local directory:
 ```
-https://github.com/kcl-tscm/LoDiS.git
+git clone https://github.com/kcl-tscm/LoDiS.git
 ```
 
 Modify the Makefile in the LoDiS_GIT/base directory to run your local Fortran compiler and its libraries (openmp required).
