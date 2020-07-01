@@ -30,7 +30,7 @@
   fattor          = 1.d0,            ! LEAVE IT, stupid units conversion
   elem1           = 'Ag',            ! Chemical species one
   elem2           = 'Ag',            ! Chemical species two
-  sys             = 'mon',           ! Monometallic cluster 'mon' or bimetallic cluster 'bim'?
+  sys             = 'mon',           ! Monometallic cluster 'mon' or bimetallic cluster 'bim'
 /
   
 ! &coal : procedure for coalescence
