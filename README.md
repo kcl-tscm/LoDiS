@@ -28,7 +28,7 @@ Supported nanosystems include:
 For more general information and publications visit [Baletto group website](https://balettogroup.weebly.com/lodis.html)
 
 ## Licence
-Copyright 2020 LoDiS-Baletto
+Copyright 2020 KCL-LoDiS-Baletto
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
