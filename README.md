@@ -111,6 +111,10 @@ NOTE: neither Ag_309.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 * Raphael Pinto-Miles (raphpmx@gmail.com)
 * Kevin Rossi (k1992@hotmail.it)
 * Vagner Rigo (vagnerrigo@gmail.com)
+* Luca Pavan (luca.pavan@kcl.ac.uk)
+* Laia Delgado-Callico (laia.delgado@kcl.ac.uk)
+* Robert Jones (robert.m.jones@kcl.ac.uk)
+* Matteo Tiberi (matteo.tiberi@kcl.ac.uk)
 * Riccardo Ferrando (ferrando@fisicaunige.it)
 * Christine Mottet (mottet@cinam.univ-mrs.fr)
 
