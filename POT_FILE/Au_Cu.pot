@@ -1,0 +1,19 @@
+﻿## INPUT PARAMETRIZATION FOR MolDyn CODE (Rapallo JCP 2005)
+###########################
+Au Cu
+# PARAMETRIZATION OF Au-Cu INTERACTION
+#      Au                    Cu			Au-Cu
+   10.229d0                10.96d0           11.050d0     	p
+   4.036d0                  2.27d0           3.048d0		q
+   0.2061d0      	   0.0855d0          0.154d0		a(eV)
+   1.7900d0       	   1.2240d0          1.5605d0		qsi(eV)
+#########################################
+## OTHER METAL PROPERTIES
+ 2.95d0       3.40d0       Cohesion energy [eV]
+ 1.44d0       1.28d0        Atomic radius [Angstrom]
+ 107.87d0      64.d0         Mass [amu]
+############################################################################
+# CUTOFF_START AND CUTOFF_END [Angstrom]
+     3.61        5.777
+#
+
