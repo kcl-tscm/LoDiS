@@ -1,5 +1,0 @@
-So the general jive here is that you run the script tastefully named "Bulls_Hit.py".
-I have entered in the Quantities dictionary, all of the currently supported and tested functions (at least for my structures).
-Despite looking ugly as sin, it seems to be semi-robust and not terribly slow for my systems (~100 atoms).
-Later, I will add in some additional scripts to guide you through looking at the data and using the statistical testing tools.
-For now, though, I just want you to have access to some of these functions and to have a crude iterator for them all.
