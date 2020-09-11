@@ -1,4 +1,4 @@
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+o!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !Copyright 2020 KCL-LoDiS-Baletto
 !
 !   Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@
 ! different tools for study low dimensional systems (LoDiS).
 ! 
 ! KCL-Developers: 
-! Luca Pavan, Kevin Rossi, Raphael Pinto-Miles, Matteo Tiberi, Laia Delgado, Francesca Baletto
+! Luca Pavan, Kevin Rossi, Raphael Pinto-Miles, Matteo Tiberi, Laia Delgado, Robert Jones, Francesca Baletto
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !  LoDiS does Molecular Dynamics simulations for cluster, wires, surfaces (and bulk to be tested).
