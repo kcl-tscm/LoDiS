@@ -1,41 +1,67 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!Copyright 2020 KCL-LoDiS-Baletto
 !
-!                            goa-MD vers. 1.1.1
+!   Licensed under the Apache License, Version 2.0 (the "License");
+!   you may not use this file except in compliance with the License.
+!   You may obtain a copy of the License at
 !
-! Developers: F. Baletto, R. Ferrando, C. Mottet
-! from a program of G. Treglia and people in CNRS/ Marseille
+!       http://www.apache.org/licenses/LICENSE-2.0
 !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!  This program goa-MD is doing a semi-empirical Molecular Dynamics
-!  for cluster, wires, surfaces and bulk.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                            LoDiS vers. 1.0.0
+! The program LoDiS-MD born from a classical Molecular Dynamics (MD) simulation
+! initially developed by F. Baletto, R. Ferrando, C. Mottet, G. Treglia. 
+! A collaboration from the Physics Department in Genova (Italy) and the CNRS in Marseille.
+!
+! In the last decade the Baletto's group based at the Physics Department at KCL as developed 
+! different tools for study low dimensional systems (LoDiS).
+! 
+! KCL-Developers: 
+! Luca Pavan, Kevin Rossi, Raphael Pinto-Miles, Matteo Tiberi, Laia Delgado, Francesca Baletto
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!  LoDiS does Molecular Dynamics simulations for cluster, wires, surfaces (and bulk to be tested).
 !  The equation of motion are solved using a velocity-Verlet algorithm
-!  Different semi-empricial potential are available:
-!  RGL (Gupta like) potntial      -- for late-transition metals (and their alloy)
+!  Different semi-empirical potential are available:
+!  RGL (Gupta like) potntial      -- for late-transition metals (and their alloys)
+! The RGL are also known as second-moment approximation if the tight-binding
 !  Pacheco or Girifalco potential -- for C60 clusters
 !  Lennard-Jones                  -- for Ar
 !  Morse potential and modiefied Morse will be available soon (under test)
 !!!!!!!!!!!!
-!  The goa-MD is able to do:
-!  quenching/annealing
-!  Important results for mono-metallic clusterss are summarised in
-!  F. Baletto et al. JCP (2002)
-!  F. Baletto and R. Ferrando RMP 77 (2005) 371
-!  one-by-one growth of nanoalloys (both core shell or with a fixed probability)
-!  the procedure is described in
-!  F. Baletto et al. Surf. Sci. (2000)
-!  F. Baletto et al. PRL (2000)
-!  thermal behaviour (freezing/melting) of nanoparticles
-!  the procedure is described in
-!  F. Baletto et al. CPL (2002)
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!  Useful information on classical MD and algorithms are available on
-!  Chap 4. Smit and Frenkel, Understanding Molecular Dynamics
+!  LoDiS tools:
+!  @quenching/annealing (see:   F. Baletto et al. JCP (2002), F. Baletto and R. Ferrando RMP 77 (2005) 371)
 !
-!---------------------------------------------------------------------
-! Metadynamics, MgO substrate, OpenMP parallel coding and debugging by
-! L. Pavan
-! King's College London
-! 2014
+!  @one-by-one growth 
+! of monometallic ( F. Baletto et al. Surf. Sci. (2000), F. Baletto et al. PRL (2000)) 
+! of nanoalloys (both core shell or with a fixed probability, F. Baletto PRB (2002) )
+! see I Parsina, F Baletto, Tailoring the structural motif of AgCo nanoalloys: core/shell versus Janus-like
+! The Journal of Physical Chemistry C 114 (3), 1504-1511
+!
+!  @freezing/melting of nanoparticles/nanoalloys (see F. Baletto et al. CPL (2002))
+!  subsequent updates 
+![1] L Pavan, F Baletto, R Novakovic, Multiscale approach for studying melting transitions in CuPt nanoparticles, 
+! Physical Chemistry Chemical Physics 17 (42), 28364-28371
+![2] K Rossi, T Ellaby, LO Paz-Borbón, I Atanasov, L Pavan, F Baletto, Melting of large Pt@ MgO (1 0 0) icosahedra,
+!Journal of Physics: Condensed Matter 29 (14), 145402
+![3] K Rossi, LB Pártay, G Csanyi, F Baletto, Thermodynamics of CuPt nanoalloys
+!Scientific reports 8 (1), 1-9 
+![4]  L Delgado-Callico, K Rossi, R Pinto-Miles, P Salzbrenner, F Baletto, Universal signature in the melting of metallic nanoparticles
+! arXiv preprint arXiv:2007.12218
+!
+!@ Metadynamics for studyng structural rearrangements
+!detalis in L. Pavan, PhD 2014,  King's College London and in K. Rossi, PhD 2018, King's College London
+! useful references:
+![5] L Pavan, C Di Paola, F Baletto, Sampling the energy landscape of Pt13 with metadynamics
+! The European Physical Journal D 67 (2), 24
+![6] L Pavan, K Rossi, F Baletto, Metallic nanoparticles meet metadynamics, The Journal of chemical physics 143 (18), 184304
+![7] K Rossi, F Baletto, The effect of chemical ordering and lattice mismatch on structural transitions in phase segregating nanoalloys
+! Physical Chemistry Chemical Physics 19 (18), 11057-11063
+![8] K Rossi, L Pavan, YY Soon, F Baletto, The effect of size and composition on structural transitions in monometallic nanoparticles
+! The European Physical Journal B 91 (2), 1-8
+!
+!@ Coalescence (soon to be added in the public version) 
+! MSci thesis by Matteo Tiberi
 !---------------------------------------------------------------------
 
 PROGRAM main
