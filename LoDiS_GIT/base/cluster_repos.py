@@ -31,7 +31,7 @@ print('===============')
 print('Starting script')
 print('===============')
 print('Please ensure the correct path is provided to the xyz file of the structure')
-print('Additionally, please make sure that the input file is of the required format')
+print('Additionally, please make sure that the input file is in the required format')
 print('-----   -----   -----   -----   -----   -----   -----   -----')
 print()
 
@@ -145,7 +145,7 @@ if (f_elem[0] != f_elem[1]):  #Bimetallic cluster
 
 	f_init.close()    
 
-	print('Initial positions of cluster have been read successfully')
+	print('Initial positions of the cluster have been read successfully')
 	print()
 
 	if N != (j):
@@ -228,7 +228,7 @@ if (f_elem[0] != f_elem[1]):  #Bimetallic cluster
             
 	ener_mgo_fixed1 = [0 for i in range(501)]    # store the values of the potential at different heights
 	ener_mgo_min1 = 0                                # the minimum value of the potential
-	mgo_min_dist1 = 0                                # distance where whe minimum is for max_coord (distance from the MgO substrate in [A])
+	mgo_min_dist1 = 0                                # distance where the minimum is for max_coord (distance from the MgO substrate in [A])
 
 	for i in range(100,501):
         
@@ -274,7 +274,7 @@ if (f_elem[0] != f_elem[1]):  #Bimetallic cluster
             
 	ener_mgo_fixed2 = [0 for i in range(501)]    # store the values of the potential at different heights
 	ener_mgo_min2 = 0                                # the minimum value of the potential
-	mgo_min_dist2 = 0                                # distance where whe minimum is for max_coord (distance from the MgO substrate in [A])
+	mgo_min_dist2 = 0                                # distance where the minimum is for max_coord (distance from the MgO substrate in [A])
 
 	for i in range(100,501):
         
@@ -367,7 +367,7 @@ else:
 
 	f_init.close()    
 
-	print('Initial positions of cluster have been read successfully')
+	print('Initial positions of the cluster have been read successfully')
 	print()
 
 	if N != (j) :
@@ -426,7 +426,7 @@ else:
             
 	ener_mgo_fixed = [0 for i in range(501)]    # store the values of the potential at different heights
 	ener_mgo_min = 0                                # the minimum value of the potential
-	mgo_min_dist = 0                                # distance where whe minimum is for max_coord (distance from the MgO substrate in [A])
+	mgo_min_dist = 0                                # distance where the minimum is for max_coord (distance from the MgO substrate in [A])
 
 	for i in range(100,501):
         
