@@ -61,7 +61,7 @@ SUBROUTINE sfnum
          ratio_ton = ratio**(nsf_pwr-1)    
          ratio_tom = ratio_ton*(ratio**(mminusn_pwr))
             
-         ! Calculationg some pieces of derivative
+         ! Calculating some pieces of derivative
          rnp = nsf_pwr * ratio_ton
          rmp = msf_pwr * ratio_tom
             
