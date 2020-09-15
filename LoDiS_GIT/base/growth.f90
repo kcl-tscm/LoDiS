@@ -31,8 +31,8 @@ SUBROUTINE growth
  ! Bimetallic versus monometallic growth:
  ! with lcs = 2 the program is allowed to deposit
  ! an atom of A or B type, with a given probability == prob
- ! element B is choosen when the random number is smaller than prob
- ! element A is choosen when the random number is bigger/= than prob 
+ ! element B is chosen when the random number is smaller than prob
+ ! element A is chosen when the random number is bigger/= than prob 
  ! When all the max number of element B are deposited (ntipo2 - initnatom==at_tipo2)
  ! the probability to deposit B atoms is set to zero
  
