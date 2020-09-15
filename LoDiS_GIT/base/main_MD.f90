@@ -13,21 +13,21 @@ o!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! initially developed by F. Baletto, R. Ferrando, C. Mottet, G. Treglia. 
 ! A collaboration from the Physics Department in Genova (Italy) and the CNRS in Marseille.
 !
-! In the last decade the Baletto's group based at the Physics Department at KCL as developed 
-! different tools for study low dimensional systems (LoDiS).
+! In the last decade the Baletto's group based at the Physics Department at KCL has developed 
+! different tools to study low dimensional systems (LoDiS).
 ! 
 ! KCL-Developers: 
-! Luca Pavan, Kevin Rossi, Raphael Pinto-Miles, Matteo Tiberi, Laia Delgado, Robert Jones, Francesca Baletto
+! Luca Pavan, Kevin Rossi, Raphael Pinto-Miles, Matteo Tiberi, Laia Delgado-Callico, Robert Jones, Francesca Baletto
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !  LoDiS does Molecular Dynamics simulations for cluster, wires, surfaces (and bulk to be tested).
-!  The equation of motion are solved using a velocity-Verlet algorithm
+!  The equations of motion are solved using a velocity-Verlet algorithm
 !  Different semi-empirical potential are available:
-!  RGL (Gupta like) potntial      -- for late-transition metals (and their alloys)
+!  RGL (Gupta like) potential      -- for late-transition metals (and their alloys)
 ! The RGL are also known as second-moment approximation if the tight-binding
 !  Pacheco or Girifalco potential -- for C60 clusters
 !  Lennard-Jones                  -- for Ar
-!  Morse potential and modiefied Morse will be available soon (under test)
+!  Morse potential and modified Morse will be available soon (under test)
 !!!!!!!!!!!!
 !  LoDiS tools:
 !  @quenching/annealing (see:   F. Baletto et al. JCP (2002), F. Baletto and R. Ferrando RMP 77 (2005) 371)
@@ -49,7 +49,7 @@ o!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ![4]  L Delgado-Callico, K Rossi, R Pinto-Miles, P Salzbrenner, F Baletto, Universal signature in the melting of metallic nanoparticles
 ! arXiv preprint arXiv:2007.12218
 !
-!@ Metadynamics for studyng structural rearrangements
+!@ Metadynamics for studying structural rearrangements
 !detalis in L. Pavan, PhD 2014,  King's College London and in K. Rossi, PhD 2018, King's College London
 ! useful references:
 ![5] L Pavan, C Di Paola, F Baletto, Sampling the energy landscape of Pt13 with metadynamics
@@ -106,7 +106,7 @@ PROGRAM main
   !
 
   !---------------------------------------------------------
-  ! Read the parameters for MgOsubstrate if wanted
+  ! Read the parameters for MgO substrate if wanted
   IF (mgo_substrate) THEN
      IF (metal_on_top) THEN
         WRITE (*,*) 'main_MD> Reading MgO substrate (MOT) parameters'
