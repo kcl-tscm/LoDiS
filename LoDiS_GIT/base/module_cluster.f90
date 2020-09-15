@@ -70,7 +70,7 @@ module cluster
 
     character(len = 2) :: metadyn !see meta_module for more metadynamic variables
 
-    !more system varuables
+    !more system variables
     character(len = 3) :: type_potential 
     character(len = 2) :: elem1          
     character(len = 2) :: elem2          
