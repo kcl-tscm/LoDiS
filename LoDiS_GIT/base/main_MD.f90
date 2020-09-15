@@ -243,7 +243,7 @@ PROGRAM main
   END IF
   IF (collvar_wanted.AND.(deposizione=='ya')) THEN
      WRITE(*,*) 'main_MD> The calculation of CVs and Growth have not been tested'
-     WRITE(*,*) 'main_MD> Since some errors might occour, the program is going to stop'
+     WRITE(*,*) 'main_MD> Since some errors might occur, the program is going to stop'
      STOP
   END IF
   IF (mgo_substrate.AND.(deposizione=='ya')) THEN
