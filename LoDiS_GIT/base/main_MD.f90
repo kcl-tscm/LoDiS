@@ -24,7 +24,7 @@ o!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !  The equations of motion are solved using a velocity-Verlet algorithm
 !  Different semi-empirical potential are available:
 !  RGL (Gupta like) potential      -- for late-transition metals (and their alloys)
-! The RGL are also known as second-moment approximation if the tight-binding
+! The RGL are also known as second-moment approximation in the tight-binding model
 !  Pacheco or Girifalco potential -- for C60 clusters
 !  Lennard-Jones                  -- for Ar
 !  Morse potential and modified Morse will be available soon (under test)
