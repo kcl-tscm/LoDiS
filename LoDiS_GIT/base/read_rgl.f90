@@ -83,7 +83,7 @@ SUBROUTINE bimet_rgl
   IF( sys == 'bim' ) dist(2)=nn(2)/arete(1)
   IF( sys == 'bim' ) dist(3)=nn(3)/arete(1)
 
-  !! IMPROVEMENT cutoff is to be logical)
+  !! IMPROVEMENT cutoff is to be logical
   !cutoff_end and cutoff_start are converted into arete(1) units
   if( lcutoff )then
      cutoff_start=cutoff_start/arete(1)
