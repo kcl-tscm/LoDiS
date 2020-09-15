@@ -73,7 +73,7 @@ nat3d=natom
           rik12=rik6*rik6
            
  !!calculate the forces in 1/arete
- !!then I convert again in eV and arete
+ !!then is converted again to eV and arete
  !! f(i)= f(i) in eV/arete  !!
                
                wtot=(1.d0/rik6-1.d0/rik12)  !in A
