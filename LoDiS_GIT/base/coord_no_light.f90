@@ -4,7 +4,7 @@ SUBROUTINE cnum_light
 ! Coordination Number light
 !======================================
 ! Calculating the analytic coordination number
-! Here the derivative are not calculated in order to improve the performance
+! Here the derivatives are not calculated in order to improve the performance
 !======================================
 
    USE PARACLUSTER  
