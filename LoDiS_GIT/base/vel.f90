@@ -62,7 +62,7 @@ subroutine vel
     if (coalescence == 'ya') then
         !terminate once near
         clustercheck = .false.
-        outer:  do i = 1, natom - natom2  !loop over atoms of cluster two too see if they interact with any atoms in cluster one
+        outer:  do i = 1, natom - natom2  !loop over atoms of cluster two to see if they interact with any atoms in cluster one
             inner:  do j = 1, nvois(i)
                 k = ivois(j, i)
                 if ( k > (natom - natom2) ) then
