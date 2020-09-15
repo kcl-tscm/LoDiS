@@ -143,7 +143,7 @@ PROGRAM main
 
      sticky_atoms_wanted = .true.
 
-     ! This is done in main_MD because always only the same atoms have theese
+     ! This is done in main_MD because only the same atoms always have these
      ! quantities different from zero
      sticky_fx = 0.d0
      sticky_fy = 0.d0
