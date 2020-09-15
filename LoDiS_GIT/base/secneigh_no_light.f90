@@ -51,7 +51,7 @@ SUBROUTINE c2num_light
          
          ! Calculating the analytic C2N          
          ratio = dij/rij0(itypik)
-         ! I need to rise to (X_pwr-1) for the derivetive  
+         ! I need to rise to (X_pwr-1) for the derivative  
          ratio_ton = ratio**(n2n_pwr)    
          ratio_tom = ratio_ton*(ratio**(mminusn_pwr))
             
