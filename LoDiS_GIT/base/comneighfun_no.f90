@@ -3,7 +3,7 @@ SUBROUTINE cnfnum
 ! Common Neighbour Function
 !========================================
 ! Calculating the number of pairs that have the same number of common nearest neighbours. 
-! The derivative are also calculated.
+! The derivatives are also calculated.
 ! OLD VERSION (BUT USING LOCAL VARIABLES)
 ! For computationally taxing runs, use the cnfnum_light subroutine instead.
 !========================================
