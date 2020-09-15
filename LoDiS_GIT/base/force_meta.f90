@@ -58,7 +58,7 @@ SUBROUTINE metaforce
                !_________________________________________________________________________________
                ! Force contribution to be added to the real force
                !---------------------------------------------------------------------------------
-               ! Inizializing force contributions for every atoms             
+               ! Initializing force contributions for every atoms             
                fg2nx = - dVg_ds(1)* dS2n_dx
                fg2ny = - dVg_ds(1)* dS2n_dy
                fg2nz = - dVg_ds(1)* dS2n_dz
