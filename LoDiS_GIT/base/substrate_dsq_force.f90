@@ -19,10 +19,10 @@ SUBROUTINE sub_dsq_force
   REAL(8), DIMENSION(3,3) :: b, db_dx, db_dy
   
  !-----------------------------------------------------
- ! Inizialisation of local variables
+ ! Initialisation of local variables
  ener_mgo = 0.d0
  !------------------------------------------------------
- ! Inizialisation of global variables
+ ! Initialisation of global variables
  ener_sub = 0.d0 ! This is global  
 
  aa = mgo_alat ! mgo_alat = 2.*pi*sqrt(2) / amgo in [1/A]  as in mgo_read.f90 
@@ -115,7 +115,7 @@ ENDDO !!su i
 !write(901,'(2i6,3f9.4,a5,4f12.5)') ipas, n, xx, yy, zz, 'CN=', mgo_cn(n), mgo_dcn_dx(n), mgo_dcn_dy(n), mgo_dcn_dz(n)
 !write(902,'(2i6,3f9.4,3f13.6)') ipas, n, xx, yy, zz, da_dz(1), da_dz(2), da_dz(3)
 !
-    ! slave quantities
+    ! save quantities
     t4 = exp(a_(2)*(a_(3)-zz)) !!units a_(3) in A, a_(2) in 1/A, zz is in AA 
     t8 = t4*t4
 	!
