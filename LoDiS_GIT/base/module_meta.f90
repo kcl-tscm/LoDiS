@@ -156,7 +156,7 @@ MODULE META
      ! cnf_calc(5) = h0 * ((rij-d0-c0)/(r0-c0))**(n-1)
 
      ! f_sigmoid_der(1) = f_sigmoid
-     ! f_sigmoid_der(2) = derivative of f_sigmoid with respect of the pair distance rij
+     ! f_sigmoid_der(2) = derivative of f_sigmoid with respect to the pair distance rij
 
      IMPLICIT NONE
      REAL(8), DIMENSION(2) :: f_sigmoid_der
