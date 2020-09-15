@@ -81,7 +81,7 @@ SUBROUTINE choice_pot
         dmas(11)=39.948d0
         R0=3.82d0     !distance NN in A
         ratv(11)=R0/2.d0
-        U0=0.01034d0 ! costant for Ar_LJ (eV)
+        U0=0.01034d0 ! constant for Ar_LJ (eV)
         arete(1)=ratv(imet1)*rac8
 !
 !Girifalco or Pacheco for C60
@@ -97,8 +97,8 @@ SUBROUTINE choice_pot
            ratv(12)=Dnn/2.d0
            Nball=60     !atom number in a ball
            dball=7.1d0  !diameter of a ball for C60 (A)
-           ALJ=20.00d0  !costant as LJ  (eV*A**6)
-           BLJ=34.856d3 !costant as LJ  (eV*A**12)
+           ALJ=20.00d0  !constant as LJ  (eV*A**6)
+           BLJ=34.856d3 !constant as LJ  (eV*A**12)
         ELSEIF(type_potential=='par') THEN
            dmu=10.05d0        !distance NN in A
            ratv(12)=dmu/2.d0
