@@ -4,7 +4,7 @@ SUBROUTINE force_choice
 !
 !RGL potential for metallic systems (noble and quasi-noble)
 !V. Rosato, M. Guillope, and B. Legrand, 1989, Philos. Mag. A 59, 321.
-!A detailed ddescription in C. Mottet PhD thesis
+!A detailed description in C. Mottet PhD thesis
 !A very short descritpion in F. Baletto PhD thesis
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
