@@ -48,7 +48,7 @@ ENDIF
 ! dc55 > cutz(itype(i), itype(j))
 !
 !nv4 == number of neighbours for atom i in a radius dc55
-!iv4 == label for identify the number of the neighbour
+!iv4 == label to identify the number of the neighbour
 !
 !
            dij2=xij*xij+yij*yij+zij*zij
