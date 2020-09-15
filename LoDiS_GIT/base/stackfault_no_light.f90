@@ -51,7 +51,7 @@ SUBROUTINE sfnum_light
          
          ! Calculating the analytic SFN          
          ratio = dij/rij0(itypik)
-         ! I need to rise to (X_pwr-1) for the derivetive  
+         ! I need to rise to (X_pwr-1) for the derivative  
          ratio_ton = ratio**(nsf_pwr)    
          ratio_tom = ratio_ton*(ratio**(mminusn_pwr))
             
