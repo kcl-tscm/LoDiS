@@ -3,7 +3,7 @@ SUBROUTINE cnfnum_light
 ! Common Neighbour Function light
 !=======================================
 ! Calculates the number of pairs that have the same number of common nearest neighbours. 
-! The derivative are not calculated in order to improve performance.
+! The derivatives are not calculated in order to improve performance.
 !=======================================
    
    USE PARACLUSTER  
