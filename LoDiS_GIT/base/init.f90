@@ -116,7 +116,7 @@ subroutine init
         end do
     end if
 
-    !calclating drift again
+    !calculating drift again
     if (coalescence == 'ya') then
         vxsum = sum(vx(1:natom - natom2)) / float(natom - natom2)
         vysum = sum(vy(1:natom - natom2)) / float(natom - natom2)
