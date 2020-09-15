@@ -91,7 +91,7 @@ nat3d=natom
           rikm10=rikm9*rikmeno
  
  !!calculate the forces in eV and A
- !!then is converted again in eV and arete
+ !!then is converted again to eV and arete
  !! f(i)= f(i)(in eV/A)*arete  !!
                         
         VAik=alpha*(1/(rik*rikm3)+1/(rik*rikp3)-2/rik4)      
