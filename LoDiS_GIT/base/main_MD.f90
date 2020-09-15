@@ -182,13 +182,13 @@ PROGRAM main
   END IF
   !
   !=========================================================================
-  ! This has always to be natom (but in the case of deposizione)
+  ! This always has to be natom (but in the case of deposizione)
   IF(deposizione=='ya') THEN
   nat = natom + ndepmax
   ELSE
   nat=natom 
   ENDIF
-  ! nat is the max number of atoms, not natom, witch is the initial
+  ! nat is the max number of atoms, not natom, which is the initial
   !=========================================================================
 
   !-------------------------------------------------------------------------
