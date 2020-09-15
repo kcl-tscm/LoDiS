@@ -83,7 +83,7 @@ module cluster
 
     !periodicity
     logical :: clusters, wires, surface, bulk, substrate
-    real(8) :: dilat  !thermal dilatation at finte temperature of the lattice parameters
+    real(8) :: dilat  !thermal dilatation at finite temperature of the lattice parameters
     real(8) :: pbcx, pbcy, pbcz !only if you have a periodic boundary condition
                                 !on z for wire-direction for wires
                                 !on x, y for surface
