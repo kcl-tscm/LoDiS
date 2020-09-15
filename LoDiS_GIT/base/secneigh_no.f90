@@ -61,7 +61,7 @@ SUBROUTINE c2num
          ratio_ton = ratio**(n2n_pwr-1)    
          ratio_tom = ratio_ton*(ratio**(mminusn_pwr))
             
-         ! Calculationg some pieces of derivative
+         ! Calculating some pieces of derivative
          rnp = n2n_pwr * ratio_ton
          rmp = m2n_pwr * ratio_tom
             
