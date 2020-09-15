@@ -63,7 +63,7 @@ if(ipas==1) write(*,*) "mgo_coord:>alpha_sub and beta_sub",alpha_sub, beta_sub
             gamma_sub_1 = gamma_sub + 1.d0
 			gamma_sub_2 = gamma_sub /(gamma_sub_1 * gamma_sub_1)
 			!! for large cluster the pair distance may grow up and become very
-			!! large (too large) for large value th eaddition of 1 change little or nothing, gamma_sub_1 ~ gamma_sub -> 
+			!! large (too large) for large value the addition of 1 change little or nothing, gamma_sub_1 ~ gamma_sub -> 
 			!gamma_sub_2 ~ 1/ gamma_sub
 		    if(dij(j,i)>=80.d0) gamma_sub_2 = 1.d0 / gamma_sub 
            ! The sum of these s(i,j) is the analytic coord no.
