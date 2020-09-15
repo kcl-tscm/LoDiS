@@ -23,7 +23,7 @@ ELSE
         nat3=natom
 ENDIF 
 !    
-DO is=1,nat3   !!EVOLUTION ACCORDING VELOCITY-VERLET         
+DO is=1,nat3   !!EVOLUTION ACCORDING WITH VELOCITY-VERLET         
 !
         du(is)=t2m(itype(is))*fx(is)+vx(is)
         dv(is)=t2m(itype(is))*fy(is)+vy(is)
