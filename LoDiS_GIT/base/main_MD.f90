@@ -248,7 +248,7 @@ PROGRAM main
   END IF
   IF (mgo_substrate.AND.(deposizione=='ya')) THEN
      WRITE(*,*) 'main_MD> Growth upon a substrate has not been tested'
-     WRITE(*,*) 'main_MD> Since some errors might occour, the program is going to stop'
+     WRITE(*,*) 'main_MD> Since some errors might occur, the program is going to stop'
      STOP
   END IF
   IF ((collvar_wanted.OR.(metadyn.EQ.'ya').OR.impl_env).AND.(nat.NE.natom)) THEN
