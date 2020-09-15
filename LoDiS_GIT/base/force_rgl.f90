@@ -237,7 +237,7 @@ SUBROUTINE force_rgl
      !
      !comment on units
      !RGL force is calculated as eV/[units of dik0 which is fixed to 1/sqrt(2) thus in the so-called arete units
-     !in time.f90 all forces shoudl be in the same units
+     !in time.f90 all forces should be in the same units
      !
      fx(i)=frx(i)+fbx                                                  
      fy(i)=fry(i)+fby                                                  
