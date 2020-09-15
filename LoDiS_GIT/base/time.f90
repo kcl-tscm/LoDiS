@@ -22,7 +22,7 @@ SUBROUTINE ev_time
 
 
  ! Metadynamics/CVs and MgO substrate stuff use their own shared
- ! parallel soubroutine, called only once per time step, when these functions are swithed on.
+ ! parallel soubroutine, called only once per time step, when these functions are switched on.
  ! However standard MD does not use it. 
 
  !%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,21 +67,21 @@ SUBROUTINE ev_time
        ENDIF
     ENDIF !! bigvoi is called only for RGL-type potential
 
-    !IN TIME: call to voisin, force, and vel at time t, finally a call to therma for the new position at tiem t+dt
+    !IN TIME: call to voisin, force, and vel at time t, finally a call to therma for the new position at time t+dt
     !
-    CALL voisin   !!calculating the number of first neighbour
+    CALL voisin   !!calculating the number of first neighbours
     !
     CALL force_choice
     !
     !
     ! RGL force, meta-force and substrate force are then in eV/arete <-- force in eV/A are divided by aretebim
-    !KEEP THE UNTS OF THE FORCES in eV/arete as the time step is done with respect that choice.
+    !KEEP THE UNITS OF THE FORCES in eV/arete as the time step is done with respect that choice.
     !
     !-----------------------------------------------
     ! Start of Metadynamics/CVs related calculations
     !-----------------------------------------------
     IF ((collvar_wanted).OR.(metadyn.eq.'ya').OR.mgo_substrate .OR. impl_env) THEN
-       ! Calling the subroutine that calculate pair distances
+       ! Calling the subroutine that calculates pair distances
        ! (It needs to be done for all the implemented CVs)
        CALL pair_distances
 
