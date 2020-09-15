@@ -118,7 +118,7 @@ do i = 1,3
 	vcm(i) = group_p(i)*tm_1
 enddo
 
-!calculate centre of mass contribution to angular momentum and subtract from total angular momentum
+!calculate center of mass contribution to angular momentum and subtract from total angular momentum
 jcm(1) = (rcm(2)*vcm(3) - rcm(3)*vcm(2))
 jcm(2) = (rcm(3)*vcm(1) - rcm(1)*vcm(3))
 jcm(3) = (rcm(1)*vcm(2) - rcm(2)*vcm(1))
