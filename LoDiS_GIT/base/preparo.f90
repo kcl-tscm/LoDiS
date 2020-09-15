@@ -70,7 +70,7 @@ endif
 !
      call voisin !!TO CALCULATE THE NEIGHBOURS AT TIME t
 !
-     call force_choice !!To CALCULATE FORCE AT TIME t
+     call force_choice !!TO CALCULATE FORCE AT TIME t
 !
      call vel_prep !! TO CALCULATE THE VEL. AT TIME t
 !
