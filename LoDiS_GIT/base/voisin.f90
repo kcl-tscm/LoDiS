@@ -34,7 +34,7 @@ SUBROUTINE voisin
            yij=y(j)+v(j)-y(i)-v(i)
            zij=z(j)+w(j)-z(i)-w(i)
            !
-           !FOR no_custer systems the periodic boundary condition have to be specified
+           !FOR no_custer systems the periodic boundary conditions have to be specified
            !
            IF ( wires ) THEN
               IF (ABS(zij+pbcz)<ABS(zij)) zij=zij+pbcz
@@ -59,7 +59,7 @@ SUBROUTINE voisin
            !
            dij2=xij*xij+yij*yij+zij*zij
            !
-           !NN are defined with respect the cutoff
+           !NN are defined with respect to the cutoff
            !
           !!dc33 = cutz(itype(i),itype(j)) 
           IF (dij2 < dc33 ) THEN
