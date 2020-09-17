@@ -113,6 +113,7 @@ NOTE: neither Ag_309.xyz nor Ag_Ag.MgO.pot are used in this particular run.
 * Laia Delgado-Callico (laia.delgado@kcl.ac.uk)
 * Matteo Tiberi (matteo.tiberi@kcl.ac.uk)
 * Robert Jones (robert.m.jones@kcl.ac.uk)
+* Alejandro Santana-Bonilla (alejandro.santana_bonilla@kcl.ac.uk)
 * Riccardo Ferrando (ferrando@fisicaunige.it)
 * Christine Mottet (mottet@cinam.univ-mrs.fr)
 
