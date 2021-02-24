@@ -13,9 +13,9 @@
   metal_on_top  = .false.,           ! For the MgO force-field with correction for the metal-on-top effect 
   sticky_atoms  = 0,                 ! Number of atoms bound to their starting position by a spring
   sticky_k      = 10,                ! Elastic constant (F=-k*x) [eV/A^2]
-  filepos      = '~/LoDiS/input_example_files/Ag_147.xyz',             ! Initial atom positions file, ONLY .xyz format
-  filepot      = '~/LoDiS/input_example_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
-  mgo_pot      = '~/LoDiS/input_example_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
+  filepos      = '~/LoDiS/example_input_files/Ag_147.xyz',             ! Initial atom positions file, ONLY .xyz format
+  filepot      = '~/LoDiS/example_input_files/Ag_Ag.pot',             ! Potential parameters file, ONLY .pot format
+  mgo_pot      = '~/LoDiS/example_input_files/Ag_Ag.MgO.pot',             ! File of parameters for MgO substrate, ONLY .pot format
   impl_env = .false.                  ! Simulate with an implicit environment?
   pot_a = 1.5d0                      ! Metal-environment interaction type. 1 - pairwise, <1 - covalent, >1 - strong interacting environment
   pot_b = 1.5d0                      ! Same case as pot_a, but for chemical species 2 in bi-metallic cluster
