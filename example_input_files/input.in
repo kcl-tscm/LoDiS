@@ -35,7 +35,7 @@
   
 ! &coal : procedure for coalescence
 &coal
-  filepos2 = '~/LoDiS/input_example_files/Ag_309.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
+  filepos2 = '~/LoDiS/example_input_files/Ag_309.xyz'                  ! Initial atom positions file for coalescence cluster, ONLY .xyz format
   natom2 = 309                        ! Initial number of atoms in the coalescence cluster
   somedist = 80.0d0                   ! Initial distance between the clusters
 /
